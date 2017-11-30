@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Hexo," />
 
 
 
@@ -80,13 +80,14 @@
 
 
 <meta name="description" content="欢迎来到黄杰的个人博客，这是我写入的第一篇博文,此博客平台采用  Hexo + githubPages搭建而成,搭建日期：2017/11/29。这篇博客将持续记录hexo使用过程中的一些问题">
+<meta name="keywords" content="Hexo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo博客使用心得">
 <meta property="og:url" content="http://yoursite.com/2017/11/29/hello-world/index.html">
 <meta property="og:site_name" content="Jay的记事本">
 <meta property="og:description" content="欢迎来到黄杰的个人博客，这是我写入的第一篇博文,此博客平台采用  Hexo + githubPages搭建而成,搭建日期：2017/11/29。这篇博客将持续记录hexo使用过程中的一些问题">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-29T13:25:06.651Z">
+<meta property="og:updated_time" content="2017-11-30T03:52:44.218Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo博客使用心得">
 <meta name="twitter:description" content="欢迎来到黄杰的个人博客，这是我写入的第一篇博文,此博客平台采用  Hexo + githubPages搭建而成,搭建日期：2017/11/29。这篇博客将持续记录hexo使用过程中的一些问题">
@@ -190,12 +191,42 @@
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
           </a>
         </li>
       
@@ -237,7 +268,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄杰">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/default_avatar.png">
+      <meta itemprop="image" content="http://p07lh1fh6.bkt.clouddn.com/head.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -272,6 +303,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">Hexo</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -282,6 +335,37 @@
 
           
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  471 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2 分钟
+                </span>
+              
+            </div>
           
 
           
@@ -314,10 +398,11 @@
 <li>提交代码 <code>$ hexo d</code>  ，需要配置deploy</li>
 </ul>
 <p>在主项目目录下有个_config.yml,为全局配置文件,在themes文件夹里，存放着网站使用的主题文件，打开主题文件夹，里面也有个_config.yml，为主题配置文件，与主题相关的在这里配置，我现在采用的是<a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">Next</a>主题</p>
-<h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><h3 id="首页的文章内容全部显示出来了，没有“阅读全文”"><a href="#首页的文章内容全部显示出来了，没有“阅读全文”" class="headerlink" title="首页的文章内容全部显示出来了，没有“阅读全文”?"></a>首页的文章内容全部显示出来了，没有“阅读全文”?</h3><h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><p>有两种方法</p>
-<h4 id="第一种"><a href="#第一种" class="headerlink" title="第一种"></a>第一种</h4><p>在主题配置文件里(themes/next/_config.yml)用编辑器打开，找到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Automatically Excerpt. Not recommend.</span><br><span class="line"># Please use &lt;!-- more --&gt; in the post to control excerpt accurately.</span><br><span class="line">auto_excerpt:</span><br><span class="line">  enable: false</span><br><span class="line">  length: 150</span><br></pre></td></tr></table></figure></p>
+<h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><h4 id="一-首页的文章内容全部显示出来了，没有“阅读全文”"><a href="#一-首页的文章内容全部显示出来了，没有“阅读全文”" class="headerlink" title="一.首页的文章内容全部显示出来了，没有“阅读全文”?"></a>一.首页的文章内容全部显示出来了，没有“阅读全文”?</h4><h5 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h5><p>有两种方法</p>
+<p>第一种：<br>在主题配置文件里(themes/next/_config.yml)用编辑器打开，找到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Automatically Excerpt. Not recommend.</span><br><span class="line"># Please use &lt;!-- more --&gt; in the post to control excerpt accurately.</span><br><span class="line">auto_excerpt:</span><br><span class="line">  enable: false</span><br><span class="line">  length: 150</span><br></pre></td></tr></table></figure></p>
 <p>将 <code>enable：false</code> 改为<code>true</code>就行了，后面的<code>length:150</code>代表显示的文本字数。</p>
-<h4 id="第二种"><a href="#第二种" class="headerlink" title="第二种"></a>第二种</h4><p>直接在编辑的.md文件里将要预览的文字后面加上<code>&lt;!--more--&gt;</code>,这样之前的就是预览的文字,后面的就不会显示了</p>
+<p>第二种：<br>直接在编辑的.md文件里将要预览的文字后面加上<code>&lt;!--more--&gt;</code>,这样之前的就是预览的文字,后面的就不会显示了</p>
+<h1 id="写作技巧记录"><a href="#写作技巧记录" class="headerlink" title="写作技巧记录"></a>写作技巧记录</h1><h4 id="一-如何将md文件以时间命名"><a href="#一-如何将md文件以时间命名" class="headerlink" title="一.如何将md文件以时间命名"></a>一.如何将md文件以时间命名</h4><p>  在_config.yml中找到new_post_name,修改名称为<code>:year-:month-:day-:title.md</code>,这样创建的文件就会以电脑时间命名，使用时间命名可以更方便的管理文章</p>
 
       
     </div>
@@ -332,6 +417,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+          
+        </div>
       
 
       
@@ -399,7 +490,7 @@
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image"
-                src="/default_avatar.png"
+                src="http://p07lh1fh6.bkt.clouddn.com/head.jpg"
                 alt="黄杰" />
             
               <p class="site-author-name" itemprop="name">黄杰</p>
@@ -420,7 +511,25 @@
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
             
 
           </nav>
@@ -440,6 +549,7 @@
           
 
         </div>
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="//music.163.com/outchain/player?type=0&id=1996249397&auto=0&height=430"></iframe>
       </section>
 
       
@@ -452,7 +562,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用命令"><span class="nav-number">2.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#遇到的问题"><span class="nav-number">3.</span> <span class="nav-text">遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#首页的文章内容全部显示出来了，没有“阅读全文”"><span class="nav-number">3.0.1.</span> <span class="nav-text">首页的文章内容全部显示出来了，没有“阅读全文”?</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解决"><span class="nav-number">3.0.1.1.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第一种"><span class="nav-number">3.0.1.2.</span> <span class="nav-text">第一种</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二种"><span class="nav-number">3.0.1.3.</span> <span class="nav-text">第二种</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用命令"><span class="nav-number">2.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#遇到的问题"><span class="nav-number">3.</span> <span class="nav-text">遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一-首页的文章内容全部显示出来了，没有“阅读全文”"><span class="nav-number">3.0.0.1.</span> <span class="nav-text">一.首页的文章内容全部显示出来了，没有“阅读全文”?</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#解决办法"><span class="nav-number">3.0.0.1.1.</span> <span class="nav-text">解决办法</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#写作技巧记录"><span class="nav-number">4.</span> <span class="nav-text">写作技巧记录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一-如何将md文件以时间命名"><span class="nav-number">4.0.0.1.</span> <span class="nav-text">一.如何将md文件以时间命名</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -472,7 +582,9 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
