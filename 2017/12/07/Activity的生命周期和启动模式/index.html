@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="此系列文章为进阶类文章,快餐类记录文,用于自己安卓知识点的复习  典型情况生命周期 onCreate() :Activity被创建 onRestart() : 正在重新启动。调用场景：当前Activity从不可见到变为可见状态 onStart():  Activity正在启动,此时Activity已经可见，但还不能和用">
+<meta name="description" content="此系列文章为进阶类文章,快餐类记录文,用于自己安卓知识点的复习  典型情况生命周期 onCreate() :Activity被创建">
 <meta name="keywords" content="Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Activity的生命周期和启动模式">
 <meta property="og:url" content="http://yoursite.com/2017/12/07/Activity的生命周期和启动模式/index.html">
 <meta property="og:site_name" content="Jay的记事本">
-<meta property="og:description" content="此系列文章为进阶类文章,快餐类记录文,用于自己安卓知识点的复习  典型情况生命周期 onCreate() :Activity被创建 onRestart() : 正在重新启动。调用场景：当前Activity从不可见到变为可见状态 onStart():  Activity正在启动,此时Activity已经可见，但还不能和用户交互 onResume() :此时Activity已经可见并开始活动 onP">
+<meta property="og:description" content="此系列文章为进阶类文章,快餐类记录文,用于自己安卓知识点的复习  典型情况生命周期 onCreate() :Activity被创建">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-07T11:22:07.300Z">
+<meta property="og:updated_time" content="2017-12-07T11:25:59.907Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Activity的生命周期和启动模式">
-<meta name="twitter:description" content="此系列文章为进阶类文章,快餐类记录文,用于自己安卓知识点的复习  典型情况生命周期 onCreate() :Activity被创建 onRestart() : 正在重新启动。调用场景：当前Activity从不可见到变为可见状态 onStart():  Activity正在启动,此时Activity已经可见，但还不能和用户交互 onResume() :此时Activity已经可见并开始活动 onP">
+<meta name="twitter:description" content="此系列文章为进阶类文章,快餐类记录文,用于自己安卓知识点的复习  典型情况生命周期 onCreate() :Activity被创建">
 
 
 
@@ -397,14 +397,13 @@
 <p>此系列文章为进阶类文章,快餐类记录文,用于自己安卓知识点的复习</p>
 </blockquote>
 <h4 id="典型情况生命周期"><a href="#典型情况生命周期" class="headerlink" title="典型情况生命周期"></a>典型情况生命周期</h4><ul>
-<li>onCreate() :Activity被创建</li>
+<li>onCreate() :Activity被创建<a id="more"></a></li>
 <li>onRestart() : 正在重新启动。调用场景：当前Activity从不可见到变为可见状态</li>
 <li>onStart():  Activity正在启动,此时Activity已经可见，但还不能和用户交互</li>
 <li>onResume() :此时Activity已经可见并开始活动</li>
 <li>onPause() :Activity正在停止，如果是从此Activity退到上一个Activity,那么会先执行此Activity的onPause,再执行上一个Activity的onResume,所以此方法不能执行耗时的操作，不然会影响新Activity的显示</li>
 <li>onStop() : Activity即将停止,紧接着onPause后面执行</li>
-<li>onDestroy() : Activity即将销毁,在这里主要做一些资源的释放<a id="more"></a>
-完整的启动流程是从上到下,有几个具体情况说明:<br>1)第一次启动一个新的Activity: onCreate-&gt;onStart-&gt;onResume<br>2)再次打开一个Activity或者切换到桌面：onPause -&gt;onStop (注：如果新的Activity是用的透明主题,那么不会回调onStop)<br>3) 再次回到此Activity：onRestar -&gt;onStart -&gt;onResume<br>4)退出此Activity (finish掉)：onPause -&gt;onStop -&gt;onDestroty</li>
+<li>onDestroy() : Activity即将销毁,在这里主要做一些资源的释放<br>完整的启动流程是从上到下,有几个具体情况说明:<br>1)第一次启动一个新的Activity: onCreate-&gt;onStart-&gt;onResume<br>2)再次打开一个Activity或者切换到桌面：onPause -&gt;onStop (注：如果新的Activity是用的透明主题,那么不会回调onStop)<br>3) 再次回到此Activity：onRestar -&gt;onStart -&gt;onResume<br>4)退出此Activity (finish掉)：onPause -&gt;onStop -&gt;onDestroty</li>
 </ul>
 <h4 id="异常情况生命周期"><a href="#异常情况生命周期" class="headerlink" title="异常情况生命周期"></a>异常情况生命周期</h4><h5 id="资源相关的系统配置发生了改变导致Activity被杀死并重新创建"><a href="#资源相关的系统配置发生了改变导致Activity被杀死并重新创建" class="headerlink" title="资源相关的系统配置发生了改变导致Activity被杀死并重新创建"></a>资源相关的系统配置发生了改变导致Activity被杀死并重新创建</h5><p>发生此种情况最典型的就是横竖屏的切换,因为系统会去拿两张不同的图片，这时，Activity就会重新创建,它的onPause,onStop,onDestroy都会被调用,同时因为Activity是在异常情况下终止的,所以系统会调用onSaveInstanceState来保存当前Activity的状态，这个方法会在onStop方法之前调用。当Activity创建完成,系统会调用onRestoreInstanceState，可以从这个方法里拿到bundle对象并恢复Activity的状态</p>
 <h5 id="资源不足导致Activity被杀死"><a href="#资源不足导致Activity被杀死" class="headerlink" title="资源不足导致Activity被杀死"></a>资源不足导致Activity被杀死</h5><p>此种情况和第一类差不多，都可以通过以上两种方法来恢复数据</p>

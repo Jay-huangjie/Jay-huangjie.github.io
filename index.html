@@ -396,13 +396,7 @@
 <p>此系列文章为进阶类文章,快餐类记录文,用于自己安卓知识点的复习</p>
 </blockquote>
 <h4 id="典型情况生命周期"><a href="#典型情况生命周期" class="headerlink" title="典型情况生命周期"></a>典型情况生命周期</h4><ul>
-<li>onCreate() :Activity被创建</li>
-<li>onRestart() : 正在重新启动。调用场景：当前Activity从不可见到变为可见状态</li>
-<li>onStart():  Activity正在启动,此时Activity已经可见，但还不能和用户交互</li>
-<li>onResume() :此时Activity已经可见并开始活动</li>
-<li>onPause() :Activity正在停止，如果是从此Activity退到上一个Activity,那么会先执行此Activity的onPause,再执行上一个Activity的onResume,所以此方法不能执行耗时的操作，不然会影响新Activity的显示</li>
-<li>onStop() : Activity即将停止,紧接着onPause后面执行</li>
-<li>onDestroy() : Activity即将销毁,在这里主要做一些资源的释放
+<li>onCreate() :Activity被创建
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/12/07/Activity的生命周期和启动模式/#more" rel="contents">
