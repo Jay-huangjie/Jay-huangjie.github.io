@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo," />
+  <meta name="keywords" content="Android," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="购买个人域名例如我的是在阿里云万网购买的,点击进入域名列表,点击解析,会出现一个添加解析按钮，点开有记录类型，主机记录，解析线路，记录值，TTL值五个选项依次填写：  记录类型：A 主机记录：www 解析线路：不用选，就用默认 记录值：填写你的github网址的ip,可以用ip查询或ping查到，一般都是151开头。 ">
-<meta name="keywords" content="Hexo">
+<meta name="description" content="此系列文章为进阶类文章,快餐类记录文,用于自己安卓知识点的复习  典型情况生命周期 onCreate() :Activity被创建 onRestart() : 正在重新启动。调用场景：当前Activity从不可见到变为可见状态 onStart():  Activity正在启动,此时Activity已经可见，但还不能和用">
+<meta name="keywords" content="Android">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何将个人域名与github绑定">
-<meta property="og:url" content="http://yoursite.com/2017/12/01/如何将个人域名与github绑定/index.html">
+<meta property="og:title" content="Activity的生命周期和启动模式">
+<meta property="og:url" content="http://yoursite.com/2017/12/07/Activity的生命周期和启动模式/index.html">
 <meta property="og:site_name" content="Jay的记事本">
-<meta property="og:description" content="购买个人域名例如我的是在阿里云万网购买的,点击进入域名列表,点击解析,会出现一个添加解析按钮，点开有记录类型，主机记录，解析线路，记录值，TTL值五个选项依次填写：  记录类型：A 主机记录：www 解析线路：不用选，就用默认 记录值：填写你的github网址的ip,可以用ip查询或ping查到，一般都是151开头。 TTL值：不用管，默认10分钟。  填写完毕后就可以关闭页面了 Github配置">
+<meta property="og:description" content="此系列文章为进阶类文章,快餐类记录文,用于自己安卓知识点的复习  典型情况生命周期 onCreate() :Activity被创建 onRestart() : 正在重新启动。调用场景：当前Activity从不可见到变为可见状态 onStart():  Activity正在启动,此时Activity已经可见，但还不能和用户交互 onResume() :此时Activity已经可见并开始活动 onP">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-01T03:53:36.859Z">
+<meta property="og:updated_time" content="2017-12-07T11:22:07.300Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何将个人域名与github绑定">
-<meta name="twitter:description" content="购买个人域名例如我的是在阿里云万网购买的,点击进入域名列表,点击解析,会出现一个添加解析按钮，点开有记录类型，主机记录，解析线路，记录值，TTL值五个选项依次填写：  记录类型：A 主机记录：www 解析线路：不用选，就用默认 记录值：填写你的github网址的ip,可以用ip查询或ping查到，一般都是151开头。 TTL值：不用管，默认10分钟。  填写完毕后就可以关闭页面了 Github配置">
+<meta name="twitter:title" content="Activity的生命周期和启动模式">
+<meta name="twitter:description" content="此系列文章为进阶类文章,快餐类记录文,用于自己安卓知识点的复习  典型情况生命周期 onCreate() :Activity被创建 onRestart() : 正在重新启动。调用场景：当前Activity从不可见到变为可见状态 onStart():  Activity正在启动,此时Activity已经可见，但还不能和用户交互 onResume() :此时Activity已经可见并开始活动 onP">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/12/01/如何将个人域名与github绑定/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/12/07/Activity的生命周期和启动模式/"/>
 
 
 
 
 
-  <title>如何将个人域名与github绑定 | Jay的记事本</title>
+  <title>Activity的生命周期和启动模式 | Jay的记事本</title>
   
 
 
@@ -273,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/01/如何将个人域名与github绑定/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/07/Activity的生命周期和启动模式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄杰">
@@ -290,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">如何将个人域名与github绑定</h1>
+          <h1 class="post-title" itemprop="name headline">Activity的生命周期和启动模式</h1>
         
 
         <div class="post-meta">
@@ -302,8 +302,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-01T11:35:48+08:00">
-                2017-12-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-07T16:11:11+08:00">
+                2017-12-07
               </time>
             
 
@@ -325,8 +325,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">Hexo</span>
+                  <a href="/categories/Android基础进阶/" itemprop="url" rel="index">
+                    <span itemprop="name">Android基础进阶</span>
                   </a>
                 </span>
 
@@ -356,7 +356,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  275 字
+                  1,001 字
                 </span>
               
 
@@ -372,7 +372,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  4 分钟
                 </span>
               
             </div>
@@ -393,17 +393,26 @@
       
 
       
-        <h1 id="购买个人域名"><a href="#购买个人域名" class="headerlink" title="购买个人域名"></a>购买个人域名</h1><p>例如我的是在阿里云万网购买的,点击进入域名列表,点击解析,会出现一个添加解析按钮，点开有记录类型，主机记录，解析线路，记录值，TTL值五个选项<br>依次填写：</p>
-<ul>
-<li>记录类型：A</li>
-<li>主机记录：www</li>
-<li>解析线路：不用选，就用默认</li>
-<li>记录值：填写你的github网址的ip,可以用ip查询或ping查到，一般都是151开头。</li>
-<li>TTL值：不用管，默认10分钟。</li>
+        <blockquote>
+<p>此系列文章为进阶类文章,快餐类记录文,用于自己安卓知识点的复习</p>
+</blockquote>
+<h4 id="典型情况生命周期"><a href="#典型情况生命周期" class="headerlink" title="典型情况生命周期"></a>典型情况生命周期</h4><ul>
+<li>onCreate() :Activity被创建</li>
+<li>onRestart() : 正在重新启动。调用场景：当前Activity从不可见到变为可见状态</li>
+<li>onStart():  Activity正在启动,此时Activity已经可见，但还不能和用户交互</li>
+<li>onResume() :此时Activity已经可见并开始活动</li>
+<li>onPause() :Activity正在停止，如果是从此Activity退到上一个Activity,那么会先执行此Activity的onPause,再执行上一个Activity的onResume,所以此方法不能执行耗时的操作，不然会影响新Activity的显示</li>
+<li>onStop() : Activity即将停止,紧接着onPause后面执行</li>
+<li>onDestroy() : Activity即将销毁,在这里主要做一些资源的释放<a id="more"></a>
+完整的启动流程是从上到下,有几个具体情况说明:<br>1)第一次启动一个新的Activity: onCreate-&gt;onStart-&gt;onResume<br>2)再次打开一个Activity或者切换到桌面：onPause -&gt;onStop (注：如果新的Activity是用的透明主题,那么不会回调onStop)<br>3) 再次回到此Activity：onRestar -&gt;onStart -&gt;onResume<br>4)退出此Activity (finish掉)：onPause -&gt;onStop -&gt;onDestroty</li>
 </ul>
-<p>填写完毕后就可以关闭页面了</p>
-<h1 id="Github配置"><a href="#Github配置" class="headerlink" title="Github配置"></a>Github配置</h1><p>在你的io网站本地仓库中新建一个CHAME(注意都要大写)文件，没有后缀，打开编辑，将你的域名添加进入，例如我的就是www.huangjie.name,保存，关闭,将文件提交到远程仓库,这时github应该会发一封邮件给你代表配置成功，更改不会立即生效，一般10分钟左右</p>
-<p>如果你是用的hexo，可以将CHAME文件建立在source文件夹中，这样通过Hexo提交到github不会被覆盖</p>
+<h4 id="异常情况生命周期"><a href="#异常情况生命周期" class="headerlink" title="异常情况生命周期"></a>异常情况生命周期</h4><h5 id="资源相关的系统配置发生了改变导致Activity被杀死并重新创建"><a href="#资源相关的系统配置发生了改变导致Activity被杀死并重新创建" class="headerlink" title="资源相关的系统配置发生了改变导致Activity被杀死并重新创建"></a>资源相关的系统配置发生了改变导致Activity被杀死并重新创建</h5><p>发生此种情况最典型的就是横竖屏的切换,因为系统会去拿两张不同的图片，这时，Activity就会重新创建,它的onPause,onStop,onDestroy都会被调用,同时因为Activity是在异常情况下终止的,所以系统会调用onSaveInstanceState来保存当前Activity的状态，这个方法会在onStop方法之前调用。当Activity创建完成,系统会调用onRestoreInstanceState，可以从这个方法里拿到bundle对象并恢复Activity的状态</p>
+<h5 id="资源不足导致Activity被杀死"><a href="#资源不足导致Activity被杀死" class="headerlink" title="资源不足导致Activity被杀死"></a>资源不足导致Activity被杀死</h5><p>此种情况和第一类差不多，都可以通过以上两种方法来恢复数据</p>
+<p>此外，我们还可以不让Activity重新创建,通过在清单文件中指定Activity的configChanges属性,通过这些属性,可以让我们在特定场景下Activity不会被重新创建,此时，如果我们进行了特殊的操作,Activity会调用onConfigurationChanged方法</p>
+<h4 id="Activity的启动模式"><a href="#Activity的启动模式" class="headerlink" title="Activity的启动模式"></a>Activity的启动模式</h4><p>1)standard： 默认模式，每次都打开一个新的Activity,例如ABCD四个Activity,A是最底的Activity,D是当前的栈顶Activity,通过D启动D，此时栈中的Activity就会变成ABCDD<br>2）singleTop： 栈顶复用模式，例如ABCD四个Activity,用D启动D,栈中的Activity还是ABCD，D被复用了,并且D不会再次调用onCreate，而是会调用onNewIntent<br>3)singleTask:  栈内复用模式,例如ABCD,通过D启动B，栈中的Activity为：ACDB,B不会被重新创建,并且B会放入到栈顶,如果是通过D启动E，那个栈中Activcity为ABCDE,因为E在栈中没有，系统会创建一个新的实例。复用的Activity依旧会调用onNewInternt<br>4) 单实例模式，可以理解为加强版的singTask.此种模式不但拥有singTask的全部特性，而且是单独的位于一个任务栈中，例如A是此种模式，那个系统会创建一个新的任务栈，那么由于栈的复用特性，后续的请求都不会重新创建新的Activity，除非被系统销毁了</p>
+<h4 id="启动模式的设置"><a href="#启动模式的设置" class="headerlink" title="启动模式的设置"></a>启动模式的设置</h4><p>1）通过清单文件的launchMode属性设置<br>2）通过Intent设置标志位来指定<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = new Intent();</span><br><span class="line">intent.setClass(A.this,B.class);</span><br><span class="line">intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure></p>
+<p>两者的区别:第二种的优先级会高于第一种，第一种无法设置FLAG_ACTIVITY_CLEAR_TOP标识,第二种无法为Activity指定singleInstance模式。</p>
+<h4 id="Activity的Flags"><a href="#Activity的Flags" class="headerlink" title="Activity的Flags"></a>Activity的Flags</h4><p><strong>FLAG_ACTIVITY_NEW_TASK</strong><br>singleTask模式<br><strong>FLAG_ACTIVITY_SINGLE_TOP</strong><br>singleTop模式<br><strong>FLAG_ACTIVITY_CLEAR_TOP</strong><br>设置了此模式，如果是singleTask模式启动,那么就会调用onNewIntent，如果是standard模式启动,那么位于此Activity栈上的所有Activity都要出栈<br><strong>FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS</strong><br>具有这个标记的Activity不会出现在列表中,等同于xml中的excludeFromRecents=true;</p>
 
       
     </div>
@@ -421,7 +430,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+            <a href="/tags/Android/" rel="tag"># Android</a>
           
         </div>
       
@@ -434,8 +443,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/29/hello-world/" rel="next" title="Hexo博客使用心得">
-                <i class="fa fa-chevron-left"></i> Hexo博客使用心得
+              <a href="/2017/12/02/有哪些送给年轻人的建议或道理？/" rel="next" title="有哪些送给年轻人的建议或道理？">
+                <i class="fa fa-chevron-left"></i> 有哪些送给年轻人的建议或道理？
               </a>
             
           </div>
@@ -443,10 +452,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/02/有哪些送给年轻人的建议或道理？/" rel="prev" title="有哪些送给年轻人的建议或道理？">
-                有哪些送给年轻人的建议或道理？ <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -608,7 +613,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#购买个人域名"><span class="nav-number">1.</span> <span class="nav-text">购买个人域名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Github配置"><span class="nav-number">2.</span> <span class="nav-text">Github配置</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#典型情况生命周期"><span class="nav-number">1.</span> <span class="nav-text">典型情况生命周期</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异常情况生命周期"><span class="nav-number">2.</span> <span class="nav-text">异常情况生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#资源相关的系统配置发生了改变导致Activity被杀死并重新创建"><span class="nav-number">2.1.</span> <span class="nav-text">资源相关的系统配置发生了改变导致Activity被杀死并重新创建</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#资源不足导致Activity被杀死"><span class="nav-number">2.2.</span> <span class="nav-text">资源不足导致Activity被杀死</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Activity的启动模式"><span class="nav-number">3.</span> <span class="nav-text">Activity的启动模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动模式的设置"><span class="nav-number">4.</span> <span class="nav-text">启动模式的设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Activity的Flags"><span class="nav-number">5.</span> <span class="nav-text">Activity的Flags</span></a></li></ol></div>
             
 
           </div>
