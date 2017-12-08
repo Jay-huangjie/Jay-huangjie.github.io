@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo," />
+  <meta name="keywords" content="Android," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="欢迎来到黄杰的个人博客，这是我写入的第一篇博文,此博客平台采用  Hexo + githubPages搭建而成,搭建日期：2017/11/29。这篇博客将持续记录hexo使用过程中的一些问题">
-<meta name="keywords" content="Hexo">
+<meta name="description" content="什么是IPC IPC是指进程间通信或者跨进程通信，指两个进程之间交换数据的过程。而IPC使用的场景往往是在多进程之间进行通信。 Android开启多进程 通过给Activity指定android:process属性来开启多进程模式,如下示例，123456789101112131415161718192021&amp;l">
+<meta name="keywords" content="Android">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo博客使用心得">
-<meta property="og:url" content="http://www.huangjie.name/2017/11/29/hello-world/index.html">
+<meta property="og:title" content="安卓IPC机制:多进程">
+<meta property="og:url" content="http://www.huangjie.name/2017/12/08/安卓IPC机制-多进程/index.html">
 <meta property="og:site_name" content="Jay的记事本">
-<meta property="og:description" content="欢迎来到黄杰的个人博客，这是我写入的第一篇博文,此博客平台采用  Hexo + githubPages搭建而成,搭建日期：2017/11/29。这篇博客将持续记录hexo使用过程中的一些问题">
+<meta property="og:description" content="什么是IPC IPC是指进程间通信或者跨进程通信，指两个进程之间交换数据的过程。而IPC使用的场景往往是在多进程之间进行通信。 Android开启多进程 通过给Activity指定android:process属性来开启多进程模式,如下示例，123456789101112131415161718192021&amp;lt;application       android:allowBackup=&amp;quo">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-07T07:49:55.438Z">
+<meta property="og:updated_time" content="2017-12-08T02:55:08.830Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo博客使用心得">
-<meta name="twitter:description" content="欢迎来到黄杰的个人博客，这是我写入的第一篇博文,此博客平台采用  Hexo + githubPages搭建而成,搭建日期：2017/11/29。这篇博客将持续记录hexo使用过程中的一些问题">
+<meta name="twitter:title" content="安卓IPC机制:多进程">
+<meta name="twitter:description" content="什么是IPC IPC是指进程间通信或者跨进程通信，指两个进程之间交换数据的过程。而IPC使用的场景往往是在多进程之间进行通信。 Android开启多进程 通过给Activity指定android:process属性来开启多进程模式,如下示例，123456789101112131415161718192021&amp;lt;application       android:allowBackup=&amp;quo">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://www.huangjie.name/2017/11/29/hello-world/"/>
+  <link rel="canonical" href="http://www.huangjie.name/2017/12/08/安卓IPC机制-多进程/"/>
 
 
 
 
 
-  <title>Hexo博客使用心得 | Jay的记事本</title>
+  <title>安卓IPC机制:多进程 | Jay的记事本</title>
   
 
 
@@ -273,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.huangjie.name/2017/11/29/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://www.huangjie.name/2017/12/08/安卓IPC机制-多进程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄杰">
@@ -290,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hexo博客使用心得</h1>
+          <h1 class="post-title" itemprop="name headline">安卓IPC机制:多进程</h1>
         
 
         <div class="post-meta">
@@ -302,8 +302,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-29T14:19:01+08:00">
-                2017-11-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-08T10:17:20+08:00">
+                2017-12-08
               </time>
             
 
@@ -325,8 +325,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">Hexo</span>
+                  <a href="/categories/Android基础进阶/" itemprop="url" rel="index">
+                    <span itemprop="name">Android基础进阶</span>
                   </a>
                 </span>
 
@@ -356,7 +356,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  544 字
+                  661 字
                 </span>
               
 
@@ -372,7 +372,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2 分钟
+                  3 分钟
                 </span>
               
             </div>
@@ -393,27 +393,25 @@
       
 
       
-        <p>欢迎来到黄杰的个人博客，这是我写入的第一篇博文,此博客平台采用  <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> + <a href="https://github.com/" target="_blank" rel="noopener">githubPages</a>搭建而成,搭建日期：2017/11/29。这篇博客将持续记录hexo使用过程中的一些问题<br><a id="more"></a></p>
-<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>记录一些自己搭建的参考资料</p>
+        <h4 id="什么是IPC"><a href="#什么是IPC" class="headerlink" title="什么是IPC"></a>什么是IPC</h4><p> IPC是指进程间通信或者跨进程通信，指两个进程之间交换数据的过程。而IPC使用的场景往往是在多进程之间进行通信。</p>
+<h4 id="Android开启多进程"><a href="#Android开启多进程" class="headerlink" title="Android开启多进程"></a>Android开启多进程</h4><p> 通过给Activity指定android:process属性来开启多进程模式,如下示例，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;application</span><br><span class="line">       android:allowBackup=&quot;true&quot;</span><br><span class="line">       android:icon=&quot;@mipmap/ic_launcher&quot;</span><br><span class="line">       android:label=&quot;@string/app_name&quot;</span><br><span class="line">       android:roundIcon=&quot;@mipmap/ic_launcher_round&quot;</span><br><span class="line">       android:supportsRtl=&quot;true&quot;</span><br><span class="line">       android:theme=&quot;@style/AppTheme&quot;&gt;</span><br><span class="line">       &lt;activity android:name=&quot;.MainActivity&quot;&gt;</span><br><span class="line">           &lt;intent-filter&gt;</span><br><span class="line">               &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;</span><br><span class="line"></span><br><span class="line">               &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;</span><br><span class="line">           &lt;/intent-filter&gt;</span><br><span class="line">       &lt;/activity&gt;</span><br><span class="line">       &lt;activity android:name=&quot;.ThirdActivity&quot; </span><br><span class="line">           android:process=&quot;:remote&quot;</span><br><span class="line">           /&gt;</span><br><span class="line">       &lt;activity android:name=&quot;.SecondActivity&quot; </span><br><span class="line">           android:process=&quot;com.jie.demo_01.remote&quot;</span><br><span class="line">           /&gt;</span><br><span class="line">   &lt;/application&gt;</span><br></pre></td></tr></table></figure></p>
+<p>示例中实现了两种不同的写法，这两种写法是有区别的,当ThirdActivity启动，系统会单独开启一个叫com.jie.demo_01:remote的进程(com.jie.demo_01为包名),当启动SecondActivity,系统会单独开启一个叫com.jie.demo_01.remote的进程，其中，“：”代表要在当前进程名前面加上当前的包名，并且代表此进程为私有进程，其他应用不能和它跑在一个进程中，而没有”：”的为全局进程。SecondActivity的这种写法，是一种完整的命名方式，不会附加包名信息。</p>
+<h4 id="开启多进程的一些坑"><a href="#开启多进程的一些坑" class="headerlink" title="开启多进程的一些坑"></a>开启多进程的一些坑</h4><p>当一个Activity单独开启了一个进程，那么这个Activity就不能和别的进程的Activity共享数据了，只能通过IPC机制来传递数据。</p>
+<p>例如我申明了一个静态变量 Userid = 1;我在MainActivity中把它改为了2，我在SecondActivity中开启了一个进程，我获取这个Userid，你会发现Userid还是1，这是因为Android会为每一个进程分配一个虚拟机，不同的虚拟机在内存分配上会有不同的地址空间，所以Userid会在不同的虚拟机上产生不同的副本，并且副本之间是互不干扰的,我在MainActivity中把它改为2，在SecondActivity中的副本是不会变得,可以理解为又新开启了一个应用，所以，一般来说，多进程之间会存在下列一些问题：</p>
 <ul>
-<li><a href="http://blog.haoji.me/build-blog-website-by-hexo-github.html?from=xa" target="_blank" rel="noopener">http://blog.haoji.me/build-blog-website-by-hexo-github.html?from=xa</a></li>
-<li><a href="https://hexo.io/zh-cn/docs/generating.html" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/generating.html</a></li>
-<li><a href="http://blog.csdn.net/poem_of_sunshine/article/details/2936978" target="_blank" rel="noopener">http://blog.csdn.net/poem_of_sunshine/article/details/2936978</a></li>
-<li><a href="http://blog.sunnyxx.com/2014/02/27/hexo_startup/" target="_blank" rel="noopener">http://blog.sunnyxx.com/2014/02/27/hexo_startup/</a></li>
+<li>静态成员和单例模式无效</li>
+<li>线程同步机制失效</li>
+<li>SharedPreferences的存储结果变得不再可靠</li>
+<li>Application会多次创建</li>
 </ul>
-<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><p>进入项目主结构，使用git bash执行命令</p>
+<p>为了解决这些问题，系统引入了IPC机制，用于在进程间共享和传递数据，IPC的方式主要有以下几种：</p>
 <ul>
-<li>监听文件变动  <code>$ hexo g</code></li>
-<li>开启本地服务 <code>$ hexo s</code> ，开启后在浏览器输入<a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> 即可访问</li>
-<li>提交代码 <code>$ hexo d</code>  ，需要配置deploy</li>
+<li>使用Bundle</li>
+<li>使用文件共享</li>
+<li>使用Messenger</li>
+<li>使用AIDL</li>
 </ul>
-<p>在主项目目录下有个_config.yml,为全局配置文件,在themes文件夹里，存放着网站使用的主题文件，打开主题文件夹，里面也有个_config.yml，为主题配置文件，与主题相关的在这里配置，我现在采用的是<a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">Next</a>主题</p>
-<h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><h4 id="一-首页的文章内容全部显示出来了，没有“阅读全文”"><a href="#一-首页的文章内容全部显示出来了，没有“阅读全文”" class="headerlink" title="一.首页的文章内容全部显示出来了，没有“阅读全文”?"></a>一.首页的文章内容全部显示出来了，没有“阅读全文”?</h4><h5 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h5><p>有两种方法</p>
-<p>第一种：<br>在主题配置文件里(themes/next/_config.yml)用编辑器打开，找到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Automatically Excerpt. Not recommend.</span><br><span class="line"># Please use &lt;!-- more --&gt; in the post to control excerpt accurately.</span><br><span class="line">auto_excerpt:</span><br><span class="line">  enable: false</span><br><span class="line">  length: 150</span><br></pre></td></tr></table></figure></p>
-<p>将 <code>enable：false</code> 改为<code>true</code>就行了，后面的<code>length:150</code>代表显示的文本字数。</p>
-<p>第二种：<br>直接在编辑的.md文件里将要预览的文字后面加上<code>&lt;!--more--&gt;</code>,这样之前的就是预览的文字,后面的就不会显示了</p>
-<h4 id="二-如何将README-md文件传到github而不被编译成html"><a href="#二-如何将README-md文件传到github而不被编译成html" class="headerlink" title="二.如何将README.md文件传到github而不被编译成html"></a>二.如何将README.md文件传到github而不被编译成html</h4><p>在Hexo目录的source目录在建立一个README.md文件,修改Hexo目录的_config.yml配置,找到 skip_render参数设置,后面加上 README.md,关闭保存,之后编译就不会渲染README.md这个文件了</p>
-<h1 id="写作技巧记录"><a href="#写作技巧记录" class="headerlink" title="写作技巧记录"></a>写作技巧记录</h1><h4 id="一-如何将md文件以时间命名"><a href="#一-如何将md文件以时间命名" class="headerlink" title="一.如何将md文件以时间命名"></a>一.如何将md文件以时间命名</h4><p>  在_config.yml中找到new_post_name,修改名称为<code>:year-:month-:day-:title.md</code>,这样创建的文件就会以电脑时间命名，使用时间命名可以更方便的管理文章</p>
+<p>其中Messenger底层其实使用的AILD，AIDL其实是依靠Binder,下一章将详细介绍这几种方法。</p>
 
       
     </div>
@@ -431,7 +429,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+            <a href="/tags/Android/" rel="tag"># Android</a>
           
         </div>
       
@@ -444,14 +442,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/12/07/Activity的生命周期和启动模式/" rel="next" title="Activity的生命周期和启动模式">
+                <i class="fa fa-chevron-left"></i> Activity的生命周期和启动模式
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/01/如何将个人域名与github绑定/" rel="prev" title="如何将个人域名与github绑定">
-                如何将个人域名与github绑定 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/12/08/安卓IPC机制：Bundle数据传递/" rel="prev" title="安卓IPC机制：Bundle数据传递">
+                安卓IPC机制：Bundle数据传递 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -614,7 +616,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用命令"><span class="nav-number">2.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#遇到的问题"><span class="nav-number">3.</span> <span class="nav-text">遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一-首页的文章内容全部显示出来了，没有“阅读全文”"><span class="nav-number">3.0.0.1.</span> <span class="nav-text">一.首页的文章内容全部显示出来了，没有“阅读全文”?</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#解决办法"><span class="nav-number">3.0.0.1.1.</span> <span class="nav-text">解决办法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二-如何将README-md文件传到github而不被编译成html"><span class="nav-number">3.0.0.2.</span> <span class="nav-text">二.如何将README.md文件传到github而不被编译成html</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#写作技巧记录"><span class="nav-number">4.</span> <span class="nav-text">写作技巧记录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一-如何将md文件以时间命名"><span class="nav-number">4.0.0.1.</span> <span class="nav-text">一.如何将md文件以时间命名</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是IPC"><span class="nav-number">1.</span> <span class="nav-text">什么是IPC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Android开启多进程"><span class="nav-number">2.</span> <span class="nav-text">Android开启多进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开启多进程的一些坑"><span class="nav-number">3.</span> <span class="nav-text">开启多进程的一些坑</span></a></li></ol></div>
             
 
           </div>

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo," />
+  <meta name="keywords" content="Android," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="欢迎来到黄杰的个人博客，这是我写入的第一篇博文,此博客平台采用  Hexo + githubPages搭建而成,搭建日期：2017/11/29。这篇博客将持续记录hexo使用过程中的一些问题">
-<meta name="keywords" content="Hexo">
+<meta name="description" content="序列化与反序列化要实现进程之间的通信，序列化是通信的基础，所以先要了解下什么是序列化">
+<meta name="keywords" content="Android">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo博客使用心得">
-<meta property="og:url" content="http://www.huangjie.name/2017/11/29/hello-world/index.html">
+<meta property="og:title" content="安卓IPC机制：Bundle数据传递">
+<meta property="og:url" content="http://www.huangjie.name/2017/12/08/安卓IPC机制：Bundle数据传递/index.html">
 <meta property="og:site_name" content="Jay的记事本">
-<meta property="og:description" content="欢迎来到黄杰的个人博客，这是我写入的第一篇博文,此博客平台采用  Hexo + githubPages搭建而成,搭建日期：2017/11/29。这篇博客将持续记录hexo使用过程中的一些问题">
+<meta property="og:description" content="序列化与反序列化要实现进程之间的通信，序列化是通信的基础，所以先要了解下什么是序列化">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-07T07:49:55.438Z">
+<meta property="og:updated_time" content="2017-12-08T05:25:31.735Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo博客使用心得">
-<meta name="twitter:description" content="欢迎来到黄杰的个人博客，这是我写入的第一篇博文,此博客平台采用  Hexo + githubPages搭建而成,搭建日期：2017/11/29。这篇博客将持续记录hexo使用过程中的一些问题">
+<meta name="twitter:title" content="安卓IPC机制：Bundle数据传递">
+<meta name="twitter:description" content="序列化与反序列化要实现进程之间的通信，序列化是通信的基础，所以先要了解下什么是序列化">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://www.huangjie.name/2017/11/29/hello-world/"/>
+  <link rel="canonical" href="http://www.huangjie.name/2017/12/08/安卓IPC机制：Bundle数据传递/"/>
 
 
 
 
 
-  <title>Hexo博客使用心得 | Jay的记事本</title>
+  <title>安卓IPC机制：Bundle数据传递 | Jay的记事本</title>
   
 
 
@@ -273,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.huangjie.name/2017/11/29/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://www.huangjie.name/2017/12/08/安卓IPC机制：Bundle数据传递/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄杰">
@@ -290,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hexo博客使用心得</h1>
+          <h1 class="post-title" itemprop="name headline">安卓IPC机制：Bundle数据传递</h1>
         
 
         <div class="post-meta">
@@ -302,8 +302,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-29T14:19:01+08:00">
-                2017-11-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-08T10:54:47+08:00">
+                2017-12-08
               </time>
             
 
@@ -325,8 +325,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">Hexo</span>
+                  <a href="/categories/Android基础进阶/" itemprop="url" rel="index">
+                    <span itemprop="name">Android基础进阶</span>
                   </a>
                 </span>
 
@@ -356,7 +356,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  544 字
+                  627 字
                 </span>
               
 
@@ -372,7 +372,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2 分钟
+                  3 分钟
                 </span>
               
             </div>
@@ -393,27 +393,48 @@
       
 
       
-        <p>欢迎来到黄杰的个人博客，这是我写入的第一篇博文,此博客平台采用  <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> + <a href="https://github.com/" target="_blank" rel="noopener">githubPages</a>搭建而成,搭建日期：2017/11/29。这篇博客将持续记录hexo使用过程中的一些问题<br><a id="more"></a></p>
-<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>记录一些自己搭建的参考资料</p>
-<ul>
-<li><a href="http://blog.haoji.me/build-blog-website-by-hexo-github.html?from=xa" target="_blank" rel="noopener">http://blog.haoji.me/build-blog-website-by-hexo-github.html?from=xa</a></li>
-<li><a href="https://hexo.io/zh-cn/docs/generating.html" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/generating.html</a></li>
-<li><a href="http://blog.csdn.net/poem_of_sunshine/article/details/2936978" target="_blank" rel="noopener">http://blog.csdn.net/poem_of_sunshine/article/details/2936978</a></li>
-<li><a href="http://blog.sunnyxx.com/2014/02/27/hexo_startup/" target="_blank" rel="noopener">http://blog.sunnyxx.com/2014/02/27/hexo_startup/</a></li>
-</ul>
-<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><p>进入项目主结构，使用git bash执行命令</p>
-<ul>
-<li>监听文件变动  <code>$ hexo g</code></li>
-<li>开启本地服务 <code>$ hexo s</code> ，开启后在浏览器输入<a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> 即可访问</li>
-<li>提交代码 <code>$ hexo d</code>  ，需要配置deploy</li>
-</ul>
-<p>在主项目目录下有个_config.yml,为全局配置文件,在themes文件夹里，存放着网站使用的主题文件，打开主题文件夹，里面也有个_config.yml，为主题配置文件，与主题相关的在这里配置，我现在采用的是<a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">Next</a>主题</p>
-<h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><h4 id="一-首页的文章内容全部显示出来了，没有“阅读全文”"><a href="#一-首页的文章内容全部显示出来了，没有“阅读全文”" class="headerlink" title="一.首页的文章内容全部显示出来了，没有“阅读全文”?"></a>一.首页的文章内容全部显示出来了，没有“阅读全文”?</h4><h5 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h5><p>有两种方法</p>
-<p>第一种：<br>在主题配置文件里(themes/next/_config.yml)用编辑器打开，找到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Automatically Excerpt. Not recommend.</span><br><span class="line"># Please use &lt;!-- more --&gt; in the post to control excerpt accurately.</span><br><span class="line">auto_excerpt:</span><br><span class="line">  enable: false</span><br><span class="line">  length: 150</span><br></pre></td></tr></table></figure></p>
-<p>将 <code>enable：false</code> 改为<code>true</code>就行了，后面的<code>length:150</code>代表显示的文本字数。</p>
-<p>第二种：<br>直接在编辑的.md文件里将要预览的文字后面加上<code>&lt;!--more--&gt;</code>,这样之前的就是预览的文字,后面的就不会显示了</p>
-<h4 id="二-如何将README-md文件传到github而不被编译成html"><a href="#二-如何将README-md文件传到github而不被编译成html" class="headerlink" title="二.如何将README.md文件传到github而不被编译成html"></a>二.如何将README.md文件传到github而不被编译成html</h4><p>在Hexo目录的source目录在建立一个README.md文件,修改Hexo目录的_config.yml配置,找到 skip_render参数设置,后面加上 README.md,关闭保存,之后编译就不会渲染README.md这个文件了</p>
-<h1 id="写作技巧记录"><a href="#写作技巧记录" class="headerlink" title="写作技巧记录"></a>写作技巧记录</h1><h4 id="一-如何将md文件以时间命名"><a href="#一-如何将md文件以时间命名" class="headerlink" title="一.如何将md文件以时间命名"></a>一.如何将md文件以时间命名</h4><p>  在_config.yml中找到new_post_name,修改名称为<code>:year-:month-:day-:title.md</code>,这样创建的文件就会以电脑时间命名，使用时间命名可以更方便的管理文章</p>
+        <h4 id="序列化与反序列化"><a href="#序列化与反序列化" class="headerlink" title="序列化与反序列化"></a>序列化与反序列化</h4><p>要实现进程之间的通信，序列化是通信的基础，所以先要了解下什么是序列化<br><a id="more"></a><br>安卓实现序列化有两种方式：<br><strong>1. 实现Serializable接口</strong>，使用相当简单，这个是JAVA提供的方法，需要注意的是,该接口有一个serialVersionUID参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">private static final long serialVersionUID = 1L ;</span><br></pre></td></tr></table></figure></p>
+<p>可以选择不实现，依旧可以序列化，但是会对反序列化产生影响，如果在反序列化的过程中类发生了变化，那么将会报错。<br>AndroidStudio默认不检查serialVersionUID的实现，因此，可以手动开启它，这样系统就会自动帮你实现serialVersionUID。开启方法：<br>Settings-&gt;Editor-&gt;Inspections-&gt;serialization issues-&gt;Serializable class without ‘serialVersionUID’ 勾上确认就可以</p>
+<p>序列化对象也非常简单，通过ObjectOutputStream和ObjectInputStream即可轻松实现</p>
+<p><strong>2.实现Parcelable接口</strong>,这是Android提供的方法，实现该接口，系统会自动帮你实现需要的代码，Android中推荐使用该方法，因为效率比Serializable高，Serializable需要进行大量的I/O操作。以下是完整实现实例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">public class User implements Parcelable &#123;</span><br><span class="line">    public int userId;</span><br><span class="line">    public String userName;</span><br><span class="line">    public boolean isMale;</span><br><span class="line">    public Book book;</span><br><span class="line"></span><br><span class="line">    protected User(Parcel in) &#123;</span><br><span class="line">        userId = in.readInt();</span><br><span class="line">        userName = in.readString();</span><br><span class="line">        isMale = in.readByte() != 0;</span><br><span class="line">        book = in.readParcelable(Book.class.getClassLoader());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static final Creator&lt;User&gt; CREATOR = new Creator&lt;User&gt;() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public User createFromParcel(Parcel in) &#123;</span><br><span class="line">            return new User(in);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public User[] newArray(int size) &#123;</span><br><span class="line">            return new User[size];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int describeContents() &#123;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void writeToParcel(Parcel parcel, int i) &#123;</span><br><span class="line">        parcel.writeInt(userId);</span><br><span class="line">        parcel.writeString(userName);</span><br><span class="line">        parcel.writeByte((byte) (isMale ? 1 : 0));</span><br><span class="line">        parcel.writeParcelable(book, i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>方法详解见下表：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>功能</th>
+<th>标记位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>createFromParce(Parcel in)l</td>
+<td>从序列化的对象中创建原始对象</td>
+<td></td>
+</tr>
+<tr>
+<td>newArray</td>
+<td>创建指定长度的原始对象数组</td>
+<td></td>
+</tr>
+<tr>
+<td>User(Parcel in)</td>
+<td>从序列化的对象中创建原始对象</td>
+<td></td>
+</tr>
+<tr>
+<td>writeToParcel(Parcel parcel, int i)</td>
+<td>将当前对象写入序列化结构中,其中 i有两种值，1代表当前对象需要作为返回值返回，不能立即释放资源，</td>
+<td>PARCELABLE_WRITE_VALUE</td>
+</tr>
+<tr>
+<td>describeContents</td>
+<td>返回当前对象的内容描述，如果含有文件扫描符，返回1（参见右侧标记位），否则返回0</td>
+<td>CONTENTS_FILE_DESCRIPTOR</td>
+</tr>
+</tbody>
+</table>
+<p>实现了序列化，我们就可以很方便的通过Intent发送Bundle,这是一种简单的进程间通信的方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Bundle bundle = new Bundle();</span><br><span class="line">       bundle.putParcelable(&quot;User&quot;,new User());</span><br><span class="line">       Intent intent = new Intent(MainActivity.this, SecondActivity.class);</span><br><span class="line">       intent.putExtra(&quot;data&quot;,bundle);</span><br><span class="line">       startActivity(intent);</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -431,7 +452,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+            <a href="/tags/Android/" rel="tag"># Android</a>
           
         </div>
       
@@ -444,14 +465,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/12/08/安卓IPC机制-多进程/" rel="next" title="安卓IPC机制:多进程">
+                <i class="fa fa-chevron-left"></i> 安卓IPC机制:多进程
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/01/如何将个人域名与github绑定/" rel="prev" title="如何将个人域名与github绑定">
-                如何将个人域名与github绑定 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/12/08/安卓IPC机制：使用文件共享/" rel="prev" title="安卓IPC机制：使用文件共享">
+                安卓IPC机制：使用文件共享 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -614,7 +639,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用命令"><span class="nav-number">2.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#遇到的问题"><span class="nav-number">3.</span> <span class="nav-text">遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一-首页的文章内容全部显示出来了，没有“阅读全文”"><span class="nav-number">3.0.0.1.</span> <span class="nav-text">一.首页的文章内容全部显示出来了，没有“阅读全文”?</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#解决办法"><span class="nav-number">3.0.0.1.1.</span> <span class="nav-text">解决办法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二-如何将README-md文件传到github而不被编译成html"><span class="nav-number">3.0.0.2.</span> <span class="nav-text">二.如何将README.md文件传到github而不被编译成html</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#写作技巧记录"><span class="nav-number">4.</span> <span class="nav-text">写作技巧记录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一-如何将md文件以时间命名"><span class="nav-number">4.0.0.1.</span> <span class="nav-text">一.如何将md文件以时间命名</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#序列化与反序列化"><span class="nav-number">1.</span> <span class="nav-text">序列化与反序列化</span></a></li></ol></div>
             
 
           </div>
