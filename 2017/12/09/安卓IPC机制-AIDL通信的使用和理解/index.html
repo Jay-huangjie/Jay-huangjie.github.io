@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Jay的记事本">
 <meta property="og:description" content="使用情景虽然Messenger对AIDL做了封装使其变得更易用，但Messenger只能一个一个的处理接收的数据,当有大量并发的数据涌入时，Messenger就显得不那么合适了,并且Messenger只能用来传递消息，如果需要调用跨进程的方法怎么办呢，这是，AIDL就派上用场了。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-09T12:20:49.143Z">
+<meta property="og:updated_time" content="2017-12-09T12:29:39.847Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安卓IPC机制:AIDL通信的使用和理解">
 <meta name="twitter:description" content="使用情景虽然Messenger对AIDL做了封装使其变得更易用，但Messenger只能一个一个的处理接收的数据,当有大量并发的数据涌入时，Messenger就显得不那么合适了,并且Messenger只能用来传递消息，如果需要调用跨进程的方法怎么办呢，这是，AIDL就派上用场了。">
@@ -356,7 +356,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,473 字
+                  2,573 字
                 </span>
               
 
@@ -372,7 +372,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  11 分钟
+                  12 分钟
                 </span>
               
             </div>
@@ -432,6 +432,7 @@
 <p><code>Proxy</code>中的方法：</p>
 <p><strong>getBookList</strong><br>此方法运行在客户端，当客户端远程调用此方法时，它会创建该方法所需要的输入型Parcel对象data,输出型Parcel对象,_reply和返回值对象List,然后将该方法的参数信息写入_data中（如果有参数的话）；接着调用transact方法来发起请求，同时当前线程挂起，然后服务端的onTransatct方法会被调用，直到远程调用返回，当前线程继续执行，并从_reply中取出远程调用过程的返回结果，最后返回_reply数据。</p>
 <p><strong>addBook</strong><br>同<code>getBookList</code>一样，因为没有返回值，所以不需要从_reply中取值</p>
+<p>整体来说整个类还是易于理解的，大多其实都是偏底层的实现,需要注意的是,客户端通过接口方法发起请求时，当前线程会被挂起直到服务端返回数据，因此，如果一个远程的方法非常耗时，那么就不能在主线程中发起请求，需要另开一个线程。</p>
 
       
     </div>
