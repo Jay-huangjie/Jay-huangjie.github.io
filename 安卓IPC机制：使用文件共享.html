@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="序列化与反序列化要实现进程之间的通信，序列化是通信的基础，所以先要了解下什么是序列化">
+<meta name="description" content="原理通过两个进程间读/写同一个文件来交换数据">
 <meta name="keywords" content="Android">
 <meta property="og:type" content="article">
-<meta property="og:title" content="安卓IPC机制：Bundle数据传递">
-<meta property="og:url" content="http://www.huangjie.name/2017/12/08/安卓IPC机制：Bundle数据传递/index.html">
+<meta property="og:title" content="安卓IPC机制：使用文件共享">
+<meta property="og:url" content="http://www.huangjie.name/安卓IPC机制：使用文件共享.html">
 <meta property="og:site_name" content="Jay的记事本">
-<meta property="og:description" content="序列化与反序列化要实现进程之间的通信，序列化是通信的基础，所以先要了解下什么是序列化">
+<meta property="og:description" content="原理通过两个进程间读/写同一个文件来交换数据">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-08T05:25:31.735Z">
+<meta property="og:updated_time" content="2017-12-08T05:27:27.846Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="安卓IPC机制：Bundle数据传递">
-<meta name="twitter:description" content="序列化与反序列化要实现进程之间的通信，序列化是通信的基础，所以先要了解下什么是序列化">
+<meta name="twitter:title" content="安卓IPC机制：使用文件共享">
+<meta name="twitter:description" content="原理通过两个进程间读/写同一个文件来交换数据">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://www.huangjie.name/2017/12/08/安卓IPC机制：Bundle数据传递/"/>
+  <link rel="canonical" href="http://www.huangjie.name/安卓IPC机制：使用文件共享.html"/>
 
 
 
 
 
-  <title>安卓IPC机制：Bundle数据传递 | Jay的记事本</title>
+  <title>安卓IPC机制：使用文件共享 | Jay的记事本</title>
   
 
 
@@ -273,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.huangjie.name/2017/12/08/安卓IPC机制：Bundle数据传递/">
+    <link itemprop="mainEntityOfPage" href="http://www.huangjie.name/安卓IPC机制：使用文件共享.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄杰">
@@ -290,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">安卓IPC机制：Bundle数据传递</h1>
+          <h1 class="post-title" itemprop="name headline">安卓IPC机制：使用文件共享</h1>
         
 
         <div class="post-meta">
@@ -302,7 +302,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-08T10:54:47+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-08T11:49:47+08:00">
                 2017-12-08
               </time>
             
@@ -356,7 +356,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  627 字
+                  554 字
                 </span>
               
 
@@ -393,48 +393,11 @@
       
 
       
-        <h4 id="序列化与反序列化"><a href="#序列化与反序列化" class="headerlink" title="序列化与反序列化"></a>序列化与反序列化</h4><p>要实现进程之间的通信，序列化是通信的基础，所以先要了解下什么是序列化<br><a id="more"></a><br>安卓实现序列化有两种方式：<br><strong>1. 实现Serializable接口</strong>，使用相当简单，这个是JAVA提供的方法，需要注意的是,该接口有一个serialVersionUID参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">private static final long serialVersionUID = 1L ;</span><br></pre></td></tr></table></figure></p>
-<p>可以选择不实现，依旧可以序列化，但是会对反序列化产生影响，如果在反序列化的过程中类发生了变化，那么将会报错。<br>AndroidStudio默认不检查serialVersionUID的实现，因此，可以手动开启它，这样系统就会自动帮你实现serialVersionUID。开启方法：<br>Settings-&gt;Editor-&gt;Inspections-&gt;serialization issues-&gt;Serializable class without ‘serialVersionUID’ 勾上确认就可以</p>
-<p>序列化对象也非常简单，通过ObjectOutputStream和ObjectInputStream即可轻松实现</p>
-<p><strong>2.实现Parcelable接口</strong>,这是Android提供的方法，实现该接口，系统会自动帮你实现需要的代码，Android中推荐使用该方法，因为效率比Serializable高，Serializable需要进行大量的I/O操作。以下是完整实现实例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">public class User implements Parcelable &#123;</span><br><span class="line">    public int userId;</span><br><span class="line">    public String userName;</span><br><span class="line">    public boolean isMale;</span><br><span class="line">    public Book book;</span><br><span class="line"></span><br><span class="line">    protected User(Parcel in) &#123;</span><br><span class="line">        userId = in.readInt();</span><br><span class="line">        userName = in.readString();</span><br><span class="line">        isMale = in.readByte() != 0;</span><br><span class="line">        book = in.readParcelable(Book.class.getClassLoader());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static final Creator&lt;User&gt; CREATOR = new Creator&lt;User&gt;() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public User createFromParcel(Parcel in) &#123;</span><br><span class="line">            return new User(in);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public User[] newArray(int size) &#123;</span><br><span class="line">            return new User[size];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int describeContents() &#123;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void writeToParcel(Parcel parcel, int i) &#123;</span><br><span class="line">        parcel.writeInt(userId);</span><br><span class="line">        parcel.writeString(userName);</span><br><span class="line">        parcel.writeByte((byte) (isMale ? 1 : 0));</span><br><span class="line">        parcel.writeParcelable(book, i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>方法详解见下表：</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>功能</th>
-<th>标记位</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>createFromParce(Parcel in)l</td>
-<td>从序列化的对象中创建原始对象</td>
-<td></td>
-</tr>
-<tr>
-<td>newArray</td>
-<td>创建指定长度的原始对象数组</td>
-<td></td>
-</tr>
-<tr>
-<td>User(Parcel in)</td>
-<td>从序列化的对象中创建原始对象</td>
-<td></td>
-</tr>
-<tr>
-<td>writeToParcel(Parcel parcel, int i)</td>
-<td>将当前对象写入序列化结构中,其中 i有两种值，1代表当前对象需要作为返回值返回，不能立即释放资源，</td>
-<td>PARCELABLE_WRITE_VALUE</td>
-</tr>
-<tr>
-<td>describeContents</td>
-<td>返回当前对象的内容描述，如果含有文件扫描符，返回1（参见右侧标记位），否则返回0</td>
-<td>CONTENTS_FILE_DESCRIPTOR</td>
-</tr>
-</tbody>
-</table>
-<p>实现了序列化，我们就可以很方便的通过Intent发送Bundle,这是一种简单的进程间通信的方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Bundle bundle = new Bundle();</span><br><span class="line">       bundle.putParcelable(&quot;User&quot;,new User());</span><br><span class="line">       Intent intent = new Intent(MainActivity.this, SecondActivity.class);</span><br><span class="line">       intent.putExtra(&quot;data&quot;,bundle);</span><br><span class="line">       startActivity(intent);</span><br></pre></td></tr></table></figure></p>
+        <h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>通过两个进程间读/写同一个文件来交换数据<br><a id="more"></a><br>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">package com.jie.demo_01;</span><br><span class="line"></span><br><span class="line">import android.content.Intent;</span><br><span class="line">import android.os.Bundle;</span><br><span class="line">import android.os.Environment;</span><br><span class="line">import android.support.v7.app.AppCompatActivity;</span><br><span class="line">import android.view.View;</span><br><span class="line"></span><br><span class="line">import java.io.File;</span><br><span class="line">import java.io.FileOutputStream;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.ObjectOutputStream;</span><br><span class="line"></span><br><span class="line">public class MainActivity extends AppCompatActivity &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onResume() &#123;</span><br><span class="line">        super.onResume();</span><br><span class="line">        initWriteToFile();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  //点击跳转到SecondActivity</span><br><span class="line">    public void start(View v)&#123;</span><br><span class="line">        startActivity(new Intent(MainActivity.this,SecondActivity.class));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void initWriteToFile()&#123;</span><br><span class="line">        new Thread()&#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void run() &#123;</span><br><span class="line">                User user = new User();</span><br><span class="line">                user.userName = &quot;Hello World&quot;;</span><br><span class="line">                File file = new File(getDiskCacheDir());</span><br><span class="line">                ObjectOutputStream oos = null;</span><br><span class="line">                try &#123;</span><br><span class="line">                    oos = new ObjectOutputStream(new FileOutputStream(file));</span><br><span class="line">                    oos.writeObject(user);</span><br><span class="line">                &#125; catch (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;finally &#123;</span><br><span class="line">                    try &#123;</span><br><span class="line">                        if (oos!=null)</span><br><span class="line">                        oos.close();</span><br><span class="line">                    &#125; catch (IOException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;.start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getDiskCacheDir() &#123;</span><br><span class="line">        String cachePath = null;</span><br><span class="line">        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())</span><br><span class="line">                || !Environment.isExternalStorageRemovable()) &#123;</span><br><span class="line">            cachePath = getExternalCacheDir().getPath()+&quot;/cache.txt&quot;;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            cachePath = getCacheDir().getPath()+&quot;/cache.txt&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        return cachePath;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>SecondActivity代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">package com.jie.demo_01;</span><br><span class="line"></span><br><span class="line">import android.os.Bundle;</span><br><span class="line">import android.os.Environment;</span><br><span class="line">import android.support.v7.app.AppCompatActivity;</span><br><span class="line">import android.util.Log;</span><br><span class="line"></span><br><span class="line">import java.io.File;</span><br><span class="line">import java.io.FileInputStream;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.ObjectInputStream;</span><br><span class="line"></span><br><span class="line">public class SecondActivity extends AppCompatActivity &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onResume() &#123;</span><br><span class="line">        super.onResume();</span><br><span class="line">        getCacheFromFile();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void getCacheFromFile ()&#123;</span><br><span class="line">        new Thread()&#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void run() &#123;</span><br><span class="line">                User user = null;</span><br><span class="line">                File file = new File(getDiskCacheDir());</span><br><span class="line">                if (file.exists())&#123;</span><br><span class="line">                    ObjectInputStream ois = null;</span><br><span class="line">                    try &#123;</span><br><span class="line">                        ois = new ObjectInputStream(new FileInputStream(file));</span><br><span class="line">                        user = (User) ois.readObject();</span><br><span class="line">                        Log.i(&quot;TAG&quot;,user.userName);</span><br><span class="line">                    &#125; catch (IOException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;.start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getDiskCacheDir() &#123;</span><br><span class="line">        String cachePath = null;</span><br><span class="line">        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())</span><br><span class="line">                || !Environment.isExternalStorageRemovable()) &#123;</span><br><span class="line">            cachePath = getExternalCacheDir().getPath()+&quot;/cache.txt&quot;;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            cachePath = getCacheDir().getPath()+&quot;/cache.txt&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        return cachePath;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行后，打印出日志：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">12-08 13:13:30.372 17706-17723/com.jie.demo_01.remote I/TAG: Hello World</span><br></pre></td></tr></table></figure></p>
+<p>文件传值成功</p>
+<p>文件传值并没有具体的要求，不管是通过txt,xml,等等都可以，需要注意的是文件的并发问题，要避免获取文件值得时候同时去修改文件，这样会造成数据的混乱。</p>
 
       
     </div>
@@ -465,8 +428,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/08/安卓IPC机制-多进程/" rel="next" title="安卓IPC机制:多进程">
-                <i class="fa fa-chevron-left"></i> 安卓IPC机制:多进程
+              <a href="/安卓IPC机制：Bundle数据传递.html" rel="next" title="安卓IPC机制：Bundle数据传递">
+                <i class="fa fa-chevron-left"></i> 安卓IPC机制：Bundle数据传递
               </a>
             
           </div>
@@ -475,8 +438,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/08/安卓IPC机制：使用文件共享/" rel="prev" title="安卓IPC机制：使用文件共享">
-                安卓IPC机制：使用文件共享 <i class="fa fa-chevron-right"></i>
+              <a href="/安卓IPC机制-使用Messenger通信.html" rel="prev" title="安卓IPC机制:使用Messenger通信">
+                安卓IPC机制:使用Messenger通信 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -639,7 +602,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#序列化与反序列化"><span class="nav-number">1.</span> <span class="nav-text">序列化与反序列化</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#原理"><span class="nav-number">1.</span> <span class="nav-text">原理</span></a></li></ol></div>
             
 
           </div>
@@ -816,6 +779,21 @@
   
 
   
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
 
   
 

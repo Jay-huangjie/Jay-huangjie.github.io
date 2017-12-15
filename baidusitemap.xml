@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+  <url>
+    <loc>http://www.huangjie.name/%E5%AE%89%E5%8D%93IPC%E6%9C%BA%E5%88%B6-AIDL%E9%80%9A%E4%BF%A1%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E7%90%86%E8%A7%A3.html</loc>
+    <lastmod>2017-12-09T12:29:39.847Z</lastmod>
+    <data>
+        <display>
+        <title>安卓IPC机制:AIDL通信的使用和理解</title>
+        <pubTime>2017-12-09T08:08:19.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android基础进阶" url="http://www.huangjie.name/categories/Android%E5%9F%BA%E7%A1%80%E8%BF%9B%E9%98%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>http://www.huangjie.name/%E5%AE%89%E5%8D%93IPC%E6%9C%BA%E5%88%B6-%E4%BD%BF%E7%94%A8Messenger%E9%80%9A%E4%BF%A1.html</loc>
+    <lastmod>2017-12-09T03:22:34.380Z</lastmod>
+    <data>
+        <display>
+        <title>安卓IPC机制:使用Messenger通信</title>
+        <pubTime>2017-12-09T02:58:17.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android基础进阶" url="http://www.huangjie.name/categories/Android%E5%9F%BA%E7%A1%80%E8%BF%9B%E9%98%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.huangjie.name/%E5%AE%89%E5%8D%93IPC%E6%9C%BA%E5%88%B6%EF%BC%9A%E4%BD%BF%E7%94%A8%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB.html</loc>
+    <lastmod>2017-12-08T05:27:27.846Z</lastmod>
+    <data>
+        <display>
+        <title>安卓IPC机制：使用文件共享</title>
+        <pubTime>2017-12-08T03:49:47.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android基础进阶" url="http://www.huangjie.name/categories/Android%E5%9F%BA%E7%A1%80%E8%BF%9B%E9%98%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.huangjie.name/%E5%AE%89%E5%8D%93IPC%E6%9C%BA%E5%88%B6%EF%BC%9ABundle%E6%95%B0%E6%8D%AE%E4%BC%A0%E9%80%92.html</loc>
+    <lastmod>2017-12-08T05:25:31.735Z</lastmod>
+    <data>
+        <display>
+        <title>安卓IPC机制：Bundle数据传递</title>
+        <pubTime>2017-12-08T02:54:47.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android基础进阶" url="http://www.huangjie.name/categories/Android%E5%9F%BA%E7%A1%80%E8%BF%9B%E9%98%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.huangjie.name/%E5%AE%89%E5%8D%93IPC%E6%9C%BA%E5%88%B6-%E5%A4%9A%E8%BF%9B%E7%A8%8B.html</loc>
+    <lastmod>2017-12-08T02:55:08.830Z</lastmod>
+    <data>
+        <display>
+        <title>安卓IPC机制:多进程</title>
+        <pubTime>2017-12-08T02:17:20.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android基础进阶" url="http://www.huangjie.name/categories/Android%E5%9F%BA%E7%A1%80%E8%BF%9B%E9%98%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.huangjie.name/Activity%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%92%8C%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F.html</loc>
+    <lastmod>2017-12-07T11:25:59.907Z</lastmod>
+    <data>
+        <display>
+        <title>Activity的生命周期和启动模式</title>
+        <pubTime>2017-12-07T08:11:11.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android基础进阶" url="http://www.huangjie.name/categories/Android%E5%9F%BA%E7%A1%80%E8%BF%9B%E9%98%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.huangjie.name/hello-world.html</loc>
+    <lastmod>2017-12-07T07:49:55.438Z</lastmod>
+    <data>
+        <display>
+        <title>Hexo博客使用心得</title>
+        <pubTime>2017-11-29T06:19:01.505Z</pubTime>
+        
+        <tag>Hexo</tag>
+         
+         
+           
+             
+              <breadCrumb title="Hexo" url="http://www.huangjie.name/categories/hexo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.huangjie.name/%E6%9C%89%E5%93%AA%E4%BA%9B%E9%80%81%E7%BB%99%E5%B9%B4%E8%BD%BB%E4%BA%BA%E7%9A%84%E5%BB%BA%E8%AE%AE%E6%88%96%E9%81%93%E7%90%86%EF%BC%9F.html</loc>
+    <lastmod>2017-12-02T02:40:46.890Z</lastmod>
+    <data>
+        <display>
+        <title>有哪些送给年轻人的建议或道理？</title>
+        <pubTime>2017-12-02T01:30:13.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="life" url="http://www.huangjie.name/categories/life/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.huangjie.name/%E5%A6%82%E4%BD%95%E5%B0%86%E4%B8%AA%E4%BA%BA%E5%9F%9F%E5%90%8D%E4%B8%8Egithub%E7%BB%91%E5%AE%9A.html</loc>
+    <lastmod>2017-12-01T03:53:36.859Z</lastmod>
+    <data>
+        <display>
+        <title>如何将个人域名与github绑定</title>
+        <pubTime>2017-12-01T03:35:48.000Z</pubTime>
+        
+        <tag>Hexo</tag>
+         
+         
+           
+             
+              <breadCrumb title="Hexo" url="http://www.huangjie.name/categories/hexo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+</urlset>

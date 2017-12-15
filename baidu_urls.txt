@@ -1,0 +1,9 @@
+http://www.huangjie.name/安卓IPC机制-AIDL通信的使用和理解.html
+http://www.huangjie.name/安卓IPC机制-使用Messenger通信.html
+http://www.huangjie.name/安卓IPC机制：使用文件共享.html
+http://www.huangjie.name/安卓IPC机制：Bundle数据传递.html
+http://www.huangjie.name/安卓IPC机制-多进程.html
+http://www.huangjie.name/Activity的生命周期和启动模式.html
+http://www.huangjie.name/有哪些送给年轻人的建议或道理？.html
+http://www.huangjie.name/如何将个人域名与github绑定.html
+http://www.huangjie.name/hello-world.html
