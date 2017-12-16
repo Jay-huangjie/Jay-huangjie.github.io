@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Android," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="安卓开发中熟练使用自定义View是开发者必备的技能，因为安卓原生控件很多时候是不能满足需求的，而自定义控件能做出各种绚丽的效果,用于满足产品各种奇怪的需求(我为什么要用奇怪呢，哈哈哈哈)。  自定义View要掌握的内容自定义View主要是掌握以下五个内容：  绘制原理: 掌握onMeasure,onLayout,onD">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安卓View体系:View的一些基本知识点">
+<meta property="og:url" content="http://www.huangjie.name/安卓View体系-View的一些基本知识点.html">
+<meta property="og:site_name" content="Jay的记事本">
+<meta property="og:description" content="安卓开发中熟练使用自定义View是开发者必备的技能，因为安卓原生控件很多时候是不能满足需求的，而自定义控件能做出各种绚丽的效果,用于满足产品各种奇怪的需求(我为什么要用奇怪呢，哈哈哈哈)。  自定义View要掌握的内容自定义View主要是掌握以下五个内容：  绘制原理: 掌握onMeasure,onLayout,onDraw及相关类的使用。 事件传递：掌握dispathTouchEvent(),">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p07lh1fh6.bkt.clouddn.com/%E5%BA%94%E7%94%A8%E5%AE%9D%E6%88%AA%E5%B1%8F2017121601.png-suofang">
+<meta property="og:updated_time" content="2017-12-16T14:39:59.221Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="安卓View体系:View的一些基本知识点">
+<meta name="twitter:description" content="安卓开发中熟练使用自定义View是开发者必备的技能，因为安卓原生控件很多时候是不能满足需求的，而自定义控件能做出各种绚丽的效果,用于满足产品各种奇怪的需求(我为什么要用奇怪呢，哈哈哈哈)。  自定义View要掌握的内容自定义View主要是掌握以下五个内容：  绘制原理: 掌握onMeasure,onLayout,onDraw及相关类的使用。 事件传递：掌握dispathTouchEvent(),">
+<meta name="twitter:image" content="http://p07lh1fh6.bkt.clouddn.com/%E5%BA%94%E7%94%A8%E5%AE%9D%E6%88%AA%E5%B1%8F2017121601.png-suofang">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.huangjie.name/安卓View体系-View的一些基本知识点.html"/>
+
+
+
+
+
+  <title>安卓View体系:View的一些基本知识点 | Jay的记事本</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?77e8be23737cec36ffbc50b53c03b7c3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jay的记事本</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Android进阶,Android技术学习，Android基础</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.huangjie.name/安卓View体系-View的一些基本知识点.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄杰">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://p07lh1fh6.bkt.clouddn.com/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay的记事本">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">安卓View体系:View的一些基本知识点</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-16T20:25:46+08:00">
+                2017-12-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android基础进阶/" itemprop="url" rel="index">
+                    <span itemprop="name">Android基础进阶</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,607 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>安卓开发中熟练使用自定义View是开发者必备的技能，因为安卓原生控件很多时候是不能满足需求的，而自定义控件能做出各种绚丽的效果,用于满足产品各种奇怪的需求(我为什么要用奇怪呢，哈哈哈哈)。</p>
+</blockquote>
+<h4 id="自定义View要掌握的内容"><a href="#自定义View要掌握的内容" class="headerlink" title="自定义View要掌握的内容"></a>自定义View要掌握的内容</h4><p>自定义View主要是掌握以下五个内容：</p>
+<ul>
+<li>绘制原理: 掌握onMeasure,onLayout,onDraw及相关类的使用。</li>
+<li>事件传递：掌握dispathTouchEvent(),onInterceptEvent(),onTouchEvent()三者的传递逻辑.</li>
+<li>动画：属性动画，用于对View进行动画操作</li>
+<li>相关手势：GestureDetector，VelocityTracker等类的应用</li>
+<li>滑动：滑动的三种实现方法，Scroller的运用</li>
+</ul>
+<h4 id="自定义View的基本知识"><a href="#自定义View的基本知识" class="headerlink" title="自定义View的基本知识"></a>自定义View的基本知识</h4><h5 id="自定义View的分类"><a href="#自定义View的分类" class="headerlink" title="自定义View的分类"></a>自定义View的分类</h5><p><strong>1. 直接继承View</strong><br>主要用于实现一些不规则的效果，不能通过现有控件扩展的一些效果</p>
+<p><strong>2. 继承自viewGroup</strong><br>主要是为了实现自定义的布局，这个布局里包含了一些特定的控件，很像几个view组合在一起</p>
+<p><strong>3.继承特定的view</strong><br>主要是为了扩展已有view的功能，比如TextView等</p>
+<p><strong>4.继承特定的ViewGroup</strong><br>为了扩展特定的布局，比如LinearLayout</p>
+<h5 id="自定义控件的构造函数"><a href="#自定义控件的构造函数" class="headerlink" title="自定义控件的构造函数"></a>自定义控件的构造函数</h5><p>建立一个class类继承自View,实现它的所有的构造方法，那么这个类就是一个可以在xml中使用的自定义View，以下是关于它的构造方法的代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.jie.demo_01.View;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.content.Context;</span><br><span class="line"><span class="keyword">import</span> android.support.annotation.Nullable;</span><br><span class="line"><span class="keyword">import</span> android.util.AttributeSet;</span><br><span class="line"><span class="keyword">import</span> android.view.View;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">mView</span> <span class="keyword">extends</span> <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">mView</span><span class="params">(Context context)</span> </span>&#123;  <span class="comment">//在代码中直接new出这个实例会调用这个方法</span></span><br><span class="line">        <span class="keyword">super</span>(context);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">mView</span><span class="params">(Context context, @Nullable AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//在xml中实现会调用这个方法（未指定style）</span></span><br><span class="line">        <span class="keyword">super</span>(context, attrs);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">mView</span><span class="params">(Context context, @Nullable AttributeSet attrs, <span class="keyword">int</span> defStyleAttr)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//为view指定了一个style</span></span><br><span class="line">        <span class="keyword">super</span>(context, attrs, defStyleAttr);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">mView</span><span class="params">(Context context, @Nullable AttributeSet attrs, <span class="keyword">int</span> defStyleAttr, <span class="keyword">int</span> defStyleRes)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//api&gt;21时调用，一般不用实现</span></span><br><span class="line">        <span class="keyword">super</span>(context, attrs, defStyleAttr, defStyleRes);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>关于构造函数中参数的含义：</p>
+<ul>
+<li><p>AttributeSet set:  属性值的集合.</p>
+</li>
+<li><p>int[] attrs:  我们自定义属性集合在R类中生成的int型数组.这个数组中包含了自定义属性的资源ID.</p>
+</li>
+<li><p>int defStyleAttr:  这是当前Theme中的包含的一个指向style的引用.当我们没有给自定义View设置declare-styleable资源集合时,默认从这个集合里面查找布局文件中配置属性值.传入0表示不向该defStyleAttr中查找默认值.</p>
+</li>
+<li><p>int defStyleRes:  这个也是一个指向Style的资源ID,但是仅在defStyleAttr为0或者defStyleAttr不为0但Theme中没有为defStyleAttr属性赋值时起作用.</p>
+</li>
+</ul>
+<blockquote>
+<p>属性赋值优先级次序表:<br>在布局xml中直接定义 &gt; 在布局xml中通过style定义 &gt; 自定义View所在的Activity的Theme中指定style引用 &gt; 构造函数中defStyleRes指定的默认值</p>
+</blockquote>
+<h5 id="自定义view的xml赋值"><a href="#自定义view的xml赋值" class="headerlink" title="自定义view的xml赋值"></a>自定义view的xml赋值</h5><p>我们经常可以看到使用xml的属性可以为view进行各种赋值,那么是怎么做到的呢，如图，在values目录下新建一个attrs.xml的文件，文件内容如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;resources&gt;</span><br><span class="line">    &lt;declare-styleable name=<span class="string">"mView"</span>&gt;</span><br><span class="line">        &lt;attr name=<span class="string">"mview_color"</span> format=<span class="string">"color"</span>/&gt;</span><br><span class="line">    &lt;/declare-styleable&gt;</span><br><span class="line">&lt;/resources&gt;</span><br></pre></td></tr></table></figure></p>
+<p>我在这里声明了一个mview_color属性，用于定义颜色值，format代表属性的格式，有许多，读者查阅文档即可了解。</p>
+<p>接下来,我在View中做如下处理：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">mView</span> <span class="keyword">extends</span> <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> defultColor = <span class="number">0xFFFFFF6</span>;</span><br><span class="line">    <span class="keyword">int</span> mColor;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">mView</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(context,<span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">mView</span><span class="params">(Context context, @Nullable AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(context, attrs,<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">mView</span><span class="params">(Context context, @Nullable AttributeSet attrs, <span class="keyword">int</span> defStyleAttr)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context, attrs, defStyleAttr);</span><br><span class="line">        TypedArray t = context.obtainStyledAttributes(attrs, R.styleable.mView);</span><br><span class="line">        mColor = t.getColor(R.styleable.mView_mview_color,defultColor);</span><br><span class="line">        t.recycle(); <span class="comment">//记得回收</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用TypedArray来解析我们定义的属性,接着就赋值给我们的变量，最后回收，这样解析工作就完成了</p>
+<p>接下来我们在xml中使用我们的View:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span>?&gt;</span><br><span class="line">&lt;LinearLayout xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">   <span class="comment">//为了使用自定义属性，必须作此声明，app可以换成其他的名字</span></span><br><span class="line">    xmlns:app=<span class="string">"http://schemas.android.com/apk/res-auto"</span>  </span><br><span class="line">    xmlns:tools=<span class="string">"http://schemas.android.com/tools"</span></span><br><span class="line">    android:layout_width=<span class="string">"match_parent"</span></span><br><span class="line">    android:layout_height=<span class="string">"match_parent"</span></span><br><span class="line">    tools:context=<span class="string">"com.jie.demo_01.MainActivity"</span>&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;com.jie.demo_01.View.mView</span><br><span class="line">        android:layout_width=<span class="string">"match_parent"</span></span><br><span class="line">        android:layout_height=<span class="string">"100dp"</span> </span><br><span class="line">        app:mview_color=<span class="string">"@color/colorAccent"</span>  <span class="comment">//声明我们的自定义属性</span></span><br><span class="line">        /&gt;</span><br><span class="line">&lt;/LinearLayout&gt;</span><br></pre></td></tr></table></figure></p>
+<h5 id="自定义view的绘制"><a href="#自定义view的绘制" class="headerlink" title="自定义view的绘制"></a>自定义view的绘制</h5><p>属性已经定义好了，接下来就是如何使用了，在这里我们重写它的onDraw方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">mView</span> <span class="keyword">extends</span> <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> defultColor = <span class="number">0xFFFFFF6</span>;</span><br><span class="line">    <span class="keyword">int</span> mColor;</span><br><span class="line">    <span class="keyword">private</span> Paint mPaint = <span class="keyword">new</span> Paint(Paint.ANTI_ALIAS_FLAG);</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">mView</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(context,<span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">mView</span><span class="params">(Context context, @Nullable AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(context, attrs,<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">mView</span><span class="params">(Context context, @Nullable AttributeSet attrs, <span class="keyword">int</span> defStyleAttr)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context, attrs, defStyleAttr);</span><br><span class="line">        TypedArray t = context.obtainStyledAttributes(attrs, R.styleable.mView);</span><br><span class="line">        mColor = t.getColor(R.styleable.mView_mview_color,defultColor);</span><br><span class="line">        t.recycle(); <span class="comment">//记得回收</span></span><br><span class="line">        init();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        mPaint.setColor(mColor);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas canvas)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onDraw(canvas);</span><br><span class="line">        canvas.drawCircle(<span class="number">200</span>,<span class="number">200</span>,<span class="number">100</span>,mPaint);  <span class="comment">//绘制一个位于200，200处的半径为100的圆</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>onDraw方法是view绘制图形图像的地方，通过画布（canvas）和画笔（paint）来灵活的绘制各种图形，这两个类所包含的方法多而全，读者可以多阅读文档来练习绘制各种图形,代码运行如图所示：</p>
+<p><img src="http://p07lh1fh6.bkt.clouddn.com/%E5%BA%94%E7%94%A8%E5%AE%9D%E6%88%AA%E5%B1%8F2017121601.png-suofang" alt=""></p>
+<h4 id="自定义View的注意事项"><a href="#自定义View的注意事项" class="headerlink" title="自定义View的注意事项"></a>自定义View的注意事项</h4><p>上面的自定义view并不是一个标准的自定义view,标准的自定义view还应该包含onMeasure和onLayout的处理，让其支持wrap_content。</p>
+<p>这里要注意了：</p>
+<ul>
+<li><p>直接继承view或者viewgroup的控件不支持wrap_content,需要在onMeasure中进行特殊的处理才能达到预期的效果</p>
+</li>
+<li><p>如果有必要的话，需要在draw方法中处理padding，使view控件的padding生效，否则padding是无效的</p>
+</li>
+<li><p>尽量不在view中使用handler,因为view本身自带了post方法</p>
+</li>
+<li><p>如果在view中有线程或者动画，要及时关闭，关闭的时机是onDetachedFromWindow方法，当包含此view的Activity退出或者view被remove掉时，此方法会被调用</p>
+</li>
+<li><p>不要再onDraw方法中作初始化操作，因为这个方法会绘制多次，会产生很多不必要的开销</p>
+</li>
+<li><p>当View有滑动嵌套的情况，要处理好滑动冲突</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/安卓IPC机制-AIDL通信的使用和理解.html" rel="next" title="安卓IPC机制:AIDL通信的使用和理解">
+                <i class="fa fa-chevron-left"></i> 安卓IPC机制:AIDL通信的使用和理解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!--MOB SHARE BEGIN-->
+<div class="-mob-share-ui-button -mob-share-open">分享</div>
+<div class="-mob-share-ui" style="display: none">
+    <ul class="-mob-share-list">
+        <li class="-mob-share-weibo"><p>新浪微博</p></li>
+        <li class="-mob-share-weixin"><p>微信</p></li>
+        <li class="-mob-share-qzone"><p>QQ空间</p></li>
+        <li class="-mob-share-qq"><p>QQ好友</p></li>
+        <li class="-mob-share-tencentweibo"><p>腾讯微博</p></li>
+        <li class="-mob-share-youdao"><p>有道云笔记</p></li>
+        <li class="-mob-share-mingdao"><p>明道</p></li>
+        <li class="-mob-share-facebook"><p>Facebook</p></li>
+        <li class="-mob-share-twitter"><p>Twitter</p></li>
+        <li class="-mob-share-pocket"><p>Pocket</p></li>
+        <li class="-mob-share-google"><p>Google+</p></li>
+        <li class="-mob-share-tumblr"><p>Tumblr</p></li>
+        <li class="-mob-share-instapaper"><p>Instapaper</p></li>
+        <li class="-mob-share-linkedin"><p>Linkedin</p></li>
+    </ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<div class="-mob-share-ui-bg"></div>
+<script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=22c54eccf6196"></script>
+<!--MOB SHARE END-->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://p07lh1fh6.bkt.clouddn.com/head.jpg"
+                alt="黄杰" />
+            
+              <p class="site-author-name" itemprop="name">黄杰</p>
+              <p class="site-description motion-element" itemprop="description">个人技术博客,安卓的完整知识树记录,属于Android进阶类博客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+　 <!--<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="//music.163.com/outchain/player?type=0&id=1996249397&auto=0&height=430"></iframe>-->
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义View要掌握的内容"><span class="nav-number">1.</span> <span class="nav-text">自定义View要掌握的内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义View的基本知识"><span class="nav-number">2.</span> <span class="nav-text">自定义View的基本知识</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#自定义View的分类"><span class="nav-number">2.1.</span> <span class="nav-text">自定义View的分类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#自定义控件的构造函数"><span class="nav-number">2.2.</span> <span class="nav-text">自定义控件的构造函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#自定义view的xml赋值"><span class="nav-number">2.3.</span> <span class="nav-text">自定义view的xml赋值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#自定义view的绘制"><span class="nav-number">2.4.</span> <span class="nav-text">自定义view的绘制</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义View的注意事项"><span class="nav-number">3.</span> <span class="nav-text">自定义View的注意事项</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">黄杰</span>
+
+  
+</div>
+
+
+  <span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
