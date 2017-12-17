@@ -1,3 +1,4 @@
+http://www.huangjie.name/安卓View体系-View的工作流程.html
 http://www.huangjie.name/安卓View体系-View的一些基本知识点.html
 http://www.huangjie.name/安卓IPC机制-AIDL通信的使用和理解.html
 http://www.huangjie.name/安卓IPC机制-使用Messenger通信.html
