@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Android," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="昨天在慕课上看到了一个自定义粘性头部的实现，发现现在有许多的app都有这个效果，于是跟着慕课上得视频敲了一遍。因为慕课上的老师对于后半部分的坐标运算讲的并不是很细致，因此我自己分析了一下源代码，总结了这篇博客，希望对同学们有所帮助。  慕课视频地址：https://www.imooc.com/learn/830源码下载">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一看就懂的自定义顶部粘性下拉控件TouchPullView全面剖析">
+<meta property="og:url" content="http://www.huangjie.name/一看就懂的自定义顶部粘性下拉控件TouchPullView全面剖析.html">
+<meta property="og:site_name" content="Jay的记事本">
+<meta property="og:description" content="昨天在慕课上看到了一个自定义粘性头部的实现，发现现在有许多的app都有这个效果，于是跟着慕课上得视频敲了一遍。因为慕课上的老师对于后半部分的坐标运算讲的并不是很细致，因此我自己分析了一下源代码，总结了这篇博客，希望对同学们有所帮助。  慕课视频地址：https://www.imooc.com/learn/830源码下载地址：https://github.com/Jay-huangjie/Touc">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://gss1.bdstatic.com/-vo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268/sign=1966ca03a0cc7cd9fa2d33df01032104/9825bc315c6034a8eb16696fc81349540823766c.jpg">
+<meta property="og:image" content="https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/s%3D325/sign=391820be267f9e2f74351b0a2a31e962/91529822720e0cf34f59dca30b46f21fbe09aa38.jpg">
+<meta property="og:image" content="http://p07lh1fh6.bkt.clouddn.com/touch_demo.gif">
+<meta property="og:image" content="http://p07lh1fh6.bkt.clouddn.com/touchpullview.jpg">
+<meta property="og:updated_time" content="2017-12-19T16:31:35.168Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一看就懂的自定义顶部粘性下拉控件TouchPullView全面剖析">
+<meta name="twitter:description" content="昨天在慕课上看到了一个自定义粘性头部的实现，发现现在有许多的app都有这个效果，于是跟着慕课上得视频敲了一遍。因为慕课上的老师对于后半部分的坐标运算讲的并不是很细致，因此我自己分析了一下源代码，总结了这篇博客，希望对同学们有所帮助。  慕课视频地址：https://www.imooc.com/learn/830源码下载地址：https://github.com/Jay-huangjie/Touc">
+<meta name="twitter:image" content="https://gss1.bdstatic.com/-vo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268/sign=1966ca03a0cc7cd9fa2d33df01032104/9825bc315c6034a8eb16696fc81349540823766c.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.huangjie.name/一看就懂的自定义顶部粘性下拉控件TouchPullView全面剖析.html"/>
+
+
+
+
+
+  <title>一看就懂的自定义顶部粘性下拉控件TouchPullView全面剖析 | Jay的记事本</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?77e8be23737cec36ffbc50b53c03b7c3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jay的记事本</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Android进阶,Android技术学习，Android基础</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.huangjie.name/一看就懂的自定义顶部粘性下拉控件TouchPullView全面剖析.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄杰">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://p07lh1fh6.bkt.clouddn.com/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay的记事本">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">一看就懂的自定义顶部粘性下拉控件TouchPullView全面剖析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-19T19:55:47+08:00">
+                2017-12-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android基础进阶/" itemprop="url" rel="index">
+                    <span itemprop="name">Android基础进阶</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android基础进阶/安卓特效合集解析/" itemprop="url" rel="index">
+                    <span itemprop="name">安卓特效合集解析</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,797 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  12 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>昨天在慕课上看到了一个自定义粘性头部的实现，发现现在有许多的app都有这个效果，于是跟着慕课上得视频敲了一遍。因为慕课上的老师对于后半部分的坐标运算讲的并不是很细致，因此我自己分析了一下源代码，总结了这篇博客，希望对同学们有所帮助。</p>
+</blockquote>
+<p>慕课视频地址：<a href="https://www.imooc.com/learn/830" target="_blank" rel="noopener">https://www.imooc.com/learn/830</a><br>源码下载地址：<a href="https://github.com/Jay-huangjie/TouchPullView" target="_blank" rel="noopener">https://github.com/Jay-huangjie/TouchPullView</a><br>建议大家先下载源码再来观看<br><a id="more"></a></p>
+<h4 id="用到的知识点"><a href="#用到的知识点" class="headerlink" title="用到的知识点"></a>用到的知识点</h4><p><strong>我们先来复习一下需要用到的数学知识点</strong></p>
+<p>三角函数：</p>
+<ul>
+<li>sin =  a/c;     </li>
+<li>cos = b/c;         </li>
+<li>tan = a/b;<br><img src="https://gss1.bdstatic.com/-vo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268/sign=1966ca03a0cc7cd9fa2d33df01032104/9825bc315c6034a8eb16696fc81349540823766c.jpg" alt=""></li>
+</ul>
+<p>贝塞尔曲线：<br><img src="https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/s%3D325/sign=391820be267f9e2f74351b0a2a31e962/91529822720e0cf34f59dca30b46f21fbe09aa38.jpg" alt=""></p>
+<p>阅读本文需要了解自定义View的基本流程和贝塞尔曲线的绘制。</p>
+<p>好，进入正题，我们先看一下它的运行效果：</p>
+<p><img src="http://p07lh1fh6.bkt.clouddn.com/touch_demo.gif" alt="效果图"></p>
+<p>emmmmm,效果感觉还不错~</p>
+<h4 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h4><p>既然是拖动，肯定是基于Touch事件来实现的，通过Touch的Y坐标获取到拖动进度progress,然后通过requestLayout方法不断重绘界面，在onSizeChanged方法中通过计算不断移动圆心坐标，圆的左右两边是经典的贝塞尔曲线，通过控制点的不断移动和onDraw方法中的画布的不断移动来达到弹性和顶部两个起始点向中心靠拢的效果，中间的圆心与旁边的间距部分则是使用的drawable的Bounds效果,回弹则是利用的属性动画的addUpdateListener接口将progress数值由大到小执行回去从而达到的回弹效果</p>
+<h4 id="具体分析"><a href="#具体分析" class="headerlink" title="具体分析"></a>具体分析</h4><p>光看原理肯定是四脸蒙蔽，还是结合代码分析才能达到事半功倍的效果。<br>我们先看OnTouch部分的代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">findViewById(R.id.ll_mainLayout).setOnTouchListener(<span class="keyword">new</span> View.OnTouchListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouch</span><span class="params">(View v, MotionEvent event)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">int</span> actionMasked = event.getActionMasked();</span><br><span class="line">                <span class="keyword">switch</span> (actionMasked) &#123;</span><br><span class="line">                    <span class="keyword">case</span> MotionEvent.ACTION_DOWN:</span><br><span class="line">                        mTouchStartY = event.getY();</span><br><span class="line">                        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                    <span class="keyword">case</span> MotionEvent.ACTION_MOVE:</span><br><span class="line">                        <span class="keyword">float</span> y = event.getY();</span><br><span class="line">                        <span class="keyword">if</span> (y &gt;= mTouchStartY) &#123;  <span class="comment">//表示向下移动</span></span><br><span class="line">                            <span class="keyword">float</span> moveSize = y - mTouchStartY;</span><br><span class="line">                            <span class="keyword">float</span> progress = moveSize &gt; TOUCH_MOVE_MAX_Y ?</span><br><span class="line">                                    <span class="number">1</span> : moveSize / TOUCH_MOVE_MAX_Y;   <span class="comment">//计算进度值</span></span><br><span class="line">                            touchView.setProgress(progress);</span><br><span class="line">                            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> MotionEvent.ACTION_UP:</span><br><span class="line">                        touchView.release();</span><br><span class="line">                        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                    <span class="keyword">default</span>:</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure></p>
+<p>这里还是比较简单，通过getY获取滑动的距离，按下去有一个点，滑动后有一个点，两点之间的距离就是我们的<br>moveSize了，由于progress是指当前滑动的进度值，取值肯定是在0~1之间，因此，当moveSize大于我们预设的最大值时，progress就返回1，否则就返回具体的进度值，最后在设置给touchView，touchView就会进行重绘。</p>
+<p>再来看下TouchPullView里面的代码：<br>我们先看一下变量：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Paint mCirclePaint = <span class="keyword">new</span> Paint(Paint.ANTI_ALIAS_FLAG);</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> mCircleRadius = <span class="number">50</span>; <span class="comment">//圆的半径</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> mCirclePointX, mCirclePointY; <span class="comment">//圆心坐标</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mDargHeight = <span class="number">400</span>;  <span class="comment">//最大可下拉的高度</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> mProgress;  <span class="comment">//下拉进度值</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mTargetWidth = <span class="number">400</span>; <span class="comment">//目标宽度</span></span><br><span class="line">    <span class="keyword">private</span> Path mPath = <span class="keyword">new</span> Path(); <span class="comment">//贝塞尔路径</span></span><br><span class="line">    <span class="keyword">private</span> Paint mPathPaint = <span class="keyword">new</span> Paint(Paint.ANTI_ALIAS_FLAG); <span class="comment">//贝塞尔画笔</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mTargetGravityHeight = <span class="number">10</span>; <span class="comment">//重心点最终高度，决定控制点的Y坐标</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mTargetAngle = <span class="number">105</span>; <span class="comment">//角度变换 0~135</span></span><br><span class="line">    <span class="keyword">private</span> Interpolator mProgessInterpolator = <span class="keyword">new</span> DecelerateInterpolator(); <span class="comment">//一个由快到慢的插值器</span></span><br><span class="line">    <span class="keyword">private</span> Interpolator mTanentAngleInterpolator;</span><br><span class="line">    <span class="keyword">private</span> Drawable content = <span class="keyword">null</span>; <span class="comment">//中心圆drawable</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mContentDrawableMargin = <span class="number">0</span>; <span class="comment">//中心圆Drawable边距</span></span><br></pre></td></tr></table></figure></p>
+<p>大部分变量都简洁明了，mTargetGravityHeight规定了控制点上下浮动的最大距离，该值越大，控制点越往下移，mTargetAngle规定了结束点与圆心连线的那个角度的最大变幻值，因为不规定可以看到结束点会围绕圆心做圆环运动，最终导致变形，这不是我们希望看到的。mTargetWidth则规定了该控件能缩小的最小宽度。</p>
+<p>接下来看onDraw()方法的实现：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas canvas)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onDraw(canvas);</span><br><span class="line">        <span class="comment">//基础坐标系改变</span></span><br><span class="line">        <span class="keyword">int</span> count = canvas.save();</span><br><span class="line">        <span class="comment">//获取平移画布的X的值,随着下滑起始点的坐标移动</span></span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">float</span> transX = (getWidth() - getValueByLine(getWidth(), mTargetWidth, mProgress)) / <span class="number">2</span>;</span><br><span class="line">        canvas.translate(transX, <span class="number">0</span>);</span><br><span class="line">        <span class="comment">//绘制贝塞尔</span></span><br><span class="line">        canvas.drawPath(mPath, mPathPaint);</span><br><span class="line">        <span class="comment">//画圆</span></span><br><span class="line">        canvas.drawCircle(mCirclePointX, mCirclePointY, mCircleRadius, mCirclePaint);</span><br><span class="line">        <span class="comment">//绘制Drawable</span></span><br><span class="line">        Drawable drawable = content;</span><br><span class="line">        <span class="keyword">if</span> (drawable != <span class="keyword">null</span>) &#123;</span><br><span class="line">            canvas.save();</span><br><span class="line">            canvas.clipRect(drawable.getBounds());</span><br><span class="line">            drawable.draw(canvas);</span><br><span class="line">            canvas.restore();</span><br><span class="line">        &#125;</span><br><span class="line">        canvas.restoreToCount(count);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>getValueByLine</code>方法的作用是获取某一时刻贝塞尔曲线上的点的坐标，看一下它的方法实现：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取某一时刻的值</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> star      起始点</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> end       结束点</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> mProgress 当前进度值</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">float</span> <span class="title">getValueByLine</span><span class="params">(<span class="keyword">float</span> star, <span class="keyword">float</span> end, <span class="keyword">float</span> mProgress)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> star + (end - star) * mProgress;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>它就是一个贝塞尔曲线公式Bt = P0+(P1-P0)*t，传入初始坐标P0和结束坐标P1和时间t，就能获取到Bt了。<br>接着它得到了一个transX,它等于起始点与屏幕左右的距离，通过画布的移动来实现起始点不断靠拢的效果，接下来是绘制贝塞尔曲线，画圆，根据Bounds大小添加Drawable到画布上。</p>
+<p>接下来分析我们的重点：onSizeChanged中的实现,关键是这个方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 更新路径</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">updatePathLayout</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">float</span> progress = mProgessInterpolator.getInterpolation(mProgress);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取所有的可绘制的宽/高  此值会根据progress不断的变化</span></span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">float</span> w = getValueByLine(getWidth(), mTargetWidth, mProgress);</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">float</span> h = getValueByLine(<span class="number">0</span>, mDargHeight, mProgress);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//圆心X坐标</span></span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">float</span> cPointX = w / <span class="number">2</span>;</span><br><span class="line">        <span class="comment">//半径</span></span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">float</span> cRadius = mCircleRadius;</span><br><span class="line">        <span class="comment">//圆心Y坐标</span></span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">float</span> cPaintY = h - cRadius;</span><br><span class="line">        <span class="comment">//控制点结束Y的值</span></span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">float</span> endPointY = mTargetGravityHeight;</span><br><span class="line">        <span class="comment">//更新圆心坐标</span></span><br><span class="line">        mCirclePointX = cPointX;</span><br><span class="line">        mCirclePointY = cPaintY;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">final</span> Path path = mPath;</span><br><span class="line">        path.reset(); <span class="comment">//重置</span></span><br><span class="line">        path.moveTo(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//坐标系是以最左边的起始点为原点</span></span><br><span class="line">        <span class="keyword">float</span> lEndPointX, lEndPointY; <span class="comment">//结束点的X,Y坐标</span></span><br><span class="line">        <span class="keyword">float</span> lControlPointX, lControlPointY; <span class="comment">//控制点的X，Y坐标</span></span><br><span class="line">        <span class="comment">//获取当前切线的弧度</span></span><br><span class="line">        <span class="keyword">double</span> angle = mTanentAngleInterpolator.getInterpolation(progress) * mTargetAngle;<span class="comment">//获取当前的角度</span></span><br><span class="line">        <span class="keyword">double</span> radian = Math.toRadians(angle); <span class="comment">//获取当前弧度</span></span><br><span class="line">        <span class="keyword">float</span> x = (<span class="keyword">float</span>) (Math.sin(radian) * cRadius);  <span class="comment">//求出“股”的长度（长的那条直角边）</span></span><br><span class="line">        <span class="keyword">float</span> y = (<span class="keyword">float</span>) (Math.cos(radian) * cRadius);  <span class="comment">//求出“勾”的长度（短的那条直角边）</span></span><br><span class="line">        lEndPointX = cPointX - x; <span class="comment">//以起始点为原点，x坐标就等于圆的X坐标减去股的长度</span></span><br><span class="line">        lEndPointY = cPaintY + y; <span class="comment">//以起始点为原点，y坐标就等于圆的y坐标加上勾的长度</span></span><br><span class="line">        lControlPointY = getValueByLine(<span class="number">0</span>, endPointY, progress);<span class="comment">//获取控制点的Y坐标</span></span><br><span class="line">        <span class="keyword">float</span> tHeight = lEndPointY - lControlPointY; <span class="comment">//结束点与控制点的Y坐标差值</span></span><br><span class="line">        <span class="keyword">float</span> tWidth = (<span class="keyword">float</span>) (tHeight / Math.tan(radian));  <span class="comment">//通过计算两个角度是相等的，因此弧度依旧适用</span></span><br><span class="line">        lControlPointX = lEndPointX - tWidth; <span class="comment">//结束点的x - ‘勾’ 的长度求出了控制点的X坐标</span></span><br><span class="line"></span><br><span class="line">        path.quadTo(lControlPointX, lControlPointY, lEndPointX, lEndPointY); <span class="comment">//画左边贝塞尔曲线</span></span><br><span class="line">        path.lineTo(cPointX + (cPointX - lEndPointX), lEndPointY); <span class="comment">//左右两个结束点相连</span></span><br><span class="line">        path.quadTo(cPointX + (cPointX - lControlPointX), lControlPointY, w, <span class="number">0</span>); <span class="comment">//画右边贝塞尔曲线</span></span><br><span class="line"></span><br><span class="line">        updateContentLayout(cPointX, cPaintY, cRadius);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 测量并设置中心Drawable</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> cx</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> cy</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> radius</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">updateContentLayout</span><span class="params">(<span class="keyword">float</span> cx, <span class="keyword">float</span> cy, <span class="keyword">float</span> radius)</span> </span>&#123;</span><br><span class="line">        Drawable drawable = content;</span><br><span class="line">        <span class="keyword">if</span> (drawable != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> margin = mContentDrawableMargin;</span><br><span class="line">            <span class="keyword">int</span> l = (<span class="keyword">int</span>) (cx - radius + margin);</span><br><span class="line">            <span class="keyword">int</span> r = (<span class="keyword">int</span>) (cx + radius - margin);</span><br><span class="line">            <span class="keyword">int</span> t = (<span class="keyword">int</span>) (cy - radius + margin);</span><br><span class="line">            <span class="keyword">int</span> b = (<span class="keyword">int</span>) (cy + radius - margin);</span><br><span class="line">            drawable.setBounds(l, t, r, b);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中每一行我都备注了注释，要理解其中的计算，就得先上个图：</p>
+<p><img src="http://p07lh1fh6.bkt.clouddn.com/touchpullview.jpg" alt=""></p>
+<p>我们脑海中要有一个清晰的定义，整个坐标系是基于起始点为原点，向右下延伸X，Y轴，左右的贝塞尔曲线是由一支画笔完成,通过lineTo相连接，因此整个曲线呈V字形。<br>接下来看代码：<br>首先求得了progress，这个无需解释，使用加速器只是为了更好的效果。<br>接下来是w和h,这是控件的某一进度下的宽和高，为什么通过getValueByLine方法就能得到呢？请看输入的参数，起始点是getWidth，也就是整个屏幕的宽度，终点是mTargetWidth也就是我们规定的最小宽度，而getValueByLine正好是求得某一时刻的贝塞尔值，因此将progress输入正好求得从整个屏幕运动到最小宽度之间的某一个宽度，高度同理。<br>宽高求出来了那个圆心的坐标也就相应出来了，注意整个圆的大小包含margin值，也就是圆与左右两边的边距也是包含的。因为mTargetGravityHeight是我们设定的控制点下移的高度，因此也就是控制点Y的坐标。<br>因为quadTo方法需要控制点的坐标和结束点的坐标，因此求出这两个点的坐标就大功告成了，接下来就是数学知识了。<br>首先，通过插值器的方法获得了某一时刻的角度，最后通过Math方法得到了弧度,也就是图中b的角度，半径我们是知道的，所以通过sin可以得出图中x的长度，然后通过半径的x坐标减去x的长度就得到了结束点的x坐标。<br>通过cos我们可以得到y的长度,圆心Y的坐标加上y的坐标就得到了结束点y的坐标，lEndPointX，lEndPointY的值也就得到了。<br>因为我们已知控制点上下运行的起始值和最大值，因此我们可以使用getValueByLine获取到当前的y坐标，接下来只需要求出控制点的x坐标就行了,tHeight表示左边这条直角的长直角边，结束点的y坐标已知，控制点的y坐标已知，因此可以求出tHeight。<br>因为平行线间的角度相等，因此a = c，又因为c+d = e+d = 90; 所以c = e；所以a = e;tHeight已知，e已知，所以tWidth的值就能求出来了。所以控制点的x坐标就等于结束点的x坐标减去tWidth。至此所有的坐标都已经求出来了，所以贝塞尔曲线也就能绘制出来了。</p>
+<p>接下来还有个测量的过程，逻辑比较简单：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onMeasure</span><span class="params">(<span class="keyword">int</span> widthMeasureSpec, <span class="keyword">int</span> heightMeasureSpec)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> MIN_W = (<span class="keyword">int</span>) (mCircleRadius * <span class="number">2</span> + getPaddingLeft() + getPaddingRight()); <span class="comment">//需要的最小宽度</span></span><br><span class="line">       <span class="keyword">int</span> MIN_H = (<span class="keyword">int</span>) ((mDargHeight * mProgress + <span class="number">0.5f</span>)  <span class="comment">//mDargHeight * mProgress = moveSize(即actionMove.getY - actionDown.getY),+0.5f为四舍五入</span></span><br><span class="line">               + getPaddingBottom() + getPaddingTop());</span><br><span class="line">       <span class="keyword">int</span> widthMeasure = getMeasureSize(widthMeasureSpec, MIN_W);</span><br><span class="line">       <span class="keyword">int</span> heightMeasure = getMeasureSize(heightMeasureSpec, MIN_H);</span><br><span class="line">       setMeasuredDimension(widthMeasure, heightMeasure);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 获取所需要的宽/高的测量结果</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> Spec     测量模式</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> minValue 规定的最小值</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span> 测量结果</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getMeasureSize</span><span class="params">(<span class="keyword">int</span> Spec, <span class="keyword">int</span> minValue)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> result;</span><br><span class="line">       <span class="keyword">int</span> mode = MeasureSpec.getMode(Spec);</span><br><span class="line">       <span class="keyword">int</span> size = MeasureSpec.getSize(Spec);</span><br><span class="line">       <span class="keyword">switch</span> (mode) &#123;</span><br><span class="line">           <span class="keyword">case</span> MeasureSpec.AT_MOST: <span class="comment">//wrap_content</span></span><br><span class="line">               result = Math.min(size, minValue); <span class="comment">//取测量值和规定的最小宽度中的最小值</span></span><br><span class="line">               <span class="keyword">break</span>;</span><br><span class="line">           <span class="keyword">case</span> MeasureSpec.EXACTLY: <span class="comment">//match_parent or exactly num</span></span><br><span class="line">               result = size;</span><br><span class="line">               <span class="keyword">break</span>;</span><br><span class="line">           <span class="keyword">default</span>: <span class="comment">//其余情况取最小值</span></span><br><span class="line">               result = minValue;</span><br><span class="line">               <span class="keyword">break</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> result;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>我将视频中的代码做了一下简单的封装，代码中有详细的注释，我这里就不做分析了。</p>
+<p>整个分析流程就到这，如果有错误的地方，欢迎指正，Thanks~</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/安卓直播技术.html" rel="next" title="安卓直播技术">
+                <i class="fa fa-chevron-left"></i> 安卓直播技术
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!--MOB SHARE BEGIN-->
+<div class="-mob-share-ui-button -mob-share-open">分享</div>
+<div class="-mob-share-ui" style="display: none">
+    <ul class="-mob-share-list">
+        <li class="-mob-share-weibo"><p>新浪微博</p></li>
+        <li class="-mob-share-weixin"><p>微信</p></li>
+        <li class="-mob-share-qzone"><p>QQ空间</p></li>
+        <li class="-mob-share-qq"><p>QQ好友</p></li>
+        <li class="-mob-share-tencentweibo"><p>腾讯微博</p></li>
+        <li class="-mob-share-youdao"><p>有道云笔记</p></li>
+        <li class="-mob-share-mingdao"><p>明道</p></li>
+        <li class="-mob-share-facebook"><p>Facebook</p></li>
+        <li class="-mob-share-twitter"><p>Twitter</p></li>
+        <li class="-mob-share-pocket"><p>Pocket</p></li>
+        <li class="-mob-share-google"><p>Google+</p></li>
+        <li class="-mob-share-tumblr"><p>Tumblr</p></li>
+        <li class="-mob-share-instapaper"><p>Instapaper</p></li>
+        <li class="-mob-share-linkedin"><p>Linkedin</p></li>
+    </ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<div class="-mob-share-ui-bg"></div>
+<script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=22c54eccf6196"></script>
+<!--MOB SHARE END-->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://p07lh1fh6.bkt.clouddn.com/head.jpg"
+                alt="黄杰" />
+            
+              <p class="site-author-name" itemprop="name">黄杰</p>
+              <p class="site-description motion-element" itemprop="description">个人技术博客,安卓的完整知识树记录,属于Android进阶类博客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+　 <!--<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="//music.163.com/outchain/player?type=0&id=1996249397&auto=0&height=430"></iframe>-->
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#用到的知识点"><span class="nav-number">1.</span> <span class="nav-text">用到的知识点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现原理"><span class="nav-number">2.</span> <span class="nav-text">实现原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#具体分析"><span class="nav-number">3.</span> <span class="nav-text">具体分析</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">黄杰</span>
+
+  
+</div>
+
+
+  <span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
