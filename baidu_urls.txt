@@ -1,3 +1,4 @@
+http://www.huangjie.name/ExoPlayer视频框架：自定义UI界面及源码解析.html
 http://www.huangjie.name/Efficientresourcessearchtogethernoguaranteeofregret.html
 http://www.huangjie.name/一看就懂的自定义顶部粘性下拉控件TouchPullView全面剖析.html
 http://www.huangjie.name/安卓直播技术.html
