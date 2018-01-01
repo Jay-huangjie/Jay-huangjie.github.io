@@ -1,7 +1,7 @@
+http://www.huangjie.name/2017年终总结.html
 http://www.huangjie.name/ExoPlayer视频框架：自定义UI界面及源码解析.html
 http://www.huangjie.name/Efficientresourcessearchtogethernoguaranteeofregret.html
 http://www.huangjie.name/一看就懂的自定义顶部粘性下拉控件TouchPullView全面剖析.html
-http://www.huangjie.name/安卓直播技术.html
 http://www.huangjie.name/安卓View体系-View的工作流程.html
 http://www.huangjie.name/安卓View体系-View的一些基本知识点.html
 http://www.huangjie.name/安卓IPC机制-AIDL通信的使用和理解.html
