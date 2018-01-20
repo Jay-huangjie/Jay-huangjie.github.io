@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://www.huangjie.name/ExoPlayer%E8%A7%86%E9%A2%91%E6%A1%86%E6%9E%B6%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89UI%E7%95%8C%E9%9D%A2%E5%8F%8A%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.html</loc>
+    <lastmod>2018-01-20T14:11:32.112Z</lastmod>
+    <data>
+        <display>
+        <title>ExoPlayer视频框架：自定义UI界面及源码解析</title>
+        <pubTime>2017-12-27T06:13:23.000Z</pubTime>
+        
+        <tag>ExoPlayer</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android视频播放" url="http://www.huangjie.name/categories/Android%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.huangjie.name/Android5-0-control-study-AppBarLayout-Toolbar-CoordinateLayout-cardView.html</loc>
     <lastmod>2018-01-20T13:45:58.613Z</lastmod>
     <data>
@@ -110,26 +130,6 @@
            
              
               <breadCrumb title="感悟" url="http://www.huangjie.name/categories/%E6%84%9F%E6%82%9F/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.huangjie.name/ExoPlayer%E8%A7%86%E9%A2%91%E6%A1%86%E6%9E%B6%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89UI%E7%95%8C%E9%9D%A2%E5%8F%8A%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.html</loc>
-    <lastmod>2017-12-27T13:35:09.107Z</lastmod>
-    <data>
-        <display>
-        <title>ExoPlayer视频框架：自定义UI界面及源码解析</title>
-        <pubTime>2017-12-27T06:13:23.000Z</pubTime>
-        
-        <tag>ExoPlayer</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android视频播放" url="http://www.huangjie.name/categories/Android%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE/"/>
           
         </display>
     </data>
