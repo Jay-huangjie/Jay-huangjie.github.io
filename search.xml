@@ -3,6 +3,57 @@
   
     
     <entry>
+      <title><![CDATA[Android5.0新控件学习]]></title>
+      <url>/Android5-0-control-study-AppBarLayout-Toolbar-CoordinateLayout-cardView.html</url>
+      <content type="html"><![CDATA[<p><strong>版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.</strong></p>
+<hr>
+<blockquote>
+<p>本文记录一些Androd5.0的新控件的一些学习总结，由于网上的博文总结的比较全面，我就不写博文总结了，这里主要是列举一些控件的学习资料</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="CoordinateLayout"><a href="#CoordinateLayout" class="headerlink" title="CoordinateLayout"></a>CoordinateLayout</h3><p>简介：协调布局,配合<code>Behavior</code>使用，特点是能根据一个<code>View</code>的动作协调另一个<code>View</code>的动作。<br>参考文章:<a href="https://www.jianshu.com/p/72d45d1f7d55" target="_blank" rel="noopener">CoordinatorLayout的使用如此简单</a></p>
+<h3 id="ToolBar"><a href="#ToolBar" class="headerlink" title="ToolBar"></a>ToolBar</h3><p>简介：代替<code>ActionBar</code>，比它更加的灵活，实质是一个<code>ViewGroup</code></p>
+<p>参考资料:<a href="http://blog.csdn.net/lmj623565791/article/details/45303349" target="_blank" rel="noopener">Android 5.x Theme 与 ToolBar 实战</a><br><a href="http://blog.csdn.net/kebi007/article/details/71247295" target="_blank" rel="noopener">xamarin android toolbar(踩坑完全入门详解)</a></p>
+<h3 id="AppBarLayout"><a href="#AppBarLayout" class="headerlink" title="AppBarLayout"></a>AppBarLayout</h3><p>简介：继承自<code>LinearLayout</code>,它可以让你定制当某个可滚动<code>View</code>手势发生变化时，其内部子<code>View</code>会实现何种动作.</p>
+<h3 id="CollapsingToolbarLayout"><a href="#CollapsingToolbarLayout" class="headerlink" title="CollapsingToolbarLayout"></a>CollapsingToolbarLayout</h3><p>简介：用来对<code>ToolBar</code>进行再次包装的<code>ViewGroup</code>，可以实现一些折叠的效果（更像是缩放），比如向上滑动标题文字逐渐缩小至左上角，它需要作为<code>AppBarLayout</code>布局里面并作为它的直接子<code>View</code>.</p>
+<h3 id="NestedScrollView"><a href="#NestedScrollView" class="headerlink" title="NestedScrollView"></a>NestedScrollView</h3><p>简介：为了配合<code>AppBarLayout</code>的滚动效果而编写的滚动控件，继承自<code>FrameLayout</code>,随后使用<code>appbar_scrolling_view_behavior</code>即可实现相应的效果</p>
+<p>参考文章:<a href="https://www.jianshu.com/p/d159f0176576" target="_blank" rel="noopener">玩转AppBarLayout，更酷炫的顶部栏</a></p>
+<h3 id="CardView"><a href="#CardView" class="headerlink" title="CardView"></a>CardView</h3><p>简介：卡片布局，继承自<code>FrameLayout</code>，可实现阴影效果,通常与<code>RecycleView</code>或<code>ListView</code>配合使用作为<code>item</code>的容器<br>参考资料:<a href="https://www.jianshu.com/p/33b1d21d6ba6" target="_blank" rel="noopener">CardView的基本用法</a></p>
+<h3 id="RecyclerView"><a href="#RecyclerView" class="headerlink" title="RecyclerView"></a>RecyclerView</h3><p>简介：比<code>ListView</code>更加灵活，更低耦合的列表展示控件，可轻易实现<code>ListView</code>,<code>GridView</code>,和瀑布流的效果</p>
+<p>参考资料:<a href="http://blog.csdn.net/lmj623565791/article/details/45059587" target="_blank" rel="noopener"> Android RecyclerView 使用完全解析 体验艺术般的控件</a></p>
+<h3 id="FloatingActionButton"><a href="#FloatingActionButton" class="headerlink" title="FloatingActionButton"></a>FloatingActionButton</h3><p>简介：用来在界面上显示一个悬浮的按钮<br>参考资料：<a href="http://blog.csdn.net/lmj623565791/article/details/46678867" target="_blank" rel="noopener">FloatingActionButton 完全解析[Design Support Library(2)]</a></p>
+<h3 id="TextInputLayout"><a href="#TextInputLayout" class="headerlink" title="TextInputLayout"></a>TextInputLayout</h3><p>简介：通常与<code>EditText</code>配合使用，能在<code>EditText</code>输入时将<code>hint</code>放入到上方，还具有空校验的功能</p>
+<p>参考资料：<br><a href="https://www.jianshu.com/p/c06b2a41f611" target="_blank" rel="noopener">TextInputlayout入门讲解</a><br><a href="http://blog.csdn.net/u011051627/article/details/48177095" target="_blank" rel="noopener">Android Design TextInputLayout 解析,带你深入TextInputLayout</a></p>
+<h3 id="TabLayout"><a href="#TabLayout" class="headerlink" title="TabLayout"></a>TabLayout</h3><p>简介：提供一个水平的布局来展示<code>TAB</code></p>
+<p>参考资料：<br><a href="https://www.jianshu.com/p/2b2bb6be83a8" target="_blank" rel="noopener">Design库-TabLayout属性详解</a><br><a href="https://www.jianshu.com/p/be1e8a1da639?nomobile=yes" target="_blank" rel="noopener">TabLayout的高端用法</a></p>
+<h3 id="NavigationView"><a href="#NavigationView" class="headerlink" title="NavigationView"></a>NavigationView</h3><p>简介:在<code>Material Design</code>中，<code>Navigation drawer</code>导航抽屉，被设计用于应用导航，提供了一种通用的导航方式，体现了设计的一致性。<br>而<code>NavigationView</code>的典型用途就是配合之前v4包的<code>DrawerLayout</code>，作为其中的<code>Drawer</code>部分，即导航菜单的本体部分。<code>NavigationView</code>是一个导航菜单框架，使用<code>menu</code>资源填充数据，使我们可以更简单高效的实现导航菜单。它提供了不错的默认样式、选中项高亮、分组单选、分组子标题、以及可选的<code>Header</code>。</p>
+<p>参考资料：<a href="http://blog.csdn.net/u012702547/article/details/51253222" target="_blank" rel="noopener"> Android5.0之NavigationView的使用</a></p>
+<h3 id="Snackbar"><a href="#Snackbar" class="headerlink" title="Snackbar"></a>Snackbar</h3><p>简介：与<code>Toast</code>相似,弹出一个提示框</p>
+<p>参考资料：<a href="https://www.jianshu.com/p/cd1e80e64311/" target="_blank" rel="noopener">没时间解释了，快使用Snackbar!——Android Snackbar花式使用指南
+</a></p>
+<h3 id="Palette"><a href="#Palette" class="headerlink" title="Palette"></a>Palette</h3><p>简介：取色器，从图片中提取关键的颜色，并将该颜色设置到别的控件上,可以和<code>ToolBar</code>配合使用动态改变颜色<br>参考资料:<br><a href="http://blog.csdn.net/u013278099/article/details/49887463" target="_blank" rel="noopener">安卓5.x的Palette之你不知道的事</a></p>
+<p><a href="http://blog.csdn.net/bbld_/article/details/41439715" target="_blank" rel="noopener">Android Material Design之Toolbar与Palette实践</a></p>
+<h3 id="RippleDrawable"><a href="#RippleDrawable" class="headerlink" title="RippleDrawable"></a>RippleDrawable</h3><p>简介：5.0以上的涟漪效果,需要兼容5.0以下需要使用开源库<a href="https://github.com/traex/RippleEffect" target="_blank" rel="noopener">RippleEffect</a>.<br>参考资料：<a href="http://blog.csdn.net/oqihaogongyuan/article/details/53102615" target="_blank" rel="noopener">Material Design之RippleDrawable详解</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> Android基础进阶 </category>
+            
+            <category> 安卓控件 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Android5.0 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[一些关于安卓非编码问题的解决方案记录]]></title>
       <url>/%E4%B8%80%E4%BA%9B%E5%85%B3%E4%BA%8E%E5%AE%89%E5%8D%93%E9%9D%9E%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E8%AE%B0%E5%BD%95.html</url>
       <content type="html"><![CDATA[<p><strong>版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.</strong></p>
@@ -866,6 +917,12 @@ iv.setImageResource(R.drawable.vector_image);</code></p>
   
     
     <entry>
+      <title><![CDATA[分类]]></title>
+      <url>/categories/index.html</url>
+      <content type="html"></content>
+    </entry>
+    
+    <entry>
       <title></title>
       <url>/about/index.html</url>
       <content type="html"><![CDATA[<h1 id="About-Me"><a href="#About-Me" class="headerlink" title="About Me"></a>About Me</h1><blockquote>
@@ -884,12 +941,6 @@ iv.setImageResource(R.drawable.vector_image);</code></p>
     <entry>
       <title><![CDATA[tags]]></title>
       <url>/tags/index.html</url>
-      <content type="html"></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[分类]]></title>
-      <url>/categories/index.html</url>
       <content type="html"></content>
     </entry>
     
