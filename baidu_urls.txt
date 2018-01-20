@@ -1,3 +1,4 @@
+http://www.huangjie.name/一些关于安卓非编码问题的解决方案记录.html
 http://www.huangjie.name/objectBox数据库使用教程-objectbox-java.html
 http://www.huangjie.name/Android开发常见问题汇总.html
 http://www.huangjie.name/2017年终总结.html
