@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="okhttp3," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   本文主要是提供一些okhttp3的文档翻译,英文文档:https://github.com/square/okhttp/wiki">
+<meta name="keywords" content="okhttp3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="okhttp3Wiki文档译文">
+<meta property="og:url" content="http://www.huangjie.name/okhttp3-wiki-chinese.html">
+<meta property="og:site_name" content="Jay的记事本">
+<meta property="og:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   本文主要是提供一些okhttp3的文档翻译,英文文档:https://github.com/square/okhttp/wiki">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/wiki/square/okhttp/interceptors@2x.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wiki/square/okhttp/events@2x.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wiki/square/okhttp/events_with_failures@2x.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wiki/square/okhttp/events_with_failures_and_retries@2x.png">
+<meta property="og:updated_time" content="2018-01-22T12:06:20.220Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="okhttp3Wiki文档译文">
+<meta name="twitter:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   本文主要是提供一些okhttp3的文档翻译,英文文档:https://github.com/square/okhttp/wiki">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/wiki/square/okhttp/interceptors@2x.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.huangjie.name/okhttp3-wiki-chinese.html"/>
+
+
+
+
+
+  <title>okhttp3Wiki文档译文 | Jay的记事本</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?51e4822e4bc99e2b512924ae3703d251";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jay的记事本</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Android进阶,Android技术学习，Android基础</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.huangjie.name/okhttp3-wiki-chinese.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄杰">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://p07lh1fh6.bkt.clouddn.com/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay的记事本">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">okhttp3Wiki文档译文</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-22T15:38:58+08:00">
+                2018-01-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/安卓开源库使用教程/" itemprop="url" rel="index">
+                    <span itemprop="name">安卓开源库使用教程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  9,350 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  43 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.</strong></p>
+<hr>
+<blockquote>
+<p>本文主要是提供一些okhttp3的文档翻译,英文文档:<a href="https://github.com/square/okhttp/wiki" target="_blank" rel="noopener">https://github.com/square/okhttp/wiki</a></p>
+</blockquote>
+<a id="more"></a>
+<h3 id="Calls-调用"><a href="#Calls-调用" class="headerlink" title="Calls(调用)"></a>Calls(调用)</h3><p>HTTP客户端的工作是接受你的请求并产生响应。这在理论上很简单，但在实践中会变得棘手。</p>
+<h4 id="Requests"><a href="#Requests" class="headerlink" title="Requests"></a><a href="http://square.github.io/okhttp/3.x/okhttp/okhttp3/Request.html" target="_blank" rel="noopener">Requests</a></h4><p>每个HTTP请求都包含一个URL，一个方法（如GET或POST）和一个头部列表(headers)。请求也可能包含一个请求体(body)：特定内容类型的数据流。</p>
+<h4 id="Responses"><a href="#Responses" class="headerlink" title="Responses"></a><a href="http://square.github.io/okhttp/3.x/okhttp/okhttp3/Response.html" target="_blank" rel="noopener">Responses</a></h4><p>每一个HTTP响应中都包含一个状态码（如200代表成功，404代表未找​​到），一个响应头列表（headers）和一个可选的响应体（body）。</p>
+<h4 id="重写请求"><a href="#重写请求" class="headerlink" title="重写请求"></a>重写请求</h4><p>当你的OkHttp发送一个HTTP请求，你在描述一个高层次的要求：“给我获取这个网址中的这些请求头。”对于正确性和效率，OkHttp发送前会重写你的请求。</p>
+<p>OkHttp可以在原先的请求中添加请求头（headers），包括Content-Length, Transfer-Encoding, User-Agent, Host, Connection, 和 Content-Type。除非请求头已经存在压缩响应，否则它还将添加一个Accept-Encoding请求头。如果你有cookies，OkHttp还将添加一个Cookie请求头。</p>
+<p>一些请求会有一个缓存的响应。当这个缓存的响应不是最新的时候，OkHttp会发送一个有条件的GET来下载更新的响应，如果它比缓存还新。它将会添加需要的请求头，如IF-Modified-Since和If-None-Match。</p>
+<h4 id="重写响应"><a href="#重写响应" class="headerlink" title="重写响应"></a>重写响应</h4><p>如果使用透明压缩，OkHttp将删除相应的响应头Content-Encoding，Content-Length因为它们不适用于解压缩的响应主体。</p>
+<p>如果条件GET成功，则来自网络和缓存的响应将按照规范的指示进行合并。</p>
+<h4 id="后续请求"><a href="#后续请求" class="headerlink" title="后续请求"></a>后续请求</h4><p>当您请求的URL已经移动时，Web服务器将返回一个响应代码，302以指示文档的新URL。OkHttp将按照重定向来检索最终响应。<br>如果响应发出授权质询，则OkHttp会询问<a href="http://square.github.io/okhttp/3.x/okhttp/okhttp3/Authenticator.html" target="_blank" rel="noopener">Authenticator</a>（如果已配置）以满足质询。如果认证者提供证书，则请求将会带着证书进行重试。</p>
+<h4 id="重试请求"><a href="#重试请求" class="headerlink" title="重试请求"></a>重试请求</h4><p>有时连接失败：要么是连接池已经过时和断开，或是Web服务器本身无法达成。如果有一个是可用的，OkHttp将会使用不同的路由进行请求重试。</p>
+<h4 id="呼叫"><a href="#呼叫" class="headerlink" title="呼叫"></a><a href="http://square.github.io/okhttp/3.x/okhttp/okhttp3/Call.html" target="_blank" rel="noopener">呼叫</a></h4><p>随着重写，重定向，后续和重试，你简单的要求可能会产生很多请求和响应。OkHttp使用呼叫（Call）并通过许多必要的中间请求和响应来满足你请求的任务模型。通常情况，这是不是很多！如果您的网址被重定向，或者如果您故障转移到另一个IP地址，但它会欣慰的知道你的代码会继续工作。</p>
+<p>通过以下两种方式进行呼叫： </p>
+<ul>
+<li>同步：直到响应,你的线程块是可读的。 </li>
+<li>异步：你在任何线程进行排队请求，并且当响应是可读的时候，你会在另一个线程得到回调。</li>
+</ul>
+<p>呼叫（Calls）可以在任何线程中取消。如果它尚未完成，它将作为失败的呼叫（Calls）！当呼叫（Call）被取消的时候，如果代码试图进行写请求体（request body）或读取响应体（response body）会遭受IOException异常。</p>
+<h4 id="调度"><a href="#调度" class="headerlink" title="调度"></a>调度</h4><p>对于同步呼叫，您需要自带线程，并负责管理多少个同时发出的请求。同时连接的垃圾资源过多; 太少的危害等待时间。</p>
+<p>对于异步调用，<a href="http://square.github.io/okhttp/3.x/okhttp/okhttp3/Dispatcher.html" target="_blank" rel="noopener">Dispatcher</a>实现最大同时请求的策略。您可以设置每个网络服务器的最大数量（默认值是5），总体（默认值是64）。</p>
+<h3 id="Connections-连接"><a href="#Connections-连接" class="headerlink" title="Connections(连接)"></a>Connections(连接)</h3><p>虽然您只提供了URL，但是OkHttp计划使用三种类型连接到你的web服务器：URL, Address, 和 Route</p>
+<h4 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h4><p>URL（如<a href="https://github.com/square/okhttp）是HTTP和Internet的基础。除了作为网络上所有内容的通用分散命名方案之外，他们还指定如何访问网络资源。" target="_blank" rel="noopener">https://github.com/square/okhttp）是HTTP和Internet的基础。除了作为网络上所有内容的通用分散命名方案之外，他们还指定如何访问网络资源。</a></p>
+<p>网址是抽象的：</p>
+<ul>
+<li>他们指定的调用可能是明文（http）或加密（https），但不应该使用哪些加密算法。他们也没有指定如何验证对等方的证书（HostnameVerifier）或哪些证书可以信任（SSLSocketFactory）。他们也是具体的：每个URL标识一个特定的路径（如/square/okhttp）和查询（如?q=sharks&amp;lang=en）。每个网络服务器都有许多网址。</li>
+<li>它们不指定是否应该使用特定的代理服务器，或者如何使用该代理服务器进行身份验证。</li>
+</ul>
+<p>他们也是具体的：每个URL标识一个特定的路径（如/square/okhttp）和查询（如?q=sharks&amp;lang=en）。每个网络服务器都有许多网址。</p>
+<h4 id="Addresses"><a href="#Addresses" class="headerlink" title="Addresses"></a>Addresses</h4><p>地址指定一个网络服务器（如github.com）以及连接到该服务器所需的所有静态配置：端口号，HTTPS设置和首选网络协议（如HTTP / 2或SPDY）。</p>
+<p>共享相同地址的URL也可能共享相同的底层TCP套接字连接。共享连接具有显着的性能优势：更低的延迟，更高的吞吐量（由于<a href="http://www.igvita.com/2011/10/20/faster-web-vs-tcp-slow-start/" target="_blank" rel="noopener">TCP启动缓慢</a>）和保存的电池。OkHttp使用<a href="http://square.github.io/okhttp/3.x/okhttp/okhttp3/ConnectionPool.html" target="_blank" rel="noopener">ConnectionPool</a>自动重用HTTP / 1.x连接并复用HTTP / 2和SPDY连接。</p>
+<p>在OkHttp地址的一些字段来自URL（方案，主机名，端口），其余来自<a href="http://square.github.io/okhttp/3.x/okhttp/okhttp3/OkHttpClient.html" target="_blank" rel="noopener">OkHttpClient</a>。</p>
+<h4 id="Routes"><a href="#Routes" class="headerlink" title="Routes"></a>Routes</h4><p>路由提供实际连接到Web服务器所需的动态信息。这是要尝试的特定IP地址（通过DNS查询发现），要使用的确切代理服务器（如果正在使用<a href="http://developer.android.com/reference/java/net/ProxySelector.html" target="_blank" rel="noopener">ProxySelector</a>）以及要协商哪个版本的TLS（用于HTTPS连接）。</p>
+<p>单个地址可能有很多路线。例如，托管在多个数据中心中的Web服务器可能会在其DNS响应中产生多个IP地址。</p>
+<h4 id="Connections"><a href="#Connections" class="headerlink" title="Connections"></a>Connections</h4><p>当你用OkHttp请求一个URL的时候，它的功能如下：</p>
+<p>它使用URL并配置OkHttpClient来创建一个地址。该地址指定我们将如何连接到Web服务器。<br>它尝试从连接池中检索具有该地址的连接。<br>如果在池中找不到连接，则选择要尝试的路由。这通常意味着发出DNS请求来获取服务器的IP地址。然后根据需要选择TLS版本和代理服务器。<br>如果是新路由，则通过构建直接套接字连接，TLS隧道（用于通过HTTP代理的HTTPS）或直接TLS连接进行连接。它根据需要进行TLS握手。<br>它发送HTTP请求并读取响应。<br>如果连接有问题，OkHttp会选择另外一个路径，然后重试。这允许OkHttp在服务器地址的子集无法访问时恢复。当池连接失效或尝试的TLS版本不受支持时，这也很有用。</p>
+<p>一旦接收到响应，连接将被返回到池中，以便将来可以重复使用。经过一段时间的不活动之后，连接被从池中逐出。</p>
+<h3 id="Recipes-方法"><a href="#Recipes-方法" class="headerlink" title="Recipes(方法)"></a>Recipes(方法)</h3><p>我们已经写了一些方法，演示了如何解决OkHttp常见问题。通过阅读他们了解一切是如何正常工作的。可以自由剪切和粘贴这些例子。</p>
+<h4 id="同步获取-Synchronous-Get"><a href="#同步获取-Synchronous-Get" class="headerlink" title="同步获取(Synchronous Get)"></a>同步获取(Synchronous Get)</h4><p>下载文件，打印其头部，并以字符串形式打印其响应体。</p>
+<p>该<code>string()</code>方法在响应体中是方便快捷的小型文件。但是，如果响应体较大（大于1 MIB以上），它会将整个较大文件加载到内存中，所以应该避免<code>string()</code> 。在这种情况下，更倾向于将响应体作为流进行处理。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> OkHttpClient client = <span class="keyword">new</span> OkHttpClient();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">  Request request = <span class="keyword">new</span> Request.Builder()</span><br><span class="line">      .url(<span class="string">"https://publicobject.com/helloworld.txt"</span>)</span><br><span class="line">      .build();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!response.isSuccessful()) <span class="keyword">throw</span> <span class="keyword">new</span> IOException(<span class="string">"Unexpected code "</span> + response);</span><br><span class="line"></span><br><span class="line">    Headers responseHeaders = response.headers();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; responseHeaders.size(); i++) &#123;</span><br><span class="line">      System.out.println(responseHeaders.name(i) + <span class="string">": "</span> + responseHeaders.value(i));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    System.out.println(response.body().string());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="异步获取-Asynchronous-Get"><a href="#异步获取-Asynchronous-Get" class="headerlink" title="异步获取(Asynchronous Get)"></a>异步获取(Asynchronous Get)</h4><p>下载一个工作线程的文件，当响应是可读的时候，获取回调（Callback）。当响应头已经准备好后，将产生回调（Callback）。读取响应体可能一直阻塞。目前OkHttp不提供异步API来接收响应体的部位。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> OkHttpClient client = <span class="keyword">new</span> OkHttpClient();</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    Request request = <span class="keyword">new</span> Request.Builder()</span><br><span class="line">        .url(<span class="string">"http://publicobject.com/helloworld.txt"</span>)</span><br><span class="line">        .build();</span><br><span class="line"></span><br><span class="line">    client.newCall(request).enqueue(<span class="keyword">new</span> Callback() &#123;</span><br><span class="line">      <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFailure</span><span class="params">(Call call, IOException e)</span> </span>&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResponse</span><span class="params">(Call call, Response response)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> (ResponseBody responseBody = response.body()) &#123;</span><br><span class="line">          <span class="keyword">if</span> (!response.isSuccessful()) <span class="keyword">throw</span> <span class="keyword">new</span> IOException(<span class="string">"Unexpected code "</span> + response);</span><br><span class="line"></span><br><span class="line">          Headers responseHeaders = response.headers();</span><br><span class="line">          <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, size = responseHeaders.size(); i &lt; size; i++) &#123;</span><br><span class="line">            System.out.println(responseHeaders.name(i) + <span class="string">": "</span> + responseHeaders.value(i));</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          System.out.println(responseBody.string());</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="访问头"><a href="#访问头" class="headerlink" title="访问头"></a>访问头</h4><p>典型的HTTP头工作就像一个Map<string, string=""> ：每个字段都有一个值或无值。但是，一些头部(headers)允许多个值，比如Guava的Multimap。例如，它共同为一个HTTP响应提供多个Vary头。OkHttp的API，试图使这两种情况下都能舒适使用。</string,></p>
+<p>当写请求头，用header(name, value)来为唯一出现的name设置value。如果它本身存在值，在添加新的value之前，他们会被移除。使用addHeader(name, value)来添加头部不需要移除当前存在的headers。</p>
+<p>当读取响应头，用header(name)返回最后设置name的value。如果没有value，header(name)将返回null。可以使用headers(name)来读取所有列表字段的值，。</p>
+<p>要访问所有的头部，用Headers类，它支持索引访问。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> OkHttpClient client = <span class="keyword">new</span> OkHttpClient();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">  Request request = <span class="keyword">new</span> Request.Builder()</span><br><span class="line">      .url(<span class="string">"https://api.github.com/repos/square/okhttp/issues"</span>)</span><br><span class="line">      .header(<span class="string">"User-Agent"</span>, <span class="string">"OkHttp Headers.java"</span>)</span><br><span class="line">      .addHeader(<span class="string">"Accept"</span>, <span class="string">"application/json; q=0.5"</span>)</span><br><span class="line">      .addHeader(<span class="string">"Accept"</span>, <span class="string">"application/vnd.github.v3+json"</span>)</span><br><span class="line">      .build();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!response.isSuccessful()) <span class="keyword">throw</span> <span class="keyword">new</span> IOException(<span class="string">"Unexpected code "</span> + response);</span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">"Server: "</span> + response.header(<span class="string">"Server"</span>));</span><br><span class="line">    System.out.println(<span class="string">"Date: "</span> + response.header(<span class="string">"Date"</span>));</span><br><span class="line">    System.out.println(<span class="string">"Vary: "</span> + response.headers(<span class="string">"Vary"</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="提交一个文本-Posting-a-String"><a href="#提交一个文本-Posting-a-String" class="headerlink" title="提交一个文本(Posting a String)"></a>提交一个文本(Posting a String)</h4><p>使用HTTP POST的请求体发送到服务。下面例子post了一个markdown文档到一个的Web服务（将markdown作为HTML）。由于整个请求体是同时在内存中，应避免使用此API发送较大（大于1 MIB）的文件。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> MediaType MEDIA_TYPE_MARKDOWN</span><br><span class="line">    = MediaType.parse(<span class="string">"text/x-markdown; charset=utf-8"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> OkHttpClient client = <span class="keyword">new</span> OkHttpClient();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">  String postBody = <span class="string">""</span></span><br><span class="line">      + <span class="string">"Releases\n"</span></span><br><span class="line">      + <span class="string">"--------\n"</span></span><br><span class="line">      + <span class="string">"\n"</span></span><br><span class="line">      + <span class="string">" * _1.0_ May 6, 2013\n"</span></span><br><span class="line">      + <span class="string">" * _1.1_ June 15, 2013\n"</span></span><br><span class="line">      + <span class="string">" * _1.2_ August 11, 2013\n"</span>;</span><br><span class="line"></span><br><span class="line">  Request request = <span class="keyword">new</span> Request.Builder()</span><br><span class="line">      .url(<span class="string">"https://api.github.com/markdown/raw"</span>)</span><br><span class="line">      .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, postBody))</span><br><span class="line">      .build();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!response.isSuccessful()) <span class="keyword">throw</span> <span class="keyword">new</span> IOException(<span class="string">"Unexpected code "</span> + response);</span><br><span class="line"></span><br><span class="line">    System.out.println(response.body().string());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="发布一个流-Post-Streaming"><a href="#发布一个流-Post-Streaming" class="headerlink" title="发布一个流(Post Streaming)"></a>发布一个流(Post Streaming)</h4><p>在这里，我们POST请求体作为stream。将正在生成请求体的内容写入到stream中。下面例子streams直接进入<a href="https://github.com/square/okio" target="_blank" rel="noopener">Okio</a>缓冲水槽。你的程序可能更喜欢使用OutputStream，你可以通过BufferedSink.outputStream（）获得 OutputStream。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> MediaType MEDIA_TYPE_MARKDOWN</span><br><span class="line">    = MediaType.parse(<span class="string">"text/x-markdown; charset=utf-8"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> OkHttpClient client = <span class="keyword">new</span> OkHttpClient();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">  RequestBody requestBody = <span class="keyword">new</span> RequestBody() &#123;</span><br><span class="line">    <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> MediaType <span class="title">contentType</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> MEDIA_TYPE_MARKDOWN;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeTo</span><span class="params">(BufferedSink sink)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">      sink.writeUtf8(<span class="string">"Numbers\n"</span>);</span><br><span class="line">      sink.writeUtf8(<span class="string">"-------\n"</span>);</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= <span class="number">997</span>; i++) &#123;</span><br><span class="line">        sink.writeUtf8(String.format(<span class="string">" * %s = %s\n"</span>, i, factor(i)));</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">factor</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> x = n / i;</span><br><span class="line">        <span class="keyword">if</span> (x * i == n) <span class="keyword">return</span> factor(x) + <span class="string">" × "</span> + i;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> Integer.toString(n);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  Request request = <span class="keyword">new</span> Request.Builder()</span><br><span class="line">      .url(<span class="string">"https://api.github.com/markdown/raw"</span>)</span><br><span class="line">      .post(requestBody)</span><br><span class="line">      .build();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!response.isSuccessful()) <span class="keyword">throw</span> <span class="keyword">new</span> IOException(<span class="string">"Unexpected code "</span> + response);</span><br><span class="line"></span><br><span class="line">    System.out.println(response.body().string());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="发布文件-Posting-a-File"><a href="#发布文件-Posting-a-File" class="headerlink" title="发布文件(Posting a File)"></a>发布文件(Posting a File)</h4><p>将文件作为请求体是很容易的。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> MediaType MEDIA_TYPE_MARKDOWN</span><br><span class="line">    = MediaType.parse(<span class="string">"text/x-markdown; charset=utf-8"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> OkHttpClient client = <span class="keyword">new</span> OkHttpClient();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">  File file = <span class="keyword">new</span> File(<span class="string">"README.md"</span>);</span><br><span class="line"></span><br><span class="line">  Request request = <span class="keyword">new</span> Request.Builder()</span><br><span class="line">      .url(<span class="string">"https://api.github.com/markdown/raw"</span>)</span><br><span class="line">      .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, file))</span><br><span class="line">      .build();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!response.isSuccessful()) <span class="keyword">throw</span> <span class="keyword">new</span> IOException(<span class="string">"Unexpected code "</span> + response);</span><br><span class="line"></span><br><span class="line">    System.out.println(response.body().string());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="发布表单-Posting-form-parameters"><a href="#发布表单-Posting-form-parameters" class="headerlink" title="发布表单(Posting form parameters)"></a>发布表单(Posting form parameters)</h4><p>使用<code>FormBody.Builder</code>建立一个请求体，它就像一个HTML的<code>&lt;form&gt;</code>标记。<code>Names</code>和<code>values</code>将使用<code>HTML</code>兼容的表单URL编码进行编码。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> OkHttpClient client = <span class="keyword">new</span> OkHttpClient();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">  RequestBody formBody = <span class="keyword">new</span> FormBody.Builder()</span><br><span class="line">      .add(<span class="string">"search"</span>, <span class="string">"Jurassic Park"</span>)</span><br><span class="line">      .build();</span><br><span class="line">  Request request = <span class="keyword">new</span> Request.Builder()</span><br><span class="line">      .url(<span class="string">"https://en.wikipedia.org/w/index.php"</span>)</span><br><span class="line">      .post(formBody)</span><br><span class="line">      .build();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!response.isSuccessful()) <span class="keyword">throw</span> <span class="keyword">new</span> IOException(<span class="string">"Unexpected code "</span> + response);</span><br><span class="line"> </span><br><span class="line">    System.out.println(response.body().string());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="发布multipart请求-Posting-a-multipart-request"><a href="#发布multipart请求-Posting-a-multipart-request" class="headerlink" title="发布multipart请求(Posting a multipart request)"></a>发布multipart请求(Posting a multipart request)</h4><p><code>MultipartBody.Builder</code>可以构建与HTML文件上传表单兼容的复杂请求主体。multipart请求体的每一部分本身就是请求体，并且可以定义自己的头部。如果存在，这些头应该描述的部分请求体，如它的<code>Content-Disposition</code>。如果<code>Content-Length</code>和 <code>Content-Type</code>头部可以使用，则他们会自动添加。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * The imgur client ID for OkHttp recipes. If you're using imgur for anything other than running</span></span><br><span class="line"><span class="comment"> * these examples, please request your own client ID! https://api.imgur.com/oauth2</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String IMGUR_CLIENT_ID = <span class="string">"..."</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> MediaType MEDIA_TYPE_PNG = MediaType.parse(<span class="string">"image/png"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> OkHttpClient client = <span class="keyword">new</span> OkHttpClient();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">  <span class="comment">// Use the imgur image upload API as documented at https://api.imgur.com/endpoints/image</span></span><br><span class="line">  RequestBody requestBody = <span class="keyword">new</span> MultipartBody.Builder()</span><br><span class="line">      .setType(MultipartBody.FORM)</span><br><span class="line">      .addFormDataPart(<span class="string">"title"</span>, <span class="string">"Square Logo"</span>)</span><br><span class="line">      .addFormDataPart(<span class="string">"image"</span>, <span class="string">"logo-square.png"</span>,</span><br><span class="line">          RequestBody.create(MEDIA_TYPE_PNG, <span class="keyword">new</span> File(<span class="string">"website/static/logo-square.png"</span>)))</span><br><span class="line">      .build();</span><br><span class="line"></span><br><span class="line">  Request request = <span class="keyword">new</span> Request.Builder()</span><br><span class="line">      .header(<span class="string">"Authorization"</span>, <span class="string">"Client-ID "</span> + IMGUR_CLIENT_ID)</span><br><span class="line">      .url(<span class="string">"https://api.imgur.com/3/image"</span>)</span><br><span class="line">      .post(requestBody)</span><br><span class="line">      .build();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!response.isSuccessful()) <span class="keyword">throw</span> <span class="keyword">new</span> IOException(<span class="string">"Unexpected code "</span> + response);</span><br><span class="line"></span><br><span class="line">    System.out.println(response.body().string());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="用Moshi解析JSON响应"><a href="#用Moshi解析JSON响应" class="headerlink" title="用Moshi解析JSON响应"></a>用<code>Moshi</code>解析JSON响应</h4><p><a href="https://github.com/square/moshi" target="_blank" rel="noopener">Moshi</a>是一个便捷的API，用于在JSON和Java对象之间进行转换。这里我们使用它来解码来自GitHub API的JSON响应。</p>
+<p>请注意，<code>ResponseBody.charStream()</code>使用<code>Content-Type</code>响应头来选择解码响应主体时使用哪个字符集。如果没有指定字符集，它默认为<code>UTF-8</code>。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> OkHttpClient client = <span class="keyword">new</span> OkHttpClient();</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Moshi moshi = <span class="keyword">new</span> Moshi.Builder().build();</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> JsonAdapter&lt;Gist&gt; gistJsonAdapter = moshi.adapter(Gist.class);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">  Request request = <span class="keyword">new</span> Request.Builder()</span><br><span class="line">      .url(<span class="string">"https://api.github.com/gists/c2a7c39532239ff261be"</span>)</span><br><span class="line">      .build();</span><br><span class="line">  <span class="keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!response.isSuccessful()) <span class="keyword">throw</span> <span class="keyword">new</span> IOException(<span class="string">"Unexpected code "</span> + response);</span><br><span class="line"></span><br><span class="line">    Gist gist = gistJsonAdapter.fromJson(response.body().source());</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (Map.Entry&lt;String, GistFile&gt; entry : gist.files.entrySet()) &#123;</span><br><span class="line">      System.out.println(entry.getKey());</span><br><span class="line">      System.out.println(entry.getValue().content);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Gist</span> </span>&#123;</span><br><span class="line">  Map&lt;String, GistFile&gt; files;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">GistFile</span> </span>&#123;</span><br><span class="line">  String content;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="响应缓存"><a href="#响应缓存" class="headerlink" title="响应缓存"></a>响应缓存</h4><p>要缓存响应，你需要有一个缓存目录来进行读取和写入，并限制缓存的大小。缓存目录应该是私有的，不被信任的应用程序不能够阅读其内容！</p>
+<p>多个缓存同时访问相同的缓存目录，这是错误的。大多数应用程序应该调用一次new OkHttpClient()，在任何地方都使用相同的实例和自己的缓存配置。否则，这两个缓存实例将踩到对方，破坏响应缓存，这可能使你的程序崩溃。</p>
+<p>响应缓存使用HTTP头进行配置。您可以添加请求头Cache-Control: max-stale=3600，这样OkHttp的缓存就会遵循他们。你的网络服务器可以通过自己的响应头配置缓存多长时间的响应，如Cache-Control: max-age=9600。有缓存头强制缓存的响应，强制网络响应，或强制使用条件GET验证的网络响应。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> OkHttpClient client;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">CacheResponse</span><span class="params">(File cacheDirectory)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> cacheSize = <span class="number">10</span> * <span class="number">1024</span> * <span class="number">1024</span>; <span class="comment">// 10 MiB</span></span><br><span class="line">  Cache cache = <span class="keyword">new</span> Cache(cacheDirectory, cacheSize);</span><br><span class="line"></span><br><span class="line">  client = <span class="keyword">new</span> OkHttpClient.Builder()</span><br><span class="line">      .cache(cache)</span><br><span class="line">      .build();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">  Request request = <span class="keyword">new</span> Request.Builder()</span><br><span class="line">      .url(<span class="string">"http://publicobject.com/helloworld.txt"</span>)</span><br><span class="line">      .build();</span><br><span class="line"></span><br><span class="line">  String response1Body;</span><br><span class="line">  <span class="keyword">try</span> (Response response1 = client.newCall(request).execute()) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!response1.isSuccessful()) <span class="keyword">throw</span> <span class="keyword">new</span> IOException(<span class="string">"Unexpected code "</span> + response1);</span><br><span class="line"></span><br><span class="line">    response1Body = response1.body().string();</span><br><span class="line">    System.out.println(<span class="string">"Response 1 response:          "</span> + response1);</span><br><span class="line">    System.out.println(<span class="string">"Response 1 cache response:    "</span> + response1.cacheResponse());</span><br><span class="line">    System.out.println(<span class="string">"Response 1 network response:  "</span> + response1.networkResponse());</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  String response2Body;</span><br><span class="line">  <span class="keyword">try</span> (Response response2 = client.newCall(request).execute()) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!response2.isSuccessful()) <span class="keyword">throw</span> <span class="keyword">new</span> IOException(<span class="string">"Unexpected code "</span> + response2);</span><br><span class="line"></span><br><span class="line">    response2Body = response2.body().string();</span><br><span class="line">    System.out.println(<span class="string">"Response 2 response:          "</span> + response2);</span><br><span class="line">    System.out.println(<span class="string">"Response 2 cache response:    "</span> + response2.cacheResponse());</span><br><span class="line">    System.out.println(<span class="string">"Response 2 network response:  "</span> + response2.networkResponse());</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  System.out.println(<span class="string">"Response 2 equals Response 1? "</span> + response1Body.equals(response2Body));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用<code>CacheControl.FORCE_NETWORK</code>可以禁止使用缓存的响应。使<code>用</code>CacheControl.FORCE_CACHE<code>可以禁止使用网络。警告：如果您使用FORCE_CACHE</code>和响应来自网络，OkHttp将会返回一个504不可满足请求的响应。</p>
+<h4 id="取消Call"><a href="#取消Call" class="headerlink" title="取消Call"></a>取消Call</h4><p>通过<code>Call.cancel()</code>来立即停止正在进行的Call。如果一个线程目前正在写请求或读响应，它还将收到一个<code>IOException</code>异常。当一个Call不需要时，使用取消Call来保护网络; 例如，当用户从应用程序导航离开。同步和异步调用可以被取消。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> ScheduledExecutorService executor = Executors.newScheduledThreadPool(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> OkHttpClient client = <span class="keyword">new</span> OkHttpClient();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">  Request request = <span class="keyword">new</span> Request.Builder()</span><br><span class="line">      .url(<span class="string">"http://httpbin.org/delay/2"</span>) <span class="comment">// This URL is served with a 2 second delay.</span></span><br><span class="line">      .build();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">final</span> <span class="keyword">long</span> startNanos = System.nanoTime();</span><br><span class="line">  <span class="keyword">final</span> Call call = client.newCall(request);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Schedule a job to cancel the call in 1 second.</span></span><br><span class="line">  executor.schedule(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      System.out.printf(<span class="string">"%.2f Canceling call.%n"</span>, (System.nanoTime() - startNanos) / <span class="number">1e9f</span>);</span><br><span class="line">      call.cancel();</span><br><span class="line">      System.out.printf(<span class="string">"%.2f Canceled call.%n"</span>, (System.nanoTime() - startNanos) / <span class="number">1e9f</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, <span class="number">1</span>, TimeUnit.SECONDS);</span><br><span class="line"></span><br><span class="line">  System.out.printf(<span class="string">"%.2f Executing call.%n"</span>, (System.nanoTime() - startNanos) / <span class="number">1e9f</span>);</span><br><span class="line">  <span class="keyword">try</span> (Response response = call.execute()) &#123;</span><br><span class="line">    System.out.printf(<span class="string">"%.2f Call was expected to fail, but completed: %s%n"</span>,</span><br><span class="line">        (System.nanoTime() - startNanos) / <span class="number">1e9f</span>, response);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    System.out.printf(<span class="string">"%.2f Call failed as expected: %s%n"</span>,</span><br><span class="line">        (System.nanoTime() - startNanos) / <span class="number">1e9f</span>, e);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="超时"><a href="#超时" class="headerlink" title="超时"></a>超时</h4><p>当无法访问查询时，将调用超时失败。超时在网络划分中可以是由于客户端连接问题，服务器可用性的问题，或两者之间的任何东西。OkHttp支持连接，读取和写入超时。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> OkHttpClient client;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ConfigureTimeouts</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">  client = <span class="keyword">new</span> OkHttpClient.Builder()</span><br><span class="line">      .connectTimeout(<span class="number">10</span>, TimeUnit.SECONDS)</span><br><span class="line">      .writeTimeout(<span class="number">10</span>, TimeUnit.SECONDS)</span><br><span class="line">      .readTimeout(<span class="number">30</span>, TimeUnit.SECONDS)</span><br><span class="line">      .build();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">  Request request = <span class="keyword">new</span> Request.Builder()</span><br><span class="line">      .url(<span class="string">"http://httpbin.org/delay/2"</span>) <span class="comment">// This URL is served with a 2 second delay.</span></span><br><span class="line">      .build();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">    System.out.println(<span class="string">"Response completed: "</span> + response);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="每个呼叫配置"><a href="#每个呼叫配置" class="headerlink" title="每个呼叫配置"></a>每个呼叫配置</h4><p>所有的HTTP客户端都在<code>OkHttpClient</code>中配置，这包括代理设置，超时和缓存。当你需要改变单一Call的配置时，调用<code>OkHttpClient.newBuilder()</code>。这将返回共享相同的连接池，调度和配置的原客户端的建造器。在下面的例子中，我们做了500毫秒超时，另外一个3000毫秒超时请求。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> OkHttpClient client = <span class="keyword">new</span> OkHttpClient();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">  Request request = <span class="keyword">new</span> Request.Builder()</span><br><span class="line">      .url(<span class="string">"http://httpbin.org/delay/1"</span>) <span class="comment">// This URL is served with a 1 second delay.</span></span><br><span class="line">      .build();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Copy to customize OkHttp for this request.</span></span><br><span class="line">  OkHttpClient client1 = client.newBuilder()</span><br><span class="line">      .readTimeout(<span class="number">500</span>, TimeUnit.MILLISECONDS)</span><br><span class="line">      .build();</span><br><span class="line">  <span class="keyword">try</span> (Response response = client1.newCall(request).execute()) &#123;</span><br><span class="line">    System.out.println(<span class="string">"Response 1 succeeded: "</span> + response);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    System.out.println(<span class="string">"Response 1 failed: "</span> + e);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Copy to customize OkHttp for this request.</span></span><br><span class="line">  OkHttpClient client2 = client.newBuilder()</span><br><span class="line">      .readTimeout(<span class="number">3000</span>, TimeUnit.MILLISECONDS)</span><br><span class="line">      .build();</span><br><span class="line">  <span class="keyword">try</span> (Response response = client2.newCall(request).execute()) &#123;</span><br><span class="line">    System.out.println(<span class="string">"Response 2 succeeded: "</span> + response);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    System.out.println(<span class="string">"Response 2 failed: "</span> + e);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="认证处理"><a href="#认证处理" class="headerlink" title="认证处理"></a>认证处理</h4><p>OkHttp能够自动重试未经授权的请求。当响应是<code>401 Not Authorized</code>，一个<code>Authenticator</code>被要求提供凭据。应该建立一个包含缺少凭据的新要求。如果没有凭证可用，则返回null跳过重试。</p>
+<p>使用<code>Response.challenges（）</code>获得任何认证挑战方案和领域。当完成一个基本的挑战，用<code>Credentials.basic(username, password)</code>编码请求头。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> OkHttpClient client;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Authenticate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  client = <span class="keyword">new</span> OkHttpClient.Builder()</span><br><span class="line">      .authenticator(<span class="keyword">new</span> Authenticator() &#123;</span><br><span class="line">        <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> Request <span class="title">authenticate</span><span class="params">(Route route, Response response)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">          <span class="keyword">if</span> (response.request().header(<span class="string">"Authorization"</span>) != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>; <span class="comment">// Give up, we've already attempted to authenticate.</span></span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          System.out.println(<span class="string">"Authenticating for response: "</span> + response);</span><br><span class="line">          System.out.println(<span class="string">"Challenges: "</span> + response.challenges());</span><br><span class="line">          String credential = Credentials.basic(<span class="string">"jesse"</span>, <span class="string">"password1"</span>);</span><br><span class="line">          <span class="keyword">return</span> response.request().newBuilder()</span><br><span class="line">              .header(<span class="string">"Authorization"</span>, credential)</span><br><span class="line">              .build();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">      .build();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">  Request request = <span class="keyword">new</span> Request.Builder()</span><br><span class="line">      .url(<span class="string">"http://publicobject.com/secrets/hellosecret.txt"</span>)</span><br><span class="line">      .build();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!response.isSuccessful()) <span class="keyword">throw</span> <span class="keyword">new</span> IOException(<span class="string">"Unexpected code "</span> + response);</span><br><span class="line"></span><br><span class="line">    System.out.println(response.body().string());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>为了避免验证时不工作的重试，你可以返回null放弃。例如，当这些确切的凭据已经尝试,您可以跳过重试：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (credential.equals(response.request().header(<span class="string">"Authorization"</span>))) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">null</span>; <span class="comment">// 如果我们已经使用这些凭据失败，不重试</span></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>当你的应用尝试的次数超过了限制的次数时，你可以跳过重试：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (responseCount(response) &gt;= <span class="number">3</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>; <span class="comment">//如果我们已经失败了3次，放弃。 .</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<p>这上面的代码依赖于下面的<code>responseCount()</code>方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">responseCount</span><span class="params">(Response response)</span> </span>&#123;</span><br><span class="line">   <span class="keyword">int</span> result = <span class="number">1</span>;</span><br><span class="line">   <span class="keyword">while</span> ((response = response.priorResponse()) != <span class="keyword">null</span>) &#123;</span><br><span class="line">     result++;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> result;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Interceptors-拦截器"><a href="#Interceptors-拦截器" class="headerlink" title="Interceptors(拦截器)"></a>Interceptors(拦截器)</h3><p>拦截器是一个强大的机制，它可以监控，重写和重试Calls。下面是一个简单记录传出请求和响应传入的拦截器。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LoggingInterceptor</span> <span class="keyword">implements</span> <span class="title">Interceptor</span> </span>&#123;</span><br><span class="line">  <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> Response <span class="title">intercept</span><span class="params">(Interceptor.Chain chain)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    Request request = chain.request();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">long</span> t1 = System.nanoTime();</span><br><span class="line">    logger.info(String.format(<span class="string">"Sending request %s on %s%n%s"</span>,</span><br><span class="line">        request.url(), chain.connection(), request.headers()));</span><br><span class="line"></span><br><span class="line">    Response response = chain.proceed(request);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">long</span> t2 = System.nanoTime();</span><br><span class="line">    logger.info(String.format(<span class="string">"Received response for %s in %.1fms%n%s"</span>,</span><br><span class="line">        response.request().url(), (t2 - t1) / <span class="number">1e6</span>d, response.headers()));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> response;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>调用<code>chain.proceed(request)</code>是每个拦截器实现的关键部分。这个看起来很简单的方法就是所有HTTP工作发生的地方，产生满足请求的响应。</p>
+<p>拦截器可以被链接。假设你有一个压缩拦截器和一个校验和拦截器：你需要决定数据是压缩的，然后进行校验和，或者校验和压缩。OkHttp使用列表来跟踪拦截器，拦截器是按顺序调用的。<br><img src="https://raw.githubusercontent.com/wiki/square/okhttp/interceptors@2x.png" alt=""></p>
+<h4 id="应用程序拦截器"><a href="#应用程序拦截器" class="headerlink" title="应用程序拦截器"></a>应用程序拦截器</h4><p>拦截器可以注册为应用拦截器或网络拦截器。我们将使用<code>LoggingInterceptor</code>来区别。</p>
+<p>通过在<code>OkHttpClient.Builder</code>上调用<code>addInterceptor（）</code>来注册应用程序拦截器：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">OkHttpClient client = <span class="keyword">new</span> OkHttpClient.Builder()</span><br><span class="line">    .addInterceptor(<span class="keyword">new</span> LoggingInterceptor())</span><br><span class="line">    .build();</span><br><span class="line"></span><br><span class="line">Request request = <span class="keyword">new</span> Request.Builder()</span><br><span class="line">    .url(<span class="string">"http://www.publicobject.com/helloworld.txt"</span>)</span><br><span class="line">    .header(<span class="string">"User-Agent"</span>, <span class="string">"OkHttp Example"</span>)</span><br><span class="line">    .build();</span><br><span class="line"></span><br><span class="line">Response response = client.newCall(request).execute();</span><br><span class="line">response.body().close();</span><br></pre></td></tr></table></figure></p>
+<p>该URL：<a href="http://www.publicobject.com/helloworld.txt" target="_blank" rel="noopener">http://www.publicobject.com/helloworld.txt</a> 重定向到<a href="https://publicobject.com/helloworld.txt" target="_blank" rel="noopener">https://publicobject.com/helloworld.txt</a>, OkHttp自动重定向。我们的应用程序拦截器被调用一次，返回的响应chain.proceed()具有重定向的响应：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">INFO: Sending request http:<span class="comment">//www.publicobject.com/helloworld.txt on null</span></span><br><span class="line">User-Agent: OkHttp Example</span><br><span class="line"></span><br><span class="line">INFO: Received response <span class="keyword">for</span> https:<span class="comment">//publicobject.com/helloworld.txt in 1179.7ms</span></span><br><span class="line">Server: nginx/<span class="number">1.4</span>.6 (Ubuntu)</span><br><span class="line">Content-Type: text/plain</span><br><span class="line">Content-Length: <span class="number">1759</span></span><br><span class="line">Connection: keep-alive</span><br></pre></td></tr></table></figure></p>
+<p>我们可以看到，我们被重定向了，因为<code>response.request().url()</code>不同于<code>request.url()</code>。这两个日志语句记录两个不同的URL。</p>
+<h4 id="网络拦截器"><a href="#网络拦截器" class="headerlink" title="网络拦截器"></a>网络拦截器</h4><p>注册网络拦截器很类似。调用<code>addNetworkInterceptor()</code>代替<code>addInterceptor()</code>：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">OkHttpClient client = <span class="keyword">new</span> OkHttpClient.Builder()</span><br><span class="line">    .addNetworkInterceptor(<span class="keyword">new</span> LoggingInterceptor())</span><br><span class="line">    .build();</span><br><span class="line"></span><br><span class="line">Request request = <span class="keyword">new</span> Request.Builder()</span><br><span class="line">    .url(<span class="string">"http://www.publicobject.com/helloworld.txt"</span>)</span><br><span class="line">    .header(<span class="string">"User-Agent"</span>, <span class="string">"OkHttp Example"</span>)</span><br><span class="line">    .build();</span><br><span class="line"></span><br><span class="line">Response response = client.newCall(request).execute();</span><br><span class="line">response.body().close();</span><br></pre></td></tr></table></figure></p>
+<p>当我们运行这个代码时，拦截器运行两次。一次为最初的请求<code>http://www.publicobject.com/helloworld.txt</code>，另一个为重定向<code>https://publicobject.com/helloworld.txt</code>。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">INFO: Sending request http:<span class="comment">//www.publicobject.com/helloworld.txt on Connection&#123;www.publicobject.com:80, proxy=DIRECT hostAddress=54.187.32.157 cipherSuite=none protocol=http/1.1&#125;</span></span><br><span class="line">User-Agent: OkHttp Example</span><br><span class="line">Host: www.publicobject.com</span><br><span class="line">Connection: Keep-Alive</span><br><span class="line">Accept-Encoding: gzip</span><br><span class="line"></span><br><span class="line">INFO: Received response <span class="keyword">for</span> http:<span class="comment">//www.publicobject.com/helloworld.txt in 115.6ms</span></span><br><span class="line">Server: nginx/<span class="number">1.4</span>.6 (Ubuntu)</span><br><span class="line">Content-Type: text/html</span><br><span class="line">Content-Length: <span class="number">193</span></span><br><span class="line">Connection: keep-alive</span><br><span class="line">Location: https:<span class="comment">//publicobject.com/helloworld.txt</span></span><br><span class="line"></span><br><span class="line">INFO: Sending request https:<span class="comment">//publicobject.com/helloworld.txt on Connection&#123;publicobject.com:443, proxy=DIRECT hostAddress=54.187.32.157 cipherSuite=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA protocol=http/1.1&#125;</span></span><br><span class="line">User-Agent: OkHttp Example</span><br><span class="line">Host: publicobject.com</span><br><span class="line">Connection: Keep-Alive</span><br><span class="line">Accept-Encoding: gzip</span><br><span class="line"></span><br><span class="line">INFO: Received response <span class="keyword">for</span> https:<span class="comment">//publicobject.com/helloworld.txt in 80.9ms</span></span><br><span class="line">Server: nginx/<span class="number">1.4</span>.6 (Ubuntu)</span><br><span class="line">Content-Type: text/plain</span><br><span class="line">Content-Length: <span class="number">1759</span></span><br><span class="line">Connection: keep-alive</span><br></pre></td></tr></table></figure></p>
+<p>网络请求还包含很多数据，如<code>OkHttp</code>加入<code>Accept-Encoding: gzip</code>头部通知支持压缩响应。网络拦截器的链具有非空的连接，它可用于询问IP地址和连接到网络服务器的TLS配置。</p>
+<h4 id="应用程序和网络拦截之间进行选择"><a href="#应用程序和网络拦截之间进行选择" class="headerlink" title="应用程序和网络拦截之间进行选择"></a>应用程序和网络拦截之间进行选择</h4><p>每个拦截器链(interceptor chain)都具有相对优势。</p>
+<h5 id="应用拦截器"><a href="#应用拦截器" class="headerlink" title="应用拦截器"></a>应用拦截器</h5><ul>
+<li>不必担心像重定向和重试的中间响应。</li>
+<li>总是被调用一次，即使HTTP响应来自缓存服务。</li>
+<li>观察应用程序的原意。不关心OkHttp注入的头文件，如 If-None-Match。</li>
+<li>允许短路和不调用Chain.proceed（） 。</li>
+<li>允许重试，并多次调用Chain.proceed（） 。</li>
+</ul>
+<h5 id="网络拦截器-1"><a href="#网络拦截器-1" class="headerlink" title="网络拦截器"></a>网络拦截器</h5><ul>
+<li>能够操作像重定向和重试的中间响应。</li>
+<li>在短路网络上不调用缓存的响应。</li>
+<li>观察在网络上传输的数据。</li>
+<li>访问Connection承载请求。</li>
+</ul>
+<h4 id="重写请求-1"><a href="#重写请求-1" class="headerlink" title="重写请求"></a>重写请求</h4><p>拦截器可以添加，删除或替换请求头。他们还可以转换请求体。例如，如果你连接到已知支持它的网络服务器，你可以使用应用程序拦截器添加请求体的压缩。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** This interceptor compresses the HTTP request body. Many webservers can't handle this! */</span></span><br><span class="line"><span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">GzipRequestInterceptor</span> <span class="keyword">implements</span> <span class="title">Interceptor</span> </span>&#123;</span><br><span class="line">  <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> Response <span class="title">intercept</span><span class="params">(Interceptor.Chain chain)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    Request originalRequest = chain.request();</span><br><span class="line">    <span class="keyword">if</span> (originalRequest.body() == <span class="keyword">null</span> || originalRequest.header(<span class="string">"Content-Encoding"</span>) != <span class="keyword">null</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> chain.proceed(originalRequest);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Request compressedRequest = originalRequest.newBuilder()</span><br><span class="line">        .header(<span class="string">"Content-Encoding"</span>, <span class="string">"gzip"</span>)</span><br><span class="line">        .method(originalRequest.method(), gzip(originalRequest.body()))</span><br><span class="line">        .build();</span><br><span class="line">    <span class="keyword">return</span> chain.proceed(compressedRequest);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> RequestBody <span class="title">gzip</span><span class="params">(<span class="keyword">final</span> RequestBody body)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> RequestBody() &#123;</span><br><span class="line">      <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> MediaType <span class="title">contentType</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> body.contentType();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">contentLength</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>; <span class="comment">// We don't know the compressed length in advance!</span></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeTo</span><span class="params">(BufferedSink sink)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        BufferedSink gzipSink = Okio.buffer(<span class="keyword">new</span> GzipSink(sink));</span><br><span class="line">        body.writeTo(gzipSink);</span><br><span class="line">        gzipSink.close();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="重写响应-1"><a href="#重写响应-1" class="headerlink" title="重写响应"></a>重写响应</h4><p>相对应的，拦截器也可以重写响应头和转换响应体。通常不要重写请求头，因为它可能违反了Web服务器的期望导致更危险！</p>
+<p>在一个棘手的情况下，如果已经做好应对的后果，重写响应头是解决问题的有效方式。例如，您可以修复服务器的配置错误的Cache-Control响应头以便更好地响应缓存：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** Dangerous interceptor that rewrites the server's cache-control header. */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Interceptor REWRITE_CACHE_CONTROL_INTERCEPTOR = <span class="keyword">new</span> Interceptor() &#123;</span><br><span class="line">  <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> Response <span class="title">intercept</span><span class="params">(Interceptor.Chain chain)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    Response originalResponse = chain.proceed(chain.request());</span><br><span class="line">    <span class="keyword">return</span> originalResponse.newBuilder()</span><br><span class="line">        .header(<span class="string">"Cache-Control"</span>, <span class="string">"max-age=60"</span>)</span><br><span class="line">        .build();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>通常此方法效果最好，它补充了在Web服务器上相应的修复！</p>
+<h4 id="可用性"><a href="#可用性" class="headerlink" title="可用性"></a>可用性</h4><p>OkHttp的拦截器需要OkHttp 2.2或更高版本。不幸的是，拦截器不适<code>OkUrlFactory</code>用于构建它的库，包括<a href="http://square.github.io/retrofit/" target="_blank" rel="noopener">Retrofit≤1.8</a>和<a href="http://square.github.io/picasso/" target="_blank" rel="noopener">Picasso≤2.4</a>。</p>
+<h3 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h3><p>OkHttp试图平衡两个相互竞争的担忧：</p>
+<ul>
+<li>连接到尽可能多的主机。这包括运行最新版本的<a href="https://boringssl.googlesource.com/boringssl/" target="_blank" rel="noopener">boringssl</a>的高级主机，以及运行旧版本<a href="https://www.openssl.org/" target="_blank" rel="noopener">OpenSSL</a>的过时主机。</li>
+<li>连接的安全性。这包括验证具有证书的远程网络服务器以及与强密码交换的数据的私密性。<br>协商连接到HTTPS服务器时，OkHttp需要知道提供哪些<a href="http://square.github.io/okhttp/3.x/okhttp/okhttp3/TlsVersion.html" target="_blank" rel="noopener">TLS</a>版本和<a href="http://square.github.io/okhttp/3.x/okhttp/okhttp3/CipherSuite.html" target="_blank" rel="noopener">密码套件</a>。希望最大化连接的客户端将包括过时的TLS版本和弱设计密码套件。一个想要最大限度地提高安全性的严格的客户端将仅限于最新的TLS版本和最强的密码套件。</li>
+</ul>
+<p><a href="http://square.github.io/okhttp/3.x/okhttp/okhttp3/ConnectionSpec.html" target="_blank" rel="noopener">ConnectionSpec</a>实现特定的安全性和连接性决定。OkHttp包含三个内置的连接规范：</p>
+<ul>
+<li><code>MODERN_TLS</code>是连接到现代HTTPS服务器的安全配置。</li>
+<li><code>COMPATIBLE_TLS</code>是一种连接到安全但不是当前HTTPS服务器的安全配置。</li>
+<li><code>CLEARTEXT</code>是用于<code>http://</code>URL 的不安全配置。</li>
+</ul>
+<p>默认情况下，OkHttp将尝试<code>MODERN_TLS</code>连接，<code>COMPATIBLE_TLS</code>如果现代配置失败，则回退连接。</p>
+<p>每个规范中的TLS版本和密码套件可随每个版本而改变。例如，在OkHttp 2.2中，我们放弃了对SSL 3.0的支持来响应<code>POODLE</code>攻击。而在OkHttp 2.3我们放弃了对<code>RC4</code>的支持。与您的桌面网络浏览器一样，保持OkHttp的最新状态是保持安全的最佳方式。</p>
+<p>您可以使用自定义的TLS版本和密码套件来构建自己的连接规范。例如，这种配置仅限于三个备受好评的密码套件。它的缺点是它需要Android 5.0+和一个类似的当前网络服务器。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ConnectionSpec spec = <span class="keyword">new</span> ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS)  </span><br><span class="line">    .tlsVersions(TlsVersion.TLS_1_2)</span><br><span class="line">    .cipherSuites(</span><br><span class="line">          CipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,</span><br><span class="line">          CipherSuite.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,</span><br><span class="line">          CipherSuite.TLS_DHE_RSA_WITH_AES_128_GCM_SHA256)</span><br><span class="line">    .build();</span><br><span class="line"></span><br><span class="line">OkHttpClient client = <span class="keyword">new</span> OkHttpClient.Builder() </span><br><span class="line">    .connectionSpecs(Collections.singletonList(spec))</span><br><span class="line">    .build();</span><br></pre></td></tr></table></figure>
+<h4 id="证书锁定"><a href="#证书锁定" class="headerlink" title="证书锁定"></a>证书锁定</h4><p>默认情况下，OkHttp信任主机平台的证书权限。这一战略最大限度地提高了连接性，但是它受到证书颁发机构的攻击，例如[<a href="http://www.computerworld.com/article/2510951/cybercrime-hacking/hackers-spied-on-300-000-iranians-using-fake-google-certificate.html" target="_blank" rel="noopener">2011年DigiNotar攻击</a>。它还假定您的HTTPS服务器的证书由证书颁发机构签名。</p>
+<p>使用<a href="http://square.github.io/okhttp/3.x/okhttp/okhttp3/CertificatePinner.html" target="_blank" rel="noopener">CertificatePinner</a>来限制哪些证书和证书颁发机构是可信的。证书固定增加了安全性，但是限制了您的服务器团队更新其TLS证书的能力。<strong>如果没有服务器的TLS管理员的同意，请勿使用证书锁定！</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">CertificatePinning</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  client = <span class="keyword">new</span> OkHttpClient.Builder()</span><br><span class="line">      .certificatePinner(<span class="keyword">new</span> CertificatePinner.Builder()</span><br><span class="line">          .add(<span class="string">"publicobject.com"</span>, <span class="string">"sha256/afwiKY3RxoMmLkuRW1l7QsPZTJPwDS2pdDROQjXw8ig="</span>)</span><br><span class="line">          .build())</span><br><span class="line">      .build();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">  Request request = <span class="keyword">new</span> Request.Builder()</span><br><span class="line">      .url(<span class="string">"https://publicobject.com/robots.txt"</span>)</span><br><span class="line">      .build();</span><br><span class="line"></span><br><span class="line">  Response response = client.newCall(request).execute();</span><br><span class="line">  <span class="keyword">if</span> (!response.isSuccessful()) <span class="keyword">throw</span> <span class="keyword">new</span> IOException(<span class="string">"Unexpected code "</span> + response);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (Certificate certificate : response.handshake().peerCertificates()) &#123;</span><br><span class="line">    System.out.println(CertificatePinner.pin(certificate));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="自定义可信证书"><a href="#自定义可信证书" class="headerlink" title="自定义可信证书"></a>自定义可信证书</h4><p>完整的代码示例显示了如何用自己的集合替换主机平台的证书颁发机构。如上所述，<strong>请勿在没有服务器的TLS管理员同意的情况下使用自定义证书！</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> OkHttpClient client;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">CustomTrust</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  SSLContext sslContext = sslContextForTrustedCertificates(trustedCertificatesInputStream());</span><br><span class="line">  client = <span class="keyword">new</span> OkHttpClient.Builder()</span><br><span class="line">      .sslSocketFactory(sslContext.getSocketFactory())</span><br><span class="line">      .build();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">  Request request = <span class="keyword">new</span> Request.Builder()</span><br><span class="line">      .url(<span class="string">"https://publicobject.com/helloworld.txt"</span>)</span><br><span class="line">      .build();</span><br><span class="line"></span><br><span class="line">  Response response = client.newCall(request).execute();</span><br><span class="line">  System.out.println(response.body().string());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> InputStream <span class="title">trustedCertificatesInputStream</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  ... <span class="comment">// Full source omitted. See sample.</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> SSLContext <span class="title">sslContextForTrustedCertificates</span><span class="params">(InputStream in)</span> </span>&#123;</span><br><span class="line">  ... <span class="comment">// Full source omitted. See sample.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Events-事件监听"><a href="#Events-事件监听" class="headerlink" title="Events(事件监听)"></a>Events(事件监听)</h3><p>事件允许您在应用程序的HTTP调用中捕获度量值。使用事件进行监视：</p>
+<ul>
+<li>HTTP调用您的应用程序的大小和频率。如果你声明了太多的calls，或者你的calls太大，你应该知道它的一切</li>
+<li>这些调用在底层网络上的性能。如果网络性能不足，则需要改善网络或少用网络。</li>
+</ul>
+<p><strong>警告：这是一个非最终的API。<br>从OkHttp 3.9开始，此功能是一个不稳定的预览：API可能会更改，并且实现不完整。我们预计OkHttp 3.10或3.11将完成这个API。在此之前，当您更新您的OkHttp依赖关系时，请准备API和行为更改。</strong></p>
+<h4 id="事件监听"><a href="#事件监听" class="headerlink" title="事件监听"></a>事件监听</h4><p>子类<a href="https://square.github.io/okhttp/3.x/okhttp/okhttp3/EventListener.html" target="_blank" rel="noopener"> EventListener</a>,覆盖您感兴趣的事件的方法。在没有重定向或重试的成功HTTP调用中，事件序列由此流程描述。<br><img src="https://raw.githubusercontent.com/wiki/square/okhttp/events@2x.png" alt=""><br>以下是一个<a href="https://github.com/square/okhttp/blob/master/samples/guide/src/main/java/okhttp3/recipes/PrintEventsNonConcurrent.java" target="_blank" rel="noopener">示例事件侦听器</a>，它使用时间戳打印每个事件。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PrintingEventListener</span> <span class="keyword">extends</span> <span class="title">EventListener</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">long</span> callStartNanos;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">printEvent</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">long</span> nowNanos = System.nanoTime();</span><br><span class="line">    <span class="keyword">if</span> (name.equals(<span class="string">"callStart"</span>)) &#123;</span><br><span class="line">      callStartNanos = nowNanos;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">long</span> elapsedNanos = nowNanos - callStartNanos;</span><br><span class="line">    System.out.printf(<span class="string">"%.3f %s%n"</span>, elapsedNanos / <span class="number">1000000000</span>d, name);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">callStart</span><span class="params">(Call call)</span> </span>&#123;</span><br><span class="line">    printEvent(<span class="string">"callStart"</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">callEnd</span><span class="params">(Call call)</span> </span>&#123;</span><br><span class="line">    printEvent(<span class="string">"callEnd"</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dnsStart</span><span class="params">(Call call, String domainName)</span> </span>&#123;</span><br><span class="line">    printEvent(<span class="string">"dnsStart"</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dnsEnd</span><span class="params">(Call call, String domainName, List&lt;InetAddress&gt; inetAddressList)</span> </span>&#123;</span><br><span class="line">    printEvent(<span class="string">"dnsEnd"</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们做几个calls：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Request request = <span class="keyword">new</span> Request.Builder()</span><br><span class="line">    .url(<span class="string">"https://publicobject.com/helloworld.txt"</span>)</span><br><span class="line">    .build();</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"REQUEST 1 (new connection)"</span>);</span><br><span class="line"><span class="keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">  <span class="comment">// Consume and discard the response body.</span></span><br><span class="line">  response.body().source().readByteString();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"REQUEST 2 (pooled connection)"</span>);</span><br><span class="line"><span class="keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">  <span class="comment">// Consume and discard the response body.</span></span><br><span class="line">  response.body().source().readByteString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>监听器打印相应的事件：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">REQUEST <span class="number">1</span> (<span class="keyword">new</span> connection)</span><br><span class="line"><span class="number">0.000</span> callStart</span><br><span class="line"><span class="number">0.010</span> dnsStart</span><br><span class="line"><span class="number">0.017</span> dnsEnd</span><br><span class="line"><span class="number">0.025</span> connectStart</span><br><span class="line"><span class="number">0.117</span> secureConnectStart</span><br><span class="line"><span class="number">0.586</span> secureConnectEnd</span><br><span class="line"><span class="number">0.586</span> connectEnd</span><br><span class="line"><span class="number">0.587</span> connectionAcquired</span><br><span class="line"><span class="number">0.588</span> requestHeadersStart</span><br><span class="line"><span class="number">0.590</span> requestHeadersEnd</span><br><span class="line"><span class="number">0.591</span> responseHeadersStart</span><br><span class="line"><span class="number">0.675</span> responseHeadersEnd</span><br><span class="line"><span class="number">0.676</span> responseBodyStart</span><br><span class="line"><span class="number">0.679</span> responseBodyEnd</span><br><span class="line"><span class="number">0.679</span> connectionReleased</span><br><span class="line"><span class="number">0.680</span> callEnd</span><br><span class="line">REQUEST <span class="number">2</span> (pooled connection)</span><br><span class="line"><span class="number">0.000</span> callStart</span><br><span class="line"><span class="number">0.001</span> connectionAcquired</span><br><span class="line"><span class="number">0.001</span> requestHeadersStart</span><br><span class="line"><span class="number">0.001</span> requestHeadersEnd</span><br><span class="line"><span class="number">0.002</span> responseHeadersStart</span><br><span class="line"><span class="number">0.082</span> responseHeadersEnd</span><br><span class="line"><span class="number">0.082</span> responseBodyStart</span><br><span class="line"><span class="number">0.082</span> responseBodyEnd</span><br><span class="line"><span class="number">0.083</span> connectionReleased</span><br><span class="line"><span class="number">0.083</span> callEnd</span><br></pre></td></tr></table></figure></p>
+<p>注意第二次调用没有连接事件。它重用了第一个请求的连接，以显着提高性能。</p>
+<h4 id="EventListener-Factory"><a href="#EventListener-Factory" class="headerlink" title="EventListener.Factory"></a>EventListener.Factory</h4><p>在前面的例子中，我们使用了一个字段<code>callStartNanos</code>来跟踪每个事件的经过时间。这很方便，但是如果多个调用同时执行，它将不起作用。为了适应这个，使用一个<code>Factory</code>创建一个新的<code>EventListener</code>为每个<code>Call</code>。这允许每个监听者保持特定于呼叫的状态。</p>
+<p>此<a href="https://github.com/square/okhttp/blob/master/samples/guide/src/main/java/okhttp3/recipes/PrintEvents.java" target="_blank" rel="noopener">示例工厂</a>为每个呼叫创建一个唯一的ID，并使用该ID区分日志消息中的呼叫。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PrintingEventListener</span> <span class="keyword">extends</span> <span class="title">EventListener</span> </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Factory FACTORY = <span class="keyword">new</span> Factory() &#123;</span><br><span class="line">    <span class="keyword">final</span> AtomicLong nextCallId = <span class="keyword">new</span> AtomicLong(<span class="number">1L</span>);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> EventListener <span class="title">create</span><span class="params">(Call call)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">long</span> callId = nextCallId.getAndIncrement();</span><br><span class="line">      System.out.printf(<span class="string">"%04d %s%n"</span>, callId, call.request().url());</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> PrintingEventListener(callId, System.nanoTime());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">final</span> <span class="keyword">long</span> callId;</span><br><span class="line">  <span class="keyword">final</span> <span class="keyword">long</span> callStartNanos;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">PrintingEventListener</span><span class="params">(<span class="keyword">long</span> callId, <span class="keyword">long</span> callStartNanos)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.callId = callId;</span><br><span class="line">    <span class="keyword">this</span>.callStartNanos = callStartNanos;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">printEvent</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">long</span> elapsedNanos = System.nanoTime() - callStartNanos;</span><br><span class="line">    System.out.printf(<span class="string">"%04d %.3f %s%n"</span>, callId, elapsedNanos / <span class="number">1000000000</span>d, name);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">callStart</span><span class="params">(Call call)</span> </span>&#123;</span><br><span class="line">    printEvent(<span class="string">"callStart"</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">callEnd</span><span class="params">(Call call)</span> </span>&#123;</span><br><span class="line">    printEvent(<span class="string">"callEnd"</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们可以使用这个侦听器来竞争一对并发的HTTP请求：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Request washingtonPostRequest = <span class="keyword">new</span> Request.Builder()</span><br><span class="line">    .url(<span class="string">"https://www.washingtonpost.com/"</span>)</span><br><span class="line">    .build();</span><br><span class="line">client.newCall(washingtonPostRequest).enqueue(<span class="keyword">new</span> Callback() &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">Request newYorkTimesRequest = <span class="keyword">new</span> Request.Builder()</span><br><span class="line">    .url(<span class="string">"https://www.nytimes.com/"</span>)</span><br><span class="line">    .build();</span><br><span class="line">client.newCall(newYorkTimesRequest).enqueue(<span class="keyword">new</span> Callback() &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>运行这场比赛的家庭无线网络显示，Times（<code>0002</code>）比Post（<code>0001</code>）略快一点：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0001</span> https:<span class="comment">//www.washingtonpost.com/</span></span><br><span class="line"><span class="number">0001</span> <span class="number">0.000</span> callStart</span><br><span class="line"><span class="number">0002</span> https:<span class="comment">//www.nytimes.com/</span></span><br><span class="line"><span class="number">0002</span> <span class="number">0.000</span> callStart</span><br><span class="line"><span class="number">0002</span> <span class="number">0.010</span> dnsStart</span><br><span class="line"><span class="number">0001</span> <span class="number">0.013</span> dnsStart</span><br><span class="line"><span class="number">0001</span> <span class="number">0.022</span> dnsEnd</span><br><span class="line"><span class="number">0002</span> <span class="number">0.019</span> dnsEnd</span><br><span class="line"><span class="number">0001</span> <span class="number">0.028</span> connectStart</span><br><span class="line"><span class="number">0002</span> <span class="number">0.025</span> connectStart</span><br><span class="line"><span class="number">0002</span> <span class="number">0.072</span> secureConnectStart</span><br><span class="line"><span class="number">0001</span> <span class="number">0.075</span> secureConnectStart</span><br><span class="line"><span class="number">0001</span> <span class="number">0.386</span> secureConnectEnd</span><br><span class="line"><span class="number">0002</span> <span class="number">0.390</span> secureConnectEnd</span><br><span class="line"><span class="number">0002</span> <span class="number">0.400</span> connectEnd</span><br><span class="line"><span class="number">0001</span> <span class="number">0.403</span> connectEnd</span><br><span class="line"><span class="number">0002</span> <span class="number">0.401</span> connectionAcquired</span><br><span class="line"><span class="number">0001</span> <span class="number">0.404</span> connectionAcquired</span><br><span class="line"><span class="number">0001</span> <span class="number">0.406</span> requestHeadersStart</span><br><span class="line"><span class="number">0002</span> <span class="number">0.403</span> requestHeadersStart</span><br><span class="line"><span class="number">0001</span> <span class="number">0.414</span> requestHeadersEnd</span><br><span class="line"><span class="number">0002</span> <span class="number">0.411</span> requestHeadersEnd</span><br><span class="line"><span class="number">0002</span> <span class="number">0.412</span> responseHeadersStart</span><br><span class="line"><span class="number">0001</span> <span class="number">0.415</span> responseHeadersStart</span><br><span class="line"><span class="number">0002</span> <span class="number">0.474</span> responseHeadersEnd</span><br><span class="line"><span class="number">0002</span> <span class="number">0.475</span> responseBodyStart</span><br><span class="line"><span class="number">0001</span> <span class="number">0.554</span> responseHeadersEnd</span><br><span class="line"><span class="number">0001</span> <span class="number">0.555</span> responseBodyStart</span><br><span class="line"><span class="number">0002</span> <span class="number">0.554</span> responseBodyEnd</span><br><span class="line"><span class="number">0002</span> <span class="number">0.554</span> connectionReleased</span><br><span class="line"><span class="number">0002</span> <span class="number">0.554</span> callEnd</span><br><span class="line"><span class="number">0001</span> <span class="number">0.624</span> responseBodyEnd</span><br><span class="line"><span class="number">0001</span> <span class="number">0.624</span> connectionReleased</span><br><span class="line"><span class="number">0001</span> <span class="number">0.624</span> callEnd</span><br></pre></td></tr></table></figure></p>
+<p>该<code>EventListener.Factory</code>还能够指标限制呼叫的子集。这一个随机捕获指标为10％：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MetricsEventListener</span> <span class="keyword">extends</span> <span class="title">EventListener</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Factory FACTORY = <span class="keyword">new</span> Factory() &#123;</span><br><span class="line">    <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> EventListener <span class="title">create</span><span class="params">(Call call)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (Math.random() &lt; <span class="number">0.10</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> MetricsEventListener(call);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> EventListener.NONE;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="事件与失败"><a href="#事件与失败" class="headerlink" title="事件与失败"></a>事件与失败</h4><p>当操作失败时，调用失败方法。这是<code>connectFailed()</code>在建立到服务器的连接<code>callFailed()</code>时，以及HTTP调用永久失败时的失败。发生故障时，<code>start</code>事件可能没有相应的<code>end</code>事件。<br><img src="https://raw.githubusercontent.com/wiki/square/okhttp/events_with_failures@2x.png" alt=""></p>
+<h4 id="事件与重试和跟进"><a href="#事件与重试和跟进" class="headerlink" title="事件与重试和跟进"></a>事件与重试和跟进</h4><p>OkHttp具有弹性，可以自动从一些连接失败中恢复。在这种情况下，<code>connectFailed()</code>事件不是终端，也不是随之而来的<code>callFailed()</code>。当尝试重试时，事件监听器将收到多个相同类型的事件。</p>
+<p>单个HTTP调用可能需要后续请求来处理认证挑战，重定向和HTTP层超时。在这种情况下，可能会尝试多个连接，请求和响应。跟进是单个电话可能触发多个相同类型事件的另一个原因。<br><img src="https://raw.githubusercontent.com/wiki/square/okhttp/events_with_failures_and_retries@2x.png" alt=""></p>
+<h4 id="可用性-1"><a href="#可用性-1" class="headerlink" title="可用性"></a>可用性</h4><p>OkHttp 3.9中的预览版本提供了事件。我们预计OkHttp 3.10或3.11将完成这个API。未来版本可能会引入新的事件类型; 您将需要覆盖相应的方法来处理它们。</p>
+<h3 id="FAQs-常见问题解答"><a href="#FAQs-常见问题解答" class="headerlink" title="FAQs(常见问题解答))"></a>FAQs(常见问题解答))</h3><h4 id="如何修复dalvikvm中的验证警告？"><a href="#如何修复dalvikvm中的验证警告？" class="headerlink" title="如何修复dalvikvm中的验证警告？"></a>如何修复dalvikvm中的验证警告？</h4><p>OkHttp支持一些需要Java 7+或Android API 20+的API。如果你在早期的Android版本上运行OkHttp，dalvikvm的验证器会警告你缺少的方法。这不是一个问题，你可以忽略警告。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">I/dalvikvm﹕ Could not find method okhttp3.internal.huc.HttpURLConnectionImpl.getContentLengthLong, referenced from method okhttp3.internal.huc.HttpsURLConnectionImpl.getContentLengthLong</span><br><span class="line">W/dalvikvm﹕ VFY: unable to resolve virtual method <span class="number">21498</span>: Lokhttp3/internal/huc/HttpURLConnectionImpl;.getContentLengthLong ()J</span><br><span class="line">D/dalvikvm﹕ VFY: replacing opcode <span class="number">0x6e</span> at <span class="number">0x0002</span></span><br><span class="line">I/dalvikvm﹕ Could not find method okhttp3.internal.huc.HttpURLConnectionImpl.getHeaderFieldLong, referenced from method okhttp3.internal.huc.HttpsURLConnectionImpl.getHeaderFieldLong</span><br><span class="line">W/dalvikvm﹕ VFY: unable to resolve virtual method <span class="number">21503</span>: Lokhttp3/internal/huc/HttpURLConnectionImpl;.getHeaderFieldLong (Ljava/lang/String;J)J</span><br><span class="line">D/dalvikvm﹕ VFY: replacing opcode <span class="number">0x6e</span> at <span class="number">0x0002</span></span><br><span class="line">W/dalvikvm﹕ VFY: <span class="function">unable to find class referenced in <span class="title">signature</span> <span class="params">(Ljava/nio/file/Path;)</span></span></span><br><span class="line"><span class="function">W/dalvikvm﹕ VFY: unable to find class referenced in <span class="title">signature</span> <span class="params">([Ljava/nio/file/OpenOption;)</span></span></span><br><span class="line"><span class="function">I/dalvikvm﹕ Could not find method java.nio.file.Files.newOutputStream, referenced from method okio.Okio.sink</span></span><br><span class="line"><span class="function">W/dalvikvm﹕ VFY: unable to resolve <span class="keyword">static</span> method 24080: Ljava/nio/file/Files</span>;.newOutputStream (Ljava/nio/file/Path;[Ljava/nio/file/OpenOption;)Ljava/io/OutputStream;</span><br><span class="line">D/dalvikvm﹕ VFY: replacing opcode <span class="number">0x71</span> at <span class="number">0x000a</span></span><br><span class="line">W/dalvikvm﹕ VFY: <span class="function">unable to find class referenced in <span class="title">signature</span> <span class="params">(Ljava/nio/file/Path;)</span></span></span><br><span class="line"><span class="function">W/dalvikvm﹕ VFY: unable to find class referenced in <span class="title">signature</span> <span class="params">([Ljava/nio/file/OpenOption;)</span></span></span><br><span class="line"><span class="function">I/dalvikvm﹕ Could not find method java.nio.file.Files.newInputStream, referenced from method okio.Okio.source</span></span><br><span class="line"><span class="function">W/dalvikvm﹕ VFY: unable to resolve <span class="keyword">static</span> method 24079: Ljava/nio/file/Files</span>;.newInputStream (Ljava/nio/file/Path;[Ljava/nio/file/OpenOption;)Ljava/io/InputStream;</span><br><span class="line">D/dalvikvm﹕ VFY: replacing opcode <span class="number">0x71</span> at <span class="number">0x000a</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>如果该文章帮助到了您,不如请我喝杯咖啡~</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/image/wechat.png" alt="黄杰 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/image/aipay.jpg" alt="黄杰 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/okhttp3/" rel="tag"># okhttp3</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/AndroidStudio_uses_skills_and_resources.html" rel="next" title="Android Studio使用技巧和资源">
+                <i class="fa fa-chevron-left"></i> Android Studio使用技巧和资源
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!--MOB SHARE BEGIN-->
+<div class="-mob-share-ui-button -mob-share-open">分享</div>
+<div class="-mob-share-ui" style="display: none">
+    <ul class="-mob-share-list">
+        <li class="-mob-share-weibo"><p>新浪微博</p></li>
+        <li class="-mob-share-weixin"><p>微信</p></li>
+        <li class="-mob-share-qzone"><p>QQ空间</p></li>
+        <li class="-mob-share-qq"><p>QQ好友</p></li>
+        <li class="-mob-share-tencentweibo"><p>腾讯微博</p></li>
+        <li class="-mob-share-youdao"><p>有道云笔记</p></li>
+        <li class="-mob-share-mingdao"><p>明道</p></li>
+        <li class="-mob-share-facebook"><p>Facebook</p></li>
+        <li class="-mob-share-twitter"><p>Twitter</p></li>
+        <li class="-mob-share-pocket"><p>Pocket</p></li>
+        <li class="-mob-share-google"><p>Google+</p></li>
+        <li class="-mob-share-tumblr"><p>Tumblr</p></li>
+        <li class="-mob-share-instapaper"><p>Instapaper</p></li>
+        <li class="-mob-share-linkedin"><p>Linkedin</p></li>
+    </ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<div class="-mob-share-ui-bg"></div>
+<script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=22c54eccf6196"></script>
+<!--MOB SHARE END-->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://p07lh1fh6.bkt.clouddn.com/head.jpg"
+                alt="黄杰" />
+            
+              <p class="site-author-name" itemprop="name">黄杰</p>
+              <p class="site-description motion-element" itemprop="description">个人技术博客,安卓的完整知识树记录,属于Android进阶类博客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+　 <!--<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="//music.163.com/outchain/player?type=0&id=1996249397&auto=0&height=430"></iframe>-->
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Calls-调用"><span class="nav-number">1.</span> <span class="nav-text">Calls(调用)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Requests"><span class="nav-number">1.1.</span> <span class="nav-text">Requests</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Responses"><span class="nav-number">1.2.</span> <span class="nav-text">Responses</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重写请求"><span class="nav-number">1.3.</span> <span class="nav-text">重写请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重写响应"><span class="nav-number">1.4.</span> <span class="nav-text">重写响应</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后续请求"><span class="nav-number">1.5.</span> <span class="nav-text">后续请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重试请求"><span class="nav-number">1.6.</span> <span class="nav-text">重试请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#呼叫"><span class="nav-number">1.7.</span> <span class="nav-text">呼叫</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调度"><span class="nav-number">1.8.</span> <span class="nav-text">调度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Connections-连接"><span class="nav-number">2.</span> <span class="nav-text">Connections(连接)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#URL"><span class="nav-number">2.1.</span> <span class="nav-text">URL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Addresses"><span class="nav-number">2.2.</span> <span class="nav-text">Addresses</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Routes"><span class="nav-number">2.3.</span> <span class="nav-text">Routes</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Connections"><span class="nav-number">2.4.</span> <span class="nav-text">Connections</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Recipes-方法"><span class="nav-number">3.</span> <span class="nav-text">Recipes(方法)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#同步获取-Synchronous-Get"><span class="nav-number">3.1.</span> <span class="nav-text">同步获取(Synchronous Get)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异步获取-Asynchronous-Get"><span class="nav-number">3.2.</span> <span class="nav-text">异步获取(Asynchronous Get)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#访问头"><span class="nav-number">3.3.</span> <span class="nav-text">访问头</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#提交一个文本-Posting-a-String"><span class="nav-number">3.4.</span> <span class="nav-text">提交一个文本(Posting a String)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#发布一个流-Post-Streaming"><span class="nav-number">3.5.</span> <span class="nav-text">发布一个流(Post Streaming)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#发布文件-Posting-a-File"><span class="nav-number">3.6.</span> <span class="nav-text">发布文件(Posting a File)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#发布表单-Posting-form-parameters"><span class="nav-number">3.7.</span> <span class="nav-text">发布表单(Posting form parameters)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#发布multipart请求-Posting-a-multipart-request"><span class="nav-number">3.8.</span> <span class="nav-text">发布multipart请求(Posting a multipart request)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用Moshi解析JSON响应"><span class="nav-number">3.9.</span> <span class="nav-text">用Moshi解析JSON响应</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#响应缓存"><span class="nav-number">3.10.</span> <span class="nav-text">响应缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#取消Call"><span class="nav-number">3.11.</span> <span class="nav-text">取消Call</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#超时"><span class="nav-number">3.12.</span> <span class="nav-text">超时</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#每个呼叫配置"><span class="nav-number">3.13.</span> <span class="nav-text">每个呼叫配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#认证处理"><span class="nav-number">3.14.</span> <span class="nav-text">认证处理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Interceptors-拦截器"><span class="nav-number">4.</span> <span class="nav-text">Interceptors(拦截器)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#应用程序拦截器"><span class="nav-number">4.1.</span> <span class="nav-text">应用程序拦截器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网络拦截器"><span class="nav-number">4.2.</span> <span class="nav-text">网络拦截器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用程序和网络拦截之间进行选择"><span class="nav-number">4.3.</span> <span class="nav-text">应用程序和网络拦截之间进行选择</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#应用拦截器"><span class="nav-number">4.3.1.</span> <span class="nav-text">应用拦截器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#网络拦截器-1"><span class="nav-number">4.3.2.</span> <span class="nav-text">网络拦截器</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重写请求-1"><span class="nav-number">4.4.</span> <span class="nav-text">重写请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重写响应-1"><span class="nav-number">4.5.</span> <span class="nav-text">重写响应</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可用性"><span class="nav-number">4.6.</span> <span class="nav-text">可用性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTPS"><span class="nav-number">5.</span> <span class="nav-text">HTTPS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#证书锁定"><span class="nav-number">5.1.</span> <span class="nav-text">证书锁定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义可信证书"><span class="nav-number">5.2.</span> <span class="nav-text">自定义可信证书</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Events-事件监听"><span class="nav-number">6.</span> <span class="nav-text">Events(事件监听)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#事件监听"><span class="nav-number">6.1.</span> <span class="nav-text">事件监听</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#EventListener-Factory"><span class="nav-number">6.2.</span> <span class="nav-text">EventListener.Factory</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事件与失败"><span class="nav-number">6.3.</span> <span class="nav-text">事件与失败</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事件与重试和跟进"><span class="nav-number">6.4.</span> <span class="nav-text">事件与重试和跟进</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可用性-1"><span class="nav-number">6.5.</span> <span class="nav-text">可用性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FAQs-常见问题解答"><span class="nav-number">7.</span> <span class="nav-text">FAQs(常见问题解答))</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#如何修复dalvikvm中的验证警告？"><span class="nav-number">7.1.</span> <span class="nav-text">如何修复dalvikvm中的验证警告？</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">黄杰</span>
+
+  
+</div>
+
+
+  <span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
