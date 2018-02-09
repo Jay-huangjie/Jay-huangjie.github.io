@@ -1,3 +1,4 @@
+http://www.huangjie.name/refactoring-project-learned.html
 http://www.huangjie.name/okhttp3-wiki-chinese.html
 http://www.huangjie.name/AndroidStudio_uses_skills_and_resources.html
 http://www.huangjie.name/Android5-0-control-study-AppBarLayout-Toolbar-CoordinateLayout-cardView.html

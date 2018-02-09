@@ -79,16 +79,20 @@
 
 
 
-<meta name="description" content="个人技术博客,安卓的完整知识树记录,属于Android进阶类博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jay的记事本">
-<meta property="og:url" content="http://www.huangjie.name/tags/tools/index.html">
+<meta name="description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   这次花时间重构了下一年前的自定义键盘项目,收获了许多，忍不住想写出来分享一下,项目地址EasyKeyBoardView,该库旨在帮助开发者更快的实现自定义键盘，无需关注键盘自身的实现逻辑，详细用法见README">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记一次重构项目心得">
+<meta property="og:url" content="http://www.huangjie.name/refactoring-project-learned.html">
 <meta property="og:site_name" content="Jay的记事本">
-<meta property="og:description" content="个人技术博客,安卓的完整知识树记录,属于Android进阶类博客">
+<meta property="og:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   这次花时间重构了下一年前的自定义键盘项目,收获了许多，忍不住想写出来分享一下,项目地址EasyKeyBoardView,该库旨在帮助开发者更快的实现自定义键盘，无需关注键盘自身的实现逻辑，详细用法见README.md">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p2p0lrpx1.bkt.clouddn.com/release.png-gif">
+<meta property="og:image" content="http://p2p0lrpx1.bkt.clouddn.com/jitpack1.png-gif">
+<meta property="og:updated_time" content="2018-02-09T08:24:02.245Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jay的记事本">
-<meta name="twitter:description" content="个人技术博客,安卓的完整知识树记录,属于Android进阶类博客">
+<meta name="twitter:title" content="记一次重构项目心得">
+<meta name="twitter:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   这次花时间重构了下一年前的自定义键盘项目,收获了许多，忍不住想写出来分享一下,项目地址EasyKeyBoardView,该库旨在帮助开发者更快的实现自定义键盘，无需关注键盘自身的实现逻辑，详细用法见README.md">
+<meta name="twitter:image" content="http://p2p0lrpx1.bkt.clouddn.com/release.png-gif">
 
 
 
@@ -118,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://www.huangjie.name/tags/tools/"/>
+  <link rel="canonical" href="http://www.huangjie.name/refactoring-project-learned.html"/>
 
 
 
 
 
-  <title>标签: tools | Jay的记事本</title>
+  <title>记一次重构项目心得 | Jay的记事本</title>
   
 
 
@@ -153,7 +157,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -291,54 +295,260 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>tools<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.huangjie.name/refactoring-project-learned.html">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄杰">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://p07lh1fh6.bkt.clouddn.com/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay的记事本">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/Efficientresourcessearchtogethernoguaranteeofregret.html" itemprop="url">
-              
-                <span itemprop="name">高效资源搜罗合集，不看保证后悔(持续更新)</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">记一次重构项目心得</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-22T20:40:26+08:00"
-              content="2017-12-22" >
-          12-22
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-09T15:42:47+08:00">
+                2018-02-09
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/安卓杂记/" itemprop="url" rel="index">
+                    <span itemprop="name">安卓杂记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  726 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.</strong></p>
+<hr>
+<blockquote>
+<p>这次花时间重构了下一年前的自定义键盘项目,收获了许多，忍不住想写出来分享一下,项目地址<a href="https://github.com/Jay-huangjie/EasyKeyBoardView" target="_blank" rel="noopener">EasyKeyBoardView</a>,该库旨在帮助开发者更快的实现自定义键盘，无需关注键盘自身的实现逻辑，详细用法见<a href="https://github.com/Jay-huangjie/EasyKeyBoardView/blob/master/README.md" target="_blank" rel="noopener">README.md</a></p>
+</blockquote>
+<a id="more"></a>
+<h3 id="如何重构项目"><a href="#如何重构项目" class="headerlink" title="如何重构项目"></a>如何重构项目</h3><p>对于一个开源项目来说，首先要弄清楚它的意义在哪里，它的目的在哪里，俗话说，程序员都是懒惰的，为了偷懒，程序员创造了越来越方便的工具来帮自己偷懒，这就是一种进步。</p>
+<p>基于此，我分析了下自定义键盘的使用场景，发现键盘的使用逻辑是差不多的，无非是UI及一些功能点上的不同，但终究是一个键盘，输入功能是刚需，所以简化输入功能就是这个库的意义所在了。</p>
+<p>而这次我发现，一款优质的开源项目必须要有高度的扩展性，应此将功能模块化是我此次学习到的重要技能，每一个类都有着它自己的功能，然后再将这些类组装起来就变成了一台灵活运作的机器。<br>而其中那些点可对外修改，那些不能，这都需要自己判断的。</p>
+<h3 id="学习到的技能"><a href="#学习到的技能" class="headerlink" title="学习到的技能"></a>学习到的技能</h3><p>更快的配置：上传项目到<code>JitPack</code><br>相比于<code>jcenter</code>,我发现<code>JitPack</code>可谓是神器，1分钟就可实现代码上传，强烈推荐，使用方法如下：<br>首先进入它的github地址:<a href="https://github.com/jitpack/jitpack.io" target="_blank" rel="noopener">jitpack.io</a>,找到它的最新版插件版本，在要上传的项目的root build.gradle中添加插件，大概长这样：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">       classpath <span class="string">'com.android.tools.build:gradle:3.0.0'</span></span><br><span class="line">       classpath <span class="string">'com.github.dcendents:android-maven-gradle-plugin:2.0'</span> <span class="comment">// 这是截至目前最新版的插件</span></span><br><span class="line">       <span class="comment">// <span class="doctag">NOTE:</span> Do not place your application dependencies here; they belong</span></span><br><span class="line">       <span class="comment">// in the individual module build.gradle files</span></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后在你要上传的library包中的build.gradle文件中添加：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apply plugin: <span class="string">'com.github.dcendents.android-maven'</span></span><br><span class="line">group=<span class="string">'com.github.Jay-huangjie'</span>  <span class="comment">//这里写你自己的github名字，别写我的啊</span></span><br></pre></td></tr></table></figure></p>
+<p>重新编译一下，然后将代码上传到github,上传成功后进入项目主页，点击releases创建一个版本，releases或tag都行，如图：<br><img src="http://p2p0lrpx1.bkt.clouddn.com/release.png-gif" alt=""></p>
+<p>创建好后进入jitPack官网：<a href="https://jitpack.io/" target="_blank" rel="noopener">https://jitpack.io/</a>;<br>在输入框中输入你的项目地址，例如我的项目地址就是<a href="https://github.com/Jay-huangjie/EasyKeyBoardView" target="_blank" rel="noopener">https://github.com/Jay-huangjie/EasyKeyBoardView</a>,得到如图所示的信息：<br><img src="http://p2p0lrpx1.bkt.clouddn.com/jitpack1.png-gif" alt=""><br>点击<code>Get it</code>按钮即可获取你的地址啦，并且，通过此地址下载的是你的library包而不是整个项目，所以你可以将库的demo也一起上传到github上，是不是非常的方便简单呢</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>如果该文章帮助到了您,不如请我喝杯咖啡~</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/image/wechat.png" alt="黄杰 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/image/aipay.jpg" alt="黄杰 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/okhttp3-wiki-chinese.html" rel="next" title="okhttp3Wiki文档译文">
+                <i class="fa fa-chevron-left"></i> okhttp3Wiki文档译文
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+        <!--MOB SHARE BEGIN-->
+<div class="-mob-share-ui-button -mob-share-open">分享</div>
+<div class="-mob-share-ui" style="display: none">
+    <ul class="-mob-share-list">
+        <li class="-mob-share-weibo"><p>新浪微博</p></li>
+        <li class="-mob-share-weixin"><p>微信</p></li>
+        <li class="-mob-share-qzone"><p>QQ空间</p></li>
+        <li class="-mob-share-qq"><p>QQ好友</p></li>
+        <li class="-mob-share-tencentweibo"><p>腾讯微博</p></li>
+        <li class="-mob-share-youdao"><p>有道云笔记</p></li>
+        <li class="-mob-share-mingdao"><p>明道</p></li>
+        <li class="-mob-share-facebook"><p>Facebook</p></li>
+        <li class="-mob-share-twitter"><p>Twitter</p></li>
+        <li class="-mob-share-pocket"><p>Pocket</p></li>
+        <li class="-mob-share-google"><p>Google+</p></li>
+        <li class="-mob-share-tumblr"><p>Tumblr</p></li>
+        <li class="-mob-share-instapaper"><p>Instapaper</p></li>
+        <li class="-mob-share-linkedin"><p>Linkedin</p></li>
+    </ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<div class="-mob-share-ui-bg"></div>
+<script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=22c54eccf6196"></script>
+<!--MOB SHARE END-->
+      
+    </div>
+  </div>
 
 
           </div>
@@ -346,6 +556,8 @@
 
 
           
+  
+
 
         </div>
         
@@ -366,8 +578,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -434,6 +655,22 @@
 　 <!--<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="//music.163.com/outchain/player?type=0&id=1996249397&auto=0&height=430"></iframe>-->
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何重构项目"><span class="nav-number">1.</span> <span class="nav-text">如何重构项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#学习到的技能"><span class="nav-number">2.</span> <span class="nav-text">学习到的技能</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -544,6 +781,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 

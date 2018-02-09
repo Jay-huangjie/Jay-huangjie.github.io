@@ -2,16 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://www.huangjie.name/okhttp3-wiki-chinese.html</loc>
+    <loc>http://www.huangjie.name/refactoring-project-learned.html</loc>
     
-    <lastmod>2018-01-22T12:06:20.220Z</lastmod>
+    <lastmod>2018-02-09T08:24:02.245Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.huangjie.name/Android%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB.html</loc>
+    
+    <lastmod>2018-02-05T03:06:42.286Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://www.huangjie.name/AndroidStudio_uses_skills_and_resources.html</loc>
     
-    <lastmod>2018-01-21T13:26:44.389Z</lastmod>
+    <lastmod>2018-01-22T12:15:10.778Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.huangjie.name/okhttp3-wiki-chinese.html</loc>
+    
+    <lastmod>2018-01-22T12:13:51.511Z</lastmod>
     
   </url>
   
@@ -40,13 +54,6 @@
     <loc>http://www.huangjie.name/objectBox%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B-objectbox-java.html</loc>
     
     <lastmod>2018-01-18T14:36:51.932Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.huangjie.name/Android%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB.html</loc>
-    
-    <lastmod>2018-01-14T06:23:42.729Z</lastmod>
     
   </url>
   
