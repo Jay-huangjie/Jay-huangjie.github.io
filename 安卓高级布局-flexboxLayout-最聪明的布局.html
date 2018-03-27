@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Android," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -79,18 +79,24 @@
 
 
 
-<meta name="description" content="此系列文章为进阶类文章,快餐类记录文,用于自己安卓知识点的复习  典型情况生命周期 onCreate() :Activity被创建">
-<meta name="keywords" content="Android">
+<meta name="description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   ps:最近由于连接外接硬盘的数据线落朋友家了，而我hexo文档都存在外接硬盘上了，导致许久都没写文章啦，还别说，手还有点痒，以后还是尽量保持每周一更">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Activity的生命周期和启动模式">
-<meta property="og:url" content="http://www.huangjie.name/Activity的生命周期和启动模式.html">
+<meta property="og:title" content="安卓高级布局-flexboxLayout：最聪明的布局">
+<meta property="og:url" content="http://www.huangjie.name/安卓高级布局-flexboxLayout-最聪明的布局.html">
 <meta property="og:site_name" content="Jay的记事本">
-<meta property="og:description" content="此系列文章为进阶类文章,快餐类记录文,用于自己安卓知识点的复习  典型情况生命周期 onCreate() :Activity被创建">
+<meta property="og:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   ps:最近由于连接外接硬盘的数据线落朋友家了，而我hexo文档都存在外接硬盘上了，导致许久都没写文章啦，还别说，手还有点痒，以后还是尽量保持每周一更">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-17T13:40:58.883Z">
+<meta property="og:image" content="http://p07lh1fh6.bkt.clouddn.com/flexboxlayout_noshuxin.png-suofang">
+<meta property="og:image" content="http://p07lh1fh6.bkt.clouddn.com/flexboxlayout_column_reverse.png-suofang">
+<meta property="og:image" content="http://p07lh1fh6.bkt.clouddn.com/flexboxlayout_warp.png-suofang">
+<meta property="og:image" content="http://p07lh1fh6.bkt.clouddn.com/flexboxlayout_space_around.png-suofang">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/3/21/f471cc42ef5f9fdd3222b45972694493">
+<meta property="og:image" content="http://p07lh1fh6.bkt.clouddn.com/flexboxlayout_presenter.png-suofang">
+<meta property="og:updated_time" content="2018-03-27T15:11:09.542Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Activity的生命周期和启动模式">
-<meta name="twitter:description" content="此系列文章为进阶类文章,快餐类记录文,用于自己安卓知识点的复习  典型情况生命周期 onCreate() :Activity被创建">
+<meta name="twitter:title" content="安卓高级布局-flexboxLayout：最聪明的布局">
+<meta name="twitter:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   ps:最近由于连接外接硬盘的数据线落朋友家了，而我hexo文档都存在外接硬盘上了，导致许久都没写文章啦，还别说，手还有点痒，以后还是尽量保持每周一更">
+<meta name="twitter:image" content="http://p07lh1fh6.bkt.clouddn.com/flexboxlayout_noshuxin.png-suofang">
 
 
 
@@ -120,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://www.huangjie.name/Activity的生命周期和启动模式.html"/>
+  <link rel="canonical" href="http://www.huangjie.name/安卓高级布局-flexboxLayout-最聪明的布局.html"/>
 
 
 
 
 
-  <title>Activity的生命周期和启动模式 | Jay的记事本</title>
+  <title>安卓高级布局-flexboxLayout：最聪明的布局 | Jay的记事本</title>
   
 
 
@@ -307,7 +313,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.huangjie.name/Activity的生命周期和启动模式.html">
+    <link itemprop="mainEntityOfPage" href="http://www.huangjie.name/安卓高级布局-flexboxLayout-最聪明的布局.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄杰">
@@ -324,7 +330,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Activity的生命周期和启动模式</h1>
+          <h1 class="post-title" itemprop="name headline">安卓高级布局-flexboxLayout：最聪明的布局</h1>
         
 
         <div class="post-meta">
@@ -336,8 +342,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-07T16:11:11+08:00">
-                2017-12-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-27T21:08:10+08:00">
+                2018-03-27
               </time>
             
 
@@ -370,8 +376,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android基础进阶/安卓Activity/" itemprop="url" rel="index">
-                    <span itemprop="name">安卓Activity</span>
+                  <a href="/categories/Android基础进阶/安卓控件/" itemprop="url" rel="index">
+                    <span itemprop="name">安卓控件</span>
                   </a>
                 </span>
 
@@ -401,7 +407,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,001 字
+                  1,491 字
                 </span>
               
 
@@ -417,7 +423,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4 分钟
+                  6 分钟
                 </span>
               
             </div>
@@ -438,25 +444,71 @@
       
 
       
-        <blockquote>
-<p>此系列文章为进阶类文章,快餐类记录文,用于自己安卓知识点的复习</p>
+        <p><strong>版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.</strong></p>
+<hr>
+<blockquote>
+<p>ps:最近由于连接外接硬盘的数据线落朋友家了，而我hexo文档都存在外接硬盘上了，导致许久都没写文章啦，还别说，手还有点痒，以后还是尽量保持每周一更</p>
 </blockquote>
-<h4 id="典型情况生命周期"><a href="#典型情况生命周期" class="headerlink" title="典型情况生命周期"></a>典型情况生命周期</h4><ul>
-<li>onCreate() :Activity被创建<a id="more"></a></li>
-<li>onRestart() : 正在重新启动。调用场景：当前Activity从不可见到变为可见状态</li>
-<li>onStart():  Activity正在启动,此时Activity已经可见，但还不能和用户交互</li>
-<li>onResume() :此时Activity已经可见并开始活动</li>
-<li>onPause() :Activity正在停止，如果是从此Activity退到上一个Activity,那么会先执行此Activity的onPause,再执行上一个Activity的onResume,所以此方法不能执行耗时的操作，不然会影响新Activity的显示</li>
-<li>onStop() : Activity即将停止,紧接着onPause后面执行</li>
-<li>onDestroy() : Activity即将销毁,在这里主要做一些资源的释放<br>完整的启动流程是从上到下,有几个具体情况说明:<br>1)第一次启动一个新的Activity: onCreate-&gt;onStart-&gt;onResume<br>2)再次打开一个Activity或者切换到桌面：onPause -&gt;onStop (注：如果新的Activity是用的透明主题,那么不会回调onStop)<br>3) 再次回到此Activity：onRestar -&gt;onStart -&gt;onResume<br>4)退出此Activity (finish掉)：onPause -&gt;onStop -&gt;onDestroty</li>
+<a id="more"></a>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>今天给大家介绍的是谷歌开源的新的一种布局，如果用css写过flexbox布局的朋友一定不会陌生,没错，<code>FlexboxLayou</code>t可以说是<code>Android</code>版的<code>flexbox</code>布局，它的作用是可以让子布局轻松填充父布局，并且可以对子布局进行排序，设置可以让子布局自动‘换行’,它还能够指定子布局的排列方向,相当于一个加强版的<code>LinearLayout</code>，怎么样，你是不是迫不及待想试试了？</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><code>FlexboxLayout</code>开源地址：<a href="https://github.com/google/flexbox-layout" target="_blank" rel="noopener">https://github.com/google/flexbox-layout</a></p>
+<p>在<code>build.gradle</code>中添加：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    implementation <span class="string">'com.google.android:flexbox:0.3.2'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在xml中使用：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&lt;com.google.android.flexbox.FlexboxLayout xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    android:layout_width=<span class="string">"match_parent"</span></span><br><span class="line">    android:layout_height=<span class="string">"match_parent"</span></span><br><span class="line">    &gt;</span><br><span class="line"></span><br><span class="line">    &lt;TextView</span><br><span class="line">        android:layout_width=<span class="string">"100dp"</span></span><br><span class="line">        android:layout_height=<span class="string">"20dp"</span></span><br><span class="line">        android:background=<span class="string">"#43eeff"</span></span><br><span class="line">        android:gravity=<span class="string">"center"</span></span><br><span class="line">        android:text=<span class="string">"1"</span> /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;TextView</span><br><span class="line">        android:layout_width=<span class="string">"100dp"</span></span><br><span class="line">        android:layout_height=<span class="string">"20dp"</span></span><br><span class="line">        android:background=<span class="string">"#ef3344"</span></span><br><span class="line">        android:gravity=<span class="string">"center"</span></span><br><span class="line">        android:text=<span class="string">"2"</span> /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;TextView</span><br><span class="line">        android:layout_width=<span class="string">"100dp"</span></span><br><span class="line">        android:layout_height=<span class="string">"20dp"</span></span><br><span class="line">        android:background=<span class="string">"#ee998f"</span></span><br><span class="line">        android:gravity=<span class="string">"center"</span></span><br><span class="line">        android:text=<span class="string">"3"</span> /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;TextView</span><br><span class="line">        android:layout_width=<span class="string">"100dp"</span></span><br><span class="line">        android:layout_height=<span class="string">"50dp"</span></span><br><span class="line">        android:background=<span class="string">"#eeff22"</span></span><br><span class="line">        android:gravity=<span class="string">"center"</span></span><br><span class="line">        android:text=<span class="string">"4"</span> /&gt;</span><br><span class="line"></span><br><span class="line">&lt;/com.google.android.flexbox.FlexboxLayout&gt;</span><br></pre></td></tr></table></figure></p>
+<p>我们什么属性都不加,可以看到效果是这样的：<br><img src="http://p07lh1fh6.bkt.clouddn.com/flexboxlayout_noshuxin.png-suofang" alt=""></p>
+<p>咦，好像并没有换行，别急，这其实是<code>flexboxLayout</code>默认属性的一个效果，下面我们就来学习它的一些常用属性吧：</p>
+<h4 id="flexDirection"><a href="#flexDirection" class="headerlink" title="flexDirection"></a>flexDirection</h4><p><code>flexDirection</code>属性决定子布局的排列方向。类似LinearLayout 的 <code>orientation</code>属性，不过,flexboxLayout的属性更加强大,它除了决定子布局的排列方向,还可以决定子布局的起点位置：</p>
+<ul>
+<li>row（默认值）：子布局为水平方向，起点在左端</li>
+<li>row_reverse：子布局为水平方向，起点在右端。</li>
+<li>column：子布局为垂直方向，起点在上沿</li>
+<li>column_reverse：子布局为垂直方向，起点在下沿</li>
 </ul>
-<h4 id="异常情况生命周期"><a href="#异常情况生命周期" class="headerlink" title="异常情况生命周期"></a>异常情况生命周期</h4><h5 id="资源相关的系统配置发生了改变导致Activity被杀死并重新创建"><a href="#资源相关的系统配置发生了改变导致Activity被杀死并重新创建" class="headerlink" title="资源相关的系统配置发生了改变导致Activity被杀死并重新创建"></a>资源相关的系统配置发生了改变导致Activity被杀死并重新创建</h5><p>发生此种情况最典型的就是横竖屏的切换,因为系统会去拿两张不同的图片，这时，Activity就会重新创建,它的onPause,onStop,onDestroy都会被调用,同时因为Activity是在异常情况下终止的,所以系统会调用onSaveInstanceState来保存当前Activity的状态，这个方法会在onStop方法之前调用。当Activity创建完成,系统会调用onRestoreInstanceState，可以从这个方法里拿到bundle对象并恢复Activity的状态</p>
-<h5 id="资源不足导致Activity被杀死"><a href="#资源不足导致Activity被杀死" class="headerlink" title="资源不足导致Activity被杀死"></a>资源不足导致Activity被杀死</h5><p>此种情况和第一类差不多，都可以通过以上两种方法来恢复数据</p>
-<p>此外，我们还可以不让Activity重新创建,通过在清单文件中指定Activity的configChanges属性,通过这些属性,可以让我们在特定场景下Activity不会被重新创建,此时，如果我们进行了特殊的操作,Activity会调用onConfigurationChanged方法</p>
-<h4 id="Activity的启动模式"><a href="#Activity的启动模式" class="headerlink" title="Activity的启动模式"></a>Activity的启动模式</h4><p>1)standard： 默认模式，每次都打开一个新的Activity,例如ABCD四个Activity,A是最底的Activity,D是当前的栈顶Activity,通过D启动D，此时栈中的Activity就会变成ABCDD<br>2）singleTop： 栈顶复用模式，例如ABCD四个Activity,用D启动D,栈中的Activity还是ABCD，D被复用了,并且D不会再次调用onCreate，而是会调用onNewIntent<br>3)singleTask:  栈内复用模式,例如ABCD,通过D启动B，栈中的Activity为：ACDB,B不会被重新创建,并且B会放入到栈顶,如果是通过D启动E，那个栈中Activcity为ABCDE,因为E在栈中没有，系统会创建一个新的实例。复用的Activity依旧会调用onNewInternt<br>4) 单实例模式，可以理解为加强版的singTask.此种模式不但拥有singTask的全部特性，而且是单独的位于一个任务栈中，例如A是此种模式，那个系统会创建一个新的任务栈，那么由于栈的复用特性，后续的请求都不会重新创建新的Activity，除非被系统销毁了</p>
-<h4 id="启动模式的设置"><a href="#启动模式的设置" class="headerlink" title="启动模式的设置"></a>启动模式的设置</h4><p>1）通过清单文件的launchMode属性设置<br>2）通过Intent设置标志位来指定<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = new Intent();</span><br><span class="line">intent.setClass(A.this,B.class);</span><br><span class="line">intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure></p>
-<p>两者的区别:第二种的优先级会高于第一种，第一种无法设置FLAG_ACTIVITY_CLEAR_TOP标识,第二种无法为Activity指定singleInstance模式。</p>
-<h4 id="Activity的Flags"><a href="#Activity的Flags" class="headerlink" title="Activity的Flags"></a>Activity的Flags</h4><p><strong>FLAG_ACTIVITY_NEW_TASK</strong><br>singleTask模式<br><strong>FLAG_ACTIVITY_SINGLE_TOP</strong><br>singleTop模式<br><strong>FLAG_ACTIVITY_CLEAR_TOP</strong><br>设置了此模式，如果是singleTask模式启动,那么就会调用onNewIntent，如果是standard模式启动,那么位于此Activity栈上的所有Activity都要出栈<br><strong>FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS</strong><br>具有这个标记的Activity不会出现在列表中,等同于xml中的excludeFromRecents=true;</p>
+<p>使用<code>column_reverse</code>效果如下所示：</p>
+<p><img src="http://p07lh1fh6.bkt.clouddn.com/flexboxlayout_column_reverse.png-suofang" alt=""></p>
+<h4 id="flexWrap"><a href="#flexWrap" class="headerlink" title="flexWrap"></a>flexWrap</h4><p><code>flexWrap</code>是一个非常有用的属性，它可以让控件自动换行,</p>
+<ul>
+<li>nowrap （默认）：不换行</li>
+<li>wrap：按正方向换行</li>
+<li>wrap_reverse：按反方向换行</li>
+</ul>
+<p>使用<code>wrap</code>属性效果如下所示：</p>
+<p><img src="http://p07lh1fh6.bkt.clouddn.com/flexboxlayout_warp.png-suofang" alt=""></p>
+<h4 id="justifyContent"><a href="#justifyContent" class="headerlink" title="justifyContent"></a>justifyContent</h4><p><code>justifyContent</code>定义了子控件的对齐方式，把它看成<code>gravity</code>属性，子控件为一个整体就好理解了，属性如下：</p>
+<ul>
+<li>flex_start(默认):左对齐</li>
+<li>flex_end：右对齐</li>
+<li>center：居中</li>
+<li>space_between：两端对齐，每个子控件之间的距离相等</li>
+<li>space_around：每个子控件的两侧相等,项目之间的间隔比项目与边框的间隔大一倍。</li>
+</ul>
+<p>如下是设置了<code>space_around</code>的效果：</p>
+<p><img src="http://p07lh1fh6.bkt.clouddn.com/flexboxlayout_space_around.png-suofang" alt=""></p>
+<h4 id="alignItems"><a href="#alignItems" class="headerlink" title="alignItems"></a>alignItems</h4><p><code>alignltems</code>用于设置子布局的对齐方式,属性如下：</p>
+<ul>
+<li>flex-start：顶端对齐。：第一行内容的的基线对齐。</li>
+<li>flex_end：底部对齐。</li>
+<li>stretch （默认）：如果item没有设置高度，则充满容器高度。</li>
+<li>center：居中对齐</li>
+<li>baseline：第一行内容的基线对齐。</li>
+</ul>
+<p>这也是为什么我们一开始什么也不设置子布局会填充父布局的原因。这里还说下baseline属性，用过TextView一定对基线不会陌生,如果子控件有文字，基线对齐可以保证文字对齐而不必理会包裹它的控件是怎样的。<br>观看下图可以有助于理解：<br><img src="https://user-gold-cdn.xitu.io/2017/3/21/f471cc42ef5f9fdd3222b45972694493" alt=""></p>
+<h4 id="alignContent"><a href="#alignContent" class="headerlink" title="alignContent"></a>alignContent</h4><p><code>alignContent</code>可以控制多行的对齐方式，如果子布局只有一行则不起作用，属性如下：</p>
+<ul>
+<li>stretch （默认值）：充满交叉轴的高度（测试发现，需要alignItems 的值也为stretch 才有效）。</li>
+<li>flex_start：与交叉轴的起点对齐。</li>
+<li>flex_end：与交叉轴的终点对齐。</li>
+<li>center：与交叉轴的中点对齐。</li>
+<li>space_between：与交叉轴两端对齐，轴线之间的间隔平均分布。</li>
+<li>space_around：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。</li>
+</ul>
+<h3 id="子布局属性"><a href="#子布局属性" class="headerlink" title="子布局属性"></a>子布局属性</h3><p>子布局也有非常给力的属性,父与子布局的结合使得排版非常灵活</p>
+<h4 id="layout-flexBasisPercent"><a href="#layout-flexBasisPercent" class="headerlink" title="layout_flexBasisPercent"></a>layout_flexBasisPercent</h4><p><code>ayout_flexBasisPercent</code>的值为一个百分比，表示设置子元素的长度为它父容器长度的百分比,默认值是auto,即元素本来的大小。<br>如图，我设置每个子布局的宽度一样，第一个子布局我设置50%的百分比，效果如图：</p>
+<p><img src="http://p07lh1fh6.bkt.clouddn.com/flexboxlayout_presenter.png-suofang" alt=""></p>
+<h4 id="layout-order"><a href="#layout-order" class="headerlink" title="layout_order"></a>layout_order</h4><p><code>layout_order</code>属性用于给子布局排序，默认是按照从上到下依次排列的，如果加入该值，值越小位置就会越靠前</p>
+<h4 id="layout-flexGrow"><a href="#layout-flexGrow" class="headerlink" title="layout_flexGrow"></a>layout_flexGrow</h4><p><code>layout_flexGrow</code>用于定义子布局的放大比例，其实就是<code>LinearLayout</code>的<code>weight</code>属性，相信这个不用过多介绍吧</p>
+<h4 id="layout-flexShrink"><a href="#layout-flexShrink" class="headerlink" title="layout_flexShrink"></a>layout_flexShrink</h4><p><code>layout_flexShrink</code>定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。如果所有项目的 layout_flexShrink 属性都为1，当空间不足时，都将等比例缩小。如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小。负值对该属性无效。</p>
+<h4 id="layout-alignSelf"><a href="#layout-alignSelf" class="headerlink" title="layout_alignSelf"></a>layout_alignSelf</h4><p><code>layout_alignSelf</code>属性允许单个子元素有与其他子元素不一样的对齐方式，可覆盖 alignItems 属性。默认值为auto，表示继承父元素的alignItems 属性，如果没有父元素，则等同于stretch。属性作用同<code>alignItems</code>一样。</p>
+<p>flexboxLayout大部分常用的属性就介绍到这里，此布局可以轻松完成类似添加tag便签的布局样式，也可以把它当成百分比布局来用，甚至可以与RecyclerView搭配完成图片流效果，因此熟练掌握这个布局还是有必要的，跟着文章的讲解多敲敲代码，相信你很快就会上手的。</p>
 
       
     </div>
@@ -501,12 +553,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Android/" rel="tag"># Android</a>
-          
-        </div>
-      
 
       
       
@@ -516,8 +562,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/有哪些送给年轻人的建议或道理？.html" rel="next" title="有哪些送给年轻人的建议或道理？">
-                <i class="fa fa-chevron-left"></i> 有哪些送给年轻人的建议或道理？
+              <a href="/refactoring-project-learned.html" rel="next" title="记一次重构项目心得">
+                <i class="fa fa-chevron-left"></i> 记一次重构项目心得
               </a>
             
           </div>
@@ -525,10 +571,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/安卓IPC机制-多进程.html" rel="prev" title="安卓IPC机制:多进程">
-                安卓IPC机制:多进程 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -690,7 +732,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#典型情况生命周期"><span class="nav-number">1.</span> <span class="nav-text">典型情况生命周期</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异常情况生命周期"><span class="nav-number">2.</span> <span class="nav-text">异常情况生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#资源相关的系统配置发生了改变导致Activity被杀死并重新创建"><span class="nav-number">2.1.</span> <span class="nav-text">资源相关的系统配置发生了改变导致Activity被杀死并重新创建</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#资源不足导致Activity被杀死"><span class="nav-number">2.2.</span> <span class="nav-text">资源不足导致Activity被杀死</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Activity的启动模式"><span class="nav-number">3.</span> <span class="nav-text">Activity的启动模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动模式的设置"><span class="nav-number">4.</span> <span class="nav-text">启动模式的设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Activity的Flags"><span class="nav-number">5.</span> <span class="nav-text">Activity的Flags</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">2.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#flexDirection"><span class="nav-number">2.0.1.</span> <span class="nav-text">flexDirection</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#flexWrap"><span class="nav-number">2.0.2.</span> <span class="nav-text">flexWrap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#justifyContent"><span class="nav-number">2.0.3.</span> <span class="nav-text">justifyContent</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#alignItems"><span class="nav-number">2.0.4.</span> <span class="nav-text">alignItems</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#alignContent"><span class="nav-number">2.0.5.</span> <span class="nav-text">alignContent</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#子布局属性"><span class="nav-number">2.1.</span> <span class="nav-text">子布局属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#layout-flexBasisPercent"><span class="nav-number">2.1.1.</span> <span class="nav-text">layout_flexBasisPercent</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#layout-order"><span class="nav-number">2.1.2.</span> <span class="nav-text">layout_order</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#layout-flexGrow"><span class="nav-number">2.1.3.</span> <span class="nav-text">layout_flexGrow</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#layout-flexShrink"><span class="nav-number">2.1.4.</span> <span class="nav-text">layout_flexShrink</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#layout-alignSelf"><span class="nav-number">2.1.5.</span> <span class="nav-text">layout_alignSelf</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
