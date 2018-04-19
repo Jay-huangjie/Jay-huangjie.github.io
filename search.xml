@@ -68,9 +68,9 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[Android开发常见问题汇总]]></title>
+    <title><![CDATA[Android开发常见问题与技巧汇总]]></title>
     <url>%2FAndroid%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB.html</url>
-    <content type="text"><![CDATA[版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起. 此为开发中遇到的一些常见问题的整理，方便下次遇到问题能快速找到解决方案 1 编译出现：1All com.android.support libraries must use the exact same version specification (mixing versions can lead to runtime crashes)...... 如果引用的第三方库的支持库版本低于（或者不一致）app build.gradle中的支持库版本，就会出现这种问题,修改第三方的依赖的话工作量太大,因此考虑所有模块强制使用相同的版本号的支持库，代码如下： 在app build.gradle中添加： 12345678910configurations.all &#123; resolutionStrategy.eachDependency &#123; DependencyResolveDetails details -&gt; def requested = details.requested if (requested.group == 'com.android.support') &#123; if (!requested.name.startsWith("multidex")) &#123; details.useVersion '26.1.0' &#125; &#125; &#125;&#125; 此代码声明了除multdex外全部使用26.1.0的版本库 2 SVG图片兼容问题(主要针对5.0以下机型)参考博客：Android Vector曲折的兼容之路 基本适配方法：在app build.gradle 的defaultConfig中添加defaultvectorDrawables.useSupportLibrary = true xml中使用：ImageView原本是使用src加载,改为app:srcCompat. java中使用：ImageView iv = (ImageView) findViewById(R.id.iv); iv.setImageResource(R.drawable.vector_image); 3.自定义View中在4.X版本上通过getContext()方法强转成Activity失效参考博客： 记一次View.getContext()遇到的大坑 原因：兼容v7包将Context包裹成了TintContextWrapper,所以强转成Activity会出错 解决方法：使用构造方法中的Context来强转。]]></content>
+    <content type="text"><![CDATA[版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起. 此为开发中遇到的一些常见问题的整理，方便下次遇到问题能快速找到解决方案，此外还收集了一些常见的开发技巧，持续更新中~~ 1 编译出现：1All com.android.support libraries must use the exact same version specification (mixing versions can lead to runtime crashes)...... 如果引用的第三方库的支持库版本低于（或者不一致）app build.gradle中的支持库版本，就会出现这种问题,修改第三方的依赖的话工作量太大,因此考虑所有模块强制使用相同的版本号的支持库，代码如下： 在app build.gradle中添加： 12345678910configurations.all &#123; resolutionStrategy.eachDependency &#123; DependencyResolveDetails details -&gt; def requested = details.requested if (requested.group == 'com.android.support') &#123; if (!requested.name.startsWith("multidex")) &#123; details.useVersion '26.1.0' &#125; &#125; &#125;&#125; 此代码声明了除multdex外全部使用26.1.0的版本库 2 SVG图片兼容问题(主要针对5.0以下机型)参考博客：Android Vector曲折的兼容之路 基本适配方法：在app build.gradle 的defaultConfig中添加defaultvectorDrawables.useSupportLibrary = true xml中使用：ImageView原本是使用src加载,改为app:srcCompat. java中使用：ImageView iv = (ImageView) findViewById(R.id.iv); iv.setImageResource(R.drawable.vector_image); 3.自定义View中在4.X版本上通过getContext()方法强转成Activity失效参考博客： 记一次View.getContext()遇到的大坑 原因：兼容v7包将Context包裹成了TintContextWrapper,所以强转成Activity会出错 解决方法：使用构造方法中的Context来强转。 4.引入的第三方库与自己的support包冲突解决方法：将冲突的库改成以下写法：123implementation ('此处是你引入的库')&#123; exclude group: 'com.android.support' //什么包冲突了这里就声明什么,注意名称要写对写全 &#125; 另外，在这里普及一下implementation的概念,现在升级了AS后引入三方库有多种方式，如implementation,compile,api ..其中，implementation主要是引用本模块的库，其他模块是调用不到该模块引用的库的,类似java中的private属性,而compile类似java中的public属性,只要模块之间相互依赖,引用的库都能相互调用,而api的作用与compile一样,使用这些不同的调用方式是为了加快编译速度，如果你的库不需要在其他模块之中使用,请使用implementation方式，这样当外部调用改变不会编译整个model而只会编译改变的那个model. 5.在java代码中获取xml中设置的behavior在开发项目的时候需要获取behavior的实例做一些事情，发现CoordinatorLayout没有提供获取behavior的方法，后来查看源码发现是使用CoordinatorLayout.LayoutParams来设置behavior的，所以behavior自然是从这里来获取,示例代码如下： 123//子类获取上级的CoordinatorLayout.LayoutParamsCoordinatorLayout.LayoutParams cl = (CoordinatorLayout.LayoutParams) mRecyclerView.getLayoutParams(); MyBehavior behavior = (MyBehavior) cl.getBehavior(); //调用getBehavior方法 6.设置状态栏透明并使父布局移动到状态栏上去(适用于5.0以上)项目中需要用到状态栏颜色随着标题栏颜色改变,甚至还有渐变效果,如果单纯设置状态栏颜色非常不方便，并且实现颜色渐变也不简单，所有将采用将父布局上移的方法,这样状态栏的颜色就是标题栏的颜色啦,实现方法如下： step1:定义主题文件1234&lt;style name="TransTheme" parent="Theme.AppCompat.Light.NoActionBar"&gt; &lt;item name="android:windowTranslucentStatus"&gt;true&lt;/item&gt; &lt;item name="android:statusBarColor"&gt;@android:color/transparent&lt;/item&gt; //设置状态栏透明 &lt;/style&gt; step2:在清单文件的Activity中使用它123&lt;activity android:name=".module.ScheduleActivity" android:theme="@style/TransTheme" /&gt; step3:让你的父布局的控件向下偏移一个状态栏的高度:获取状态栏的高度:1234567891011/** * 获取状态栏高度 * * @param context context * @return 状态栏高度 */ public static int getStatusBarHeight(Context context) &#123; // 获得状态栏高度 int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android"); return context.getResources().getDimensionPixelSize(resourceId); &#125; 然后需要偏移的控件就需要根据项目实际情况了，一般是自定义一个标题布局,然后在所有的Activity中使用这个标题布局,我的标题布局的父布局是一个FragmeLayout，因此做如下设置： 12345if (Build.VERSION.SDK_INT&gt;Build.VERSION_CODES.KITKAT)&#123; FrameLayout.LayoutParams fl = (LayoutParams) mFrameLayout.getLayoutParams(); fl.topMargin = getStatusBarHeight(getContext()); mFrameLayout.setLayoutParams(fl); &#125; 然后给mFrameLayout设置背景色,这样状态栏就和标题栏一个颜色啦。]]></content>
       <categories>
         <category>Android基础进阶</category>
       </categories>
@@ -249,13 +249,13 @@
     <content type="text"><![CDATA[About Me Android 小生一枚，轻微强迫症患者，非处女座，忠实谷粉兼果粉，喜欢看书听歌旅游，最近的目标是去西藏，有组团的欢迎私我 Email(QQ): jay@huangjie.name Github : Jay-huangjie Weixin: h289223562 QQ: 289223562 CSDN: _杰哥]]></content>
   </entry>
   <entry>
-    <title><![CDATA[tags]]></title>
-    <url>%2Ftags%2Findex.html</url>
+    <title><![CDATA[分类]]></title>
+    <url>%2Fcategories%2Findex.html</url>
     <content type="text"></content>
   </entry>
   <entry>
-    <title><![CDATA[分类]]></title>
-    <url>%2Fcategories%2Findex.html</url>
+    <title><![CDATA[tags]]></title>
+    <url>%2Ftags%2Findex.html</url>
     <content type="text"></content>
   </entry>
 </search>

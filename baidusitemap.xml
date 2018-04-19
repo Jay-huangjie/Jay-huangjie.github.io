@@ -4,8 +4,26 @@
 
     
   <url>
+    <loc>http://www.huangjie.name/Android%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB.html</loc>
+    <lastmod>2018-04-19T15:03:34.709Z</lastmod>
+    <data>
+        <display>
+        <title>Android开发常见问题与技巧汇总</title>
+        <pubTime>2018-01-14T05:03:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Android基础进阶" url="http://www.huangjie.name/categories/Android%E5%9F%BA%E7%A1%80%E8%BF%9B%E9%98%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.huangjie.name/%E5%AE%89%E5%8D%93%E9%AB%98%E7%BA%A7%E5%B8%83%E5%B1%80-flexboxLayout-%E6%9C%80%E8%81%AA%E6%98%8E%E7%9A%84%E5%B8%83%E5%B1%80.html</loc>
-    <lastmod>2018-03-27T15:11:09.542Z</lastmod>
+    <lastmod>2018-03-27T15:19:20.058Z</lastmod>
     <data>
         <display>
         <title>安卓高级布局-flexboxLayout：最聪明的布局</title>
@@ -36,24 +54,6 @@
            
              
               <breadCrumb title="安卓杂记" url="http://www.huangjie.name/categories/%E5%AE%89%E5%8D%93%E6%9D%82%E8%AE%B0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.huangjie.name/Android%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB.html</loc>
-    <lastmod>2018-02-05T03:06:42.286Z</lastmod>
-    <data>
-        <display>
-        <title>Android开发常见问题汇总</title>
-        <pubTime>2018-01-14T05:03:08.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="Android基础进阶" url="http://www.huangjie.name/categories/Android%E5%9F%BA%E7%A1%80%E8%BF%9B%E9%98%B6/"/>
           
         </display>
     </data>
