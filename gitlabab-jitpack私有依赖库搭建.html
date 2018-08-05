@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="tools," />
 
 
 
@@ -79,16 +79,20 @@
 
 
 
-<meta name="description" content="个人技术博客,安卓的完整知识树记录,属于Android进阶类博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jay的记事本">
-<meta property="og:url" content="http://www.huangjie.name/categories/Android基础进阶/安卓IPC机制/index.html">
+<meta name="description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   一直想为公司项目搭建一个依赖库，可以直接像引入第三方开源项目一样去引用它，方便集成到其他的项目中去，趁着这个周末将几大依赖库平台都研究了一番，顺便做一个总结">
+<meta name="keywords" content="tools">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gitlab加jitpack搭建免费私有依赖库">
+<meta property="og:url" content="http://www.huangjie.name/gitlabab-jitpack私有依赖库搭建.html">
 <meta property="og:site_name" content="Jay的记事本">
-<meta property="og:description" content="个人技术博客,安卓的完整知识树记录,属于Android进阶类博客">
+<meta property="og:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   一直想为公司项目搭建一个依赖库，可以直接像引入第三方开源项目一样去引用它，方便集成到其他的项目中去，趁着这个周末将几大依赖库平台都研究了一番，顺便做一个总结">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p2p0lrpx1.bkt.clouddn.com/jitpack1.png-gif">
+<meta property="og:updated_time" content="2018-08-05T08:35:43.477Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jay的记事本">
-<meta name="twitter:description" content="个人技术博客,安卓的完整知识树记录,属于Android进阶类博客">
+<meta name="twitter:title" content="gitlab加jitpack搭建免费私有依赖库">
+<meta name="twitter:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   一直想为公司项目搭建一个依赖库，可以直接像引入第三方开源项目一样去引用它，方便集成到其他的项目中去，趁着这个周末将几大依赖库平台都研究了一番，顺便做一个总结">
+<meta name="twitter:image" content="http://p2p0lrpx1.bkt.clouddn.com/jitpack1.png-gif">
 
 
 
@@ -118,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://www.huangjie.name/categories/Android基础进阶/安卓IPC机制/"/>
+  <link rel="canonical" href="http://www.huangjie.name/gitlabab-jitpack私有依赖库搭建.html"/>
 
 
 
 
 
-  <title>分类: 安卓IPC机制 | Jay的记事本</title>
+  <title>gitlab加jitpack搭建免费私有依赖库 | Jay的记事本</title>
   
 
 
@@ -153,7 +157,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -291,167 +295,302 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block category">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>安卓IPC机制<small>分类</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.huangjie.name/gitlabab-jitpack私有依赖库搭建.html">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄杰">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://p07lh1fh6.bkt.clouddn.com/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay的记事本">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/安卓IPC机制-AIDL通信的使用和理解.html" itemprop="url">
-              
-                <span itemprop="name">安卓IPC机制:AIDL通信的使用和理解</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">gitlab加jitpack搭建免费私有依赖库</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-09T16:08:19+08:00"
-              content="2017-12-09" >
-          12-09
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-05T15:05:02+08:00">
+                2018-08-05
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/安卓杂记/" itemprop="url" rel="index">
+                    <span itemprop="name">安卓杂记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  947 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/安卓IPC机制-使用Messenger通信.html" itemprop="url">
-              
-                <span itemprop="name">安卓IPC机制:使用Messenger通信</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-09T10:58:17+08:00"
-              content="2017-12-09" >
-          12-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/安卓IPC机制：使用文件共享.html" itemprop="url">
-              
-                <span itemprop="name">安卓IPC机制：使用文件共享</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-08T11:49:47+08:00"
-              content="2017-12-08" >
-          12-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/安卓IPC机制：Bundle数据传递.html" itemprop="url">
-              
-                <span itemprop="name">安卓IPC机制：Bundle数据传递</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-08T10:54:47+08:00"
-              content="2017-12-08" >
-          12-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/安卓IPC机制-多进程.html" itemprop="url">
-              
-                <span itemprop="name">安卓IPC机制:多进程</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-08T10:17:20+08:00"
-              content="2017-12-08" >
-          12-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <p><strong>版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.</strong></p>
+<hr>
+<blockquote>
+<p>一直想为公司项目搭建一个依赖库，可以直接像引入第三方开源项目一样去引用它，方便集成到其他的项目中去，趁着这个周末将几大依赖库平台都研究了一番，顺便做一个总结<br><a id="more"></a></p>
+</blockquote>
+<h4 id="选择托管平台"><a href="#选择托管平台" class="headerlink" title="选择托管平台"></a>选择托管平台</h4><p> 搭建公司依赖库的前提是项目非公开，必须能托管私有项目，同时需要免费，对比现在比较火的只有两个：</p>
+<ul>
+<li><a href="https://gitlab.com" target="_blank" rel="noopener">gitlab</a></li>
+</ul>
+<pre><code>GitLab 是一个用于仓库管理系统的开源项目，使用Git作为代码管理工具，并在此基础上搭建起来的web服务。安装方法是参考GitLab在GitHub上的Wiki页面。
+</code></pre><ul>
+<li><a href="https://coding.net/" target="_blank" rel="noopener">Coding</a></li>
+</ul>
+<pre><code>有人说Coding就是中国的github,但从最近的产品演变方向看，coding更想做的是团队代码云端服务，通过它可以云端一键部署代码
+</code></pre><p>两者相比较，虽然Coding是国内产品，上手程度上具有一定的优势，但是产品并没有gitlab发展的成熟，故笔者选择了gitlab来托管私有项目</p>
+<h4 id="选择构建工具"><a href="#选择构建工具" class="headerlink" title="选择构建工具"></a>选择构建工具</h4><p>目前已知有以下平台供选择：</p>
+<ul>
+<li><p><a href="https://bintray.com/signup/oss" target="_blank" rel="noopener">Bintray</a><br>优点：响应快，结构清晰，当部署出错能迅速打印log，分析错误原因<br>缺点: 需要翻墙，配置稍显复杂</p>
+<p>  配置可参考:<a href="https://www.jianshu.com/p/5a3d485fda1d" target="_blank" rel="noopener">发布 Android Library 到 JCenter 从入门到放弃</a></p>
+</li>
+<li><p><a href="https://jitpack.io" target="_blank" rel="noopener">jitpack</a><br>优点: 配置简单,支持度广泛<br>缺点: 管理平台较简单</p>
+</li>
+<li>使用<a href="https://www.sonatype.com/download-oss-sonatype" target="_blank" rel="noopener">Nexus Repository Manager OSS 3.x</a>来搭建私有maven服务<br>优点:较为开放，完全本地服务器运行<br>缺点：需要对gradle进行复杂的配置,需要本地服务器</li>
+</ul>
+<p>综合考虑，决定用jitpack来搭建</p>
+<h4 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h4><ol>
+<li>注册一个gitlab账号</li>
+<li>注册一个jitpack账号</li>
+<li>在gitlab中创建一个私有项目,并生成一个Access Tokens(Setting-&gt;Access Tokens),如果是管理者把权限全部勾上，Expires at不需要填，点击生成记下密钥(我比较懒就不放示例图了)</li>
+<li>进入jitpack的设置界面（点击用户名可进入）,看到GitLab一栏，将此令牌输入</li>
+<li>回到jitpack首页左边Repositories里应该就可以看到我们先前创建的私有项目了</li>
+</ol>
+<h4 id="上传library包"><a href="#上传library包" class="headerlink" title="上传library包"></a>上传library包</h4><ol>
+<li>创建一个项目，添加一个library包</li>
+<li>在此library的gradle里加入<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apply plugin: <span class="string">'com.github.dcendents.android-maven'</span></span><br><span class="line">group=<span class="string">'com.gitlab.UserName'</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>其中UserName是你的用户名</p>
+<ol>
+<li>在根目录的gradle中加入<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies&#123;</span><br><span class="line">    classpath <span class="string">'com.github.dcendents:android-maven-gradle-plugin:2.0'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>注意看你的gradle版本，如果是4.1+就使用2.0，如果是4.4+就使用2.1<br>配置完毕，使用git提交到gitlab,怎么提交不需要我说了吧，就是平常提交代码到github上一样</p>
+<ol>
+<li>版本控制<br>提交成功后可以在gitlab中生成一个tag，tag的名称就是你在项目中引用的名称</li>
+<li>刷新jitpack, 项目解构如图:<br><img src="http://p2p0lrpx1.bkt.clouddn.com/jitpack1.png-gif" alt=""><br>点击<code>Get it</code>即可获取你的配置地址了，复制它</li>
+</ol>
+<h4 id="项目中使用"><a href="#项目中使用" class="headerlink" title="项目中使用"></a>项目中使用</h4><p>直接在项目中贴上这个地址，build………… 咦，怎么失败了，别急，这是因为权限问题造成的。由于我们在gitlab上创建的是私有项目，所以我们需要在项目中配置一下令牌:<br>打开项目的<code>gradle.properties</code>,加上<code>authToken=你的令牌地址</code>,随后在项目根目录加上<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">       ........</span><br><span class="line">        maven &#123; url <span class="string">'https://jitpack.io'</span></span><br><span class="line">            credentials &#123; username authToken &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>重新rebuild一下，编译成功，试试在项目中使用library中的代码，大功告成，怎么样，配置是不是超级简单</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>如果该文章帮助到了您,不如请我喝杯咖啡~</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/image/wechat.png" alt="黄杰 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/image/aipay.jpg" alt="黄杰 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/tools/" rel="tag"># tools</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Kotlin系列-基本语法.html" rel="next" title="Kotlin系列学习资料整理">
+                <i class="fa fa-chevron-left"></i> Kotlin系列学习资料整理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+        <!--MOB SHARE BEGIN-->
+<div class="-mob-share-ui-button -mob-share-open">分享</div>
+<div class="-mob-share-ui" style="display: none">
+    <ul class="-mob-share-list">
+        <li class="-mob-share-weibo"><p>新浪微博</p></li>
+        <li class="-mob-share-weixin"><p>微信</p></li>
+        <li class="-mob-share-qzone"><p>QQ空间</p></li>
+        <li class="-mob-share-qq"><p>QQ好友</p></li>
+        <li class="-mob-share-tencentweibo"><p>腾讯微博</p></li>
+        <li class="-mob-share-youdao"><p>有道云笔记</p></li>
+        <li class="-mob-share-mingdao"><p>明道</p></li>
+        <li class="-mob-share-facebook"><p>Facebook</p></li>
+        <li class="-mob-share-twitter"><p>Twitter</p></li>
+        <li class="-mob-share-pocket"><p>Pocket</p></li>
+        <li class="-mob-share-google"><p>Google+</p></li>
+        <li class="-mob-share-tumblr"><p>Tumblr</p></li>
+        <li class="-mob-share-instapaper"><p>Instapaper</p></li>
+        <li class="-mob-share-linkedin"><p>Linkedin</p></li>
+    </ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<div class="-mob-share-ui-bg"></div>
+<script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=22c54eccf6196"></script>
+<!--MOB SHARE END-->
+      
+    </div>
+  </div>
 
 
           </div>
@@ -459,6 +598,8 @@
 
 
           
+  
+
 
         </div>
         
@@ -479,8 +620,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -547,6 +697,22 @@
 　 <!--<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="//music.163.com/outchain/player?type=0&id=1996249397&auto=0&height=430"></iframe>-->
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#选择托管平台"><span class="nav-number">1.</span> <span class="nav-text">选择托管平台</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#选择构建工具"><span class="nav-number">2.</span> <span class="nav-text">选择构建工具</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#准备工作"><span class="nav-number">3.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#上传library包"><span class="nav-number">4.</span> <span class="nav-text">上传library包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#项目中使用"><span class="nav-number">5.</span> <span class="nav-text">项目中使用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -657,6 +823,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 

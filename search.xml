@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[gitlab加jitpack搭建免费私有依赖库]]></title>
+    <url>%2Fgitlabab-jitpack%E7%A7%81%E6%9C%89%E4%BE%9D%E8%B5%96%E5%BA%93%E6%90%AD%E5%BB%BA.html</url>
+    <content type="text"><![CDATA[版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起. 一直想为公司项目搭建一个依赖库，可以直接像引入第三方开源项目一样去引用它，方便集成到其他的项目中去，趁着这个周末将几大依赖库平台都研究了一番，顺便做一个总结 选择托管平台 搭建公司依赖库的前提是项目非公开，必须能托管私有项目，同时需要免费，对比现在比较火的只有两个： gitlab GitLab 是一个用于仓库管理系统的开源项目，使用Git作为代码管理工具，并在此基础上搭建起来的web服务。安装方法是参考GitLab在GitHub上的Wiki页面。 Coding 有人说Coding就是中国的github,但从最近的产品演变方向看，coding更想做的是团队代码云端服务，通过它可以云端一键部署代码 两者相比较，虽然Coding是国内产品，上手程度上具有一定的优势，但是产品并没有gitlab发展的成熟，故笔者选择了gitlab来托管私有项目 选择构建工具目前已知有以下平台供选择： Bintray优点：响应快，结构清晰，当部署出错能迅速打印log，分析错误原因缺点: 需要翻墙，配置稍显复杂 配置可参考:发布 Android Library 到 JCenter 从入门到放弃 jitpack优点: 配置简单,支持度广泛缺点: 管理平台较简单 使用Nexus Repository Manager OSS 3.x来搭建私有maven服务优点:较为开放，完全本地服务器运行缺点：需要对gradle进行复杂的配置,需要本地服务器 综合考虑，决定用jitpack来搭建 准备工作 注册一个gitlab账号 注册一个jitpack账号 在gitlab中创建一个私有项目,并生成一个Access Tokens(Setting-&gt;Access Tokens),如果是管理者把权限全部勾上，Expires at不需要填，点击生成记下密钥(我比较懒就不放示例图了) 进入jitpack的设置界面（点击用户名可进入）,看到GitLab一栏，将此令牌输入 回到jitpack首页左边Repositories里应该就可以看到我们先前创建的私有项目了 上传library包 创建一个项目，添加一个library包 在此library的gradle里加入12apply plugin: 'com.github.dcendents.android-maven'group='com.gitlab.UserName' 其中UserName是你的用户名 在根目录的gradle中加入123dependencies&#123; classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'&#125; 注意看你的gradle版本，如果是4.1+就使用2.0，如果是4.4+就使用2.1配置完毕，使用git提交到gitlab,怎么提交不需要我说了吧，就是平常提交代码到github上一样 版本控制提交成功后可以在gitlab中生成一个tag，tag的名称就是你在项目中引用的名称 刷新jitpack, 项目解构如图:点击Get it即可获取你的配置地址了，复制它 项目中使用直接在项目中贴上这个地址，build………… 咦，怎么失败了，别急，这是因为权限问题造成的。由于我们在gitlab上创建的是私有项目，所以我们需要在项目中配置一下令牌:打开项目的gradle.properties,加上authToken=你的令牌地址,随后在项目根目录加上12345678allprojects &#123; repositories &#123; ........ maven &#123; url 'https://jitpack.io' credentials &#123; username authToken &#125; &#125; &#125;&#125; 重新rebuild一下，编译成功，试试在项目中使用library中的代码，大功告成，怎么样，配置是不是超级简单]]></content>
+      <categories>
+        <category>安卓杂记</category>
+      </categories>
+      <tags>
+        <tag>tools</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Kotlin系列学习资料整理]]></title>
     <url>%2FKotlin%E7%B3%BB%E5%88%97-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95.html</url>
     <content type="text"><![CDATA[版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起. 时至今日,Kotlin在Android开发中越来越受欢迎,它的高效性，简介性,以及更高的容错率不禁让我感叹:一入Kotlin深似海，从此Java是路人，入了Kotlin的门，保证让你回不去,哈哈哈，还等什么,快来和我一起学习Kotlin把 前言网上Kotlin的资料很多，我也不重复造‘资料’了，跟着我的资料索引来，一步一步的学习，相信你很快就能熟练使用了 官网教程Kotlin开源地址 Kotlin中文文档此文档应仔细熟读三遍，确保每一章节都有一个大概的印象，方便以后翻阅，同时这也是最重要的资料,应保存到书签.读语法是应该联想一下使用java会如何实现，思考一下Kotlin的好处，下次遇见此场景就会联想到需要使用这个Api来编写代码了. 视频教程 练习熟悉了文档后就可以去Kotlin官网去在线练习一下语法啦，用来巩固你的知识点。地址:Hello,Kotlin可以点击Kotlin Koans来做上面的练习题，让你实践各种Api的使用 参考代码当你使用Kotlin得心应手之后,就可以参考一下别人是怎么使用Kotlin来编写代码的，这里列举几个可参考的开源项目 基于Kotlin+MVP+Retrofit+RxJava+Glide 等架构实现的短视频类的APP练手项目，UI 简约风格，代码详细注释 Kotlin for Android Developers (the book)国外某Kotlin书籍中的示例代码.. 仿开眼视频 使用干货集中营Api实现的App Kotlin的MVP示例 结束最后说下通过书籍的阅读可以让你的知识点更成体系,推荐Kotlin实战这本书，内容不错,推荐]]></content>
@@ -255,6 +266,11 @@
       </tags>
   </entry>
   <entry>
+    <title></title>
+    <url>%2Fabout%2Findex.html</url>
+    <content type="text"><![CDATA[About Me Android 小生一枚，轻微强迫症患者，非处女座，忠实谷粉兼果粉，喜欢看书听歌旅游，最近的目标是去西藏，有组团的欢迎私我 Email(QQ): jay@huangjie.name Github : Jay-huangjie Weixin: h289223562 QQ: 289223562 CSDN: _杰哥]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[分类]]></title>
     <url>%2Fcategories%2Findex.html</url>
     <content type="text"></content>
@@ -263,10 +279,5 @@
     <title><![CDATA[tags]]></title>
     <url>%2Ftags%2Findex.html</url>
     <content type="text"></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>%2Fabout%2Findex.html</url>
-    <content type="text"><![CDATA[About Me Android 小生一枚，轻微强迫症患者，非处女座，忠实谷粉兼果粉，喜欢看书听歌旅游，最近的目标是去西藏，有组团的欢迎私我 Email(QQ): jay@huangjie.name Github : Jay-huangjie Weixin: h289223562 QQ: 289223562 CSDN: _杰哥]]></content>
   </entry>
 </search>

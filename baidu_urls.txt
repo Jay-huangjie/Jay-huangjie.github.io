@@ -1,3 +1,4 @@
+http://www.huangjie.name/gitlabab-jitpack私有依赖库搭建.html
 http://www.huangjie.name/Kotlin系列-基本语法.html
 http://www.huangjie.name/安卓高级布局-flexboxLayout-最聪明的布局.html
 http://www.huangjie.name/refactoring-project-learned.html
