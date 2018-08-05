@@ -88,7 +88,7 @@
 <meta property="og:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   一直想为公司项目搭建一个依赖库，可以直接像引入第三方开源项目一样去引用它，方便集成到其他的项目中去，趁着这个周末将几大依赖库平台都研究了一番，顺便做一个总结">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://p2p0lrpx1.bkt.clouddn.com/jitpack1.png-gif">
-<meta property="og:updated_time" content="2018-08-05T08:35:43.477Z">
+<meta property="og:updated_time" content="2018-08-05T08:47:20.797Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gitlab加jitpack搭建免费私有依赖库">
 <meta name="twitter:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   一直想为公司项目搭建一个依赖库，可以直接像引入第三方开源项目一样去引用它，方便集成到其他的项目中去，趁着这个周末将几大依赖库平台都研究了一番，顺便做一个总结">
@@ -392,7 +392,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  947 字
+                  952 字
                 </span>
               
 
@@ -462,21 +462,18 @@
 <li>回到jitpack首页左边Repositories里应该就可以看到我们先前创建的私有项目了</li>
 </ol>
 <h4 id="上传library包"><a href="#上传library包" class="headerlink" title="上传library包"></a>上传library包</h4><ol>
-<li>创建一个项目，添加一个library包</li>
-<li>在此library的gradle里加入<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apply plugin: <span class="string">'com.github.dcendents.android-maven'</span></span><br><span class="line">group=<span class="string">'com.gitlab.UserName'</span></span><br></pre></td></tr></table></figure>
+<li><p>创建一个项目，添加一个library包</p>
+</li>
+<li><p>在此library的gradle里加入</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apply plugin: <span class="string">'com.github.dcendents.android-maven'</span></span><br><span class="line">group=<span class="string">'com.gitlab.UserName'</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>其中UserName是你的用户名</p>
-<ol>
-<li>在根目录的gradle中加入<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies&#123;</span><br><span class="line">    classpath <span class="string">'com.github.dcendents:android-maven-gradle-plugin:2.0'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
+<p> 3 在根目录的gradle中加入<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies&#123;</span><br><span class="line">    classpath <span class="string">'com.github.dcendents:android-maven-gradle-plugin:2.0'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>注意看你的gradle版本，如果是4.1+就使用2.0，如果是4.4+就使用2.1<br>配置完毕，使用git提交到gitlab,怎么提交不需要我说了吧，就是平常提交代码到github上一样</p>
-<ol>
-<li>版本控制<br>提交成功后可以在gitlab中生成一个tag，tag的名称就是你在项目中引用的名称</li>
-<li>刷新jitpack, 项目解构如图:<br><img src="http://p2p0lrpx1.bkt.clouddn.com/jitpack1.png-gif" alt=""><br>点击<code>Get it</code>即可获取你的配置地址了，复制它</li>
-</ol>
-<h4 id="项目中使用"><a href="#项目中使用" class="headerlink" title="项目中使用"></a>项目中使用</h4><p>直接在项目中贴上这个地址，build………… 咦，怎么失败了，别急，这是因为权限问题造成的。由于我们在gitlab上创建的是私有项目，所以我们需要在项目中配置一下令牌:<br>打开项目的<code>gradle.properties</code>,加上<code>authToken=你的令牌地址</code>,随后在项目根目录加上<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">       ........</span><br><span class="line">        maven &#123; url <span class="string">'https://jitpack.io'</span></span><br><span class="line">            credentials &#123; username authToken &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p> 4 版本控制<br>  提交成功后可以在gitlab中生成一个tag，tag的名称就是你在项目中引用的名称</p>
+<p> 5 刷新jitpack, 项目结构如图:<br>  <img src="http://p2p0lrpx1.bkt.clouddn.com/jitpack1.png-gif" alt=""><br>  点击<code>Get it</code>即可获取你的配置地址了，复制它</p>
+<h4 id="项目中使用"><a href="#项目中使用" class="headerlink" title="项目中使用"></a>项目中使用</h4><p>直接在项目的build.gradle中贴上这个地址，build………… 咦，怎么失败了，别急，这是因为权限问题造成的。由于我们在gitlab上创建的是私有项目，所以我们需要在项目中配置一下令牌:<br>打开项目的<code>gradle.properties</code>,加上<code>authToken=你的令牌地址</code>,随后在项目根目录加上<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">       ........</span><br><span class="line">        maven &#123; url <span class="string">'https://jitpack.io'</span></span><br><span class="line">            credentials &#123; username authToken &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>重新rebuild一下，编译成功，试试在项目中使用library中的代码，大功告成，怎么样，配置是不是超级简单</p>
 
       
