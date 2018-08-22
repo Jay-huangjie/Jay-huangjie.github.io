@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Android," />
 
 
 
@@ -79,16 +79,18 @@
 
 
 
-<meta name="description" content="个人技术博客,安卓的完整知识树记录,属于Android进阶类博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jay的记事本">
-<meta property="og:url" content="http://www.huangjie.name/categories/Android基础进阶/安卓IPC机制/index.html">
+<meta name="description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   用过Kotlin的同学都知道，那些扩展方法用起来简直不要太爽，那么这些扩展方法是怎么定义实现的呢，本文介绍了Kotlin高阶函数的使用,带你实现自己的超溜扩展方法，并且能让你能看懂扩展方法源码，阅读本文需要有一">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kotlin高阶函数使用(一)">
+<meta property="og:url" content="http://www.huangjie.name/Kotlin-Higher-order-function1.html">
 <meta property="og:site_name" content="Jay的记事本">
-<meta property="og:description" content="个人技术博客,安卓的完整知识树记录,属于Android进阶类博客">
+<meta property="og:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   用过Kotlin的同学都知道，那些扩展方法用起来简直不要太爽，那么这些扩展方法是怎么定义实现的呢，本文介绍了Kotlin高阶函数的使用,带你实现自己的超溜扩展方法，并且能让你能看懂扩展方法源码，阅读本文需要有一定的Kotlin基础，请谨慎阅读.">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-08-22T14:23:39.157Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jay的记事本">
-<meta name="twitter:description" content="个人技术博客,安卓的完整知识树记录,属于Android进阶类博客">
+<meta name="twitter:title" content="Kotlin高阶函数使用(一)">
+<meta name="twitter:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   用过Kotlin的同学都知道，那些扩展方法用起来简直不要太爽，那么这些扩展方法是怎么定义实现的呢，本文介绍了Kotlin高阶函数的使用,带你实现自己的超溜扩展方法，并且能让你能看懂扩展方法源码，阅读本文需要有一定的Kotlin基础，请谨慎阅读.">
 
 
 
@@ -118,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://www.huangjie.name/categories/Android基础进阶/安卓IPC机制/"/>
+  <link rel="canonical" href="http://www.huangjie.name/Kotlin-Higher-order-function1.html"/>
 
 
 
 
 
-  <title>分类: 安卓IPC机制 | Jay的记事本</title>
+  <title>Kotlin高阶函数使用(一) | Jay的记事本</title>
   
 
 
@@ -153,7 +155,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -291,167 +293,275 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block category">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>安卓IPC机制<small>分类</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.huangjie.name/Kotlin-Higher-order-function1.html">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄杰">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://p07lh1fh6.bkt.clouddn.com/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay的记事本">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/安卓IPC机制-AIDL通信的使用和理解.html" itemprop="url">
-              
-                <span itemprop="name">安卓IPC机制:AIDL通信的使用和理解</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Kotlin高阶函数使用(一)</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-09T16:08:19+08:00"
-              content="2017-12-09" >
-          12-09
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-22T22:11:33+08:00">
+                2018-08-22
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Kotlin/" itemprop="url" rel="index">
+                    <span itemprop="name">Kotlin</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,045 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/安卓IPC机制-使用Messenger通信.html" itemprop="url">
-              
-                <span itemprop="name">安卓IPC机制:使用Messenger通信</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-09T10:58:17+08:00"
-              content="2017-12-09" >
-          12-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/安卓IPC机制：使用文件共享.html" itemprop="url">
-              
-                <span itemprop="name">安卓IPC机制：使用文件共享</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-08T11:49:47+08:00"
-              content="2017-12-08" >
-          12-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/安卓IPC机制：Bundle数据传递.html" itemprop="url">
-              
-                <span itemprop="name">安卓IPC机制：Bundle数据传递</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-08T10:54:47+08:00"
-              content="2017-12-08" >
-          12-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/安卓IPC机制-多进程.html" itemprop="url">
-              
-                <span itemprop="name">安卓IPC机制:多进程</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-08T10:17:20+08:00"
-              content="2017-12-08" >
-          12-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <p><strong>版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.</strong></p>
+<hr>
+<blockquote>
+<p>用过Kotlin的同学都知道，那些扩展方法用起来简直不要太爽，那么这些扩展方法是怎么定义实现的呢，本文介绍了Kotlin高阶函数的使用,带你实现自己的超溜扩展方法，并且能让你能看懂扩展方法源码，阅读本文需要有一定的Kotlin基础，请谨慎阅读.</p>
+</blockquote>
+<a id="more"></a>
+<h4 id="1-定义-什么是高阶函数"><a href="#1-定义-什么是高阶函数" class="headerlink" title="1.定义:什么是高阶函数"></a>1.定义:什么是高阶函数</h4><p>高阶函数就是以另一个函数作为参数或返回值的函数，Kotlin可以以lambda或参数引用作为参数或返回值，所以，任何以lambda或函数引用作为参数或返回值的都是高阶函数</p>
+<h4 id="2-函数类型"><a href="#2-函数类型" class="headerlink" title="2.函数类型"></a>2.函数类型</h4><p>要使用Kotlin的高阶函数就必须遵循它的函数类型<br>先来看一个简单的例子，这是一个简单的函数类型申明<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">val sum = &#123; x: Int, y: Int -&gt; x + y &#125;</span><br></pre></td></tr></table></figure></p>
+<p>之所以能这么写得益于Kotlin的类型推导，它的显示写法是这样的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var sum:(Int,Int)-&gt; Int = &#123;x , y-&gt; x + y&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>(Int,Int)</code>是参数类型，<code>-&gt;</code>后面的值<code>Int</code>是返回类型,组合在一起就构成了一个函数类型,以上属于有参有返回值类型，下面列举其他几种类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var action:() -&gt;Unit = &#123;&#125; //无参无返回值</span><br><span class="line">var a = &#123;&#125; //类型推导后的简化写法</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var action:(Int) -&gt;Unit = &#123;&#125; //有参无返回值</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var action:() -&gt; Int = &#123;&#125; //无参有返回值</span><br></pre></td></tr></table></figure>
+<h4 id="3-使用高阶函数-将函数类型作为参数"><a href="#3-使用高阶函数-将函数类型作为参数" class="headerlink" title="3.使用高阶函数(将函数类型作为参数)"></a>3.使用高阶函数(将函数类型作为参数)</h4><p>直接看代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> fun getNumResult(result: (Int, Int) -&gt; Int): Int &#123;</span><br><span class="line">        return result(1,2)                                                                                                                       </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">//调用</span><br><span class="line">var value = getNumResult&#123; a, b -&gt; a + b &#125;</span><br><span class="line">==&gt; value = 3</span><br><span class="line"></span><br><span class="line">var value = getNumResult&#123; a, b -&gt; a * b &#125;</span><br><span class="line">==&gt; value = 2</span><br></pre></td></tr></table></figure></p>
+<p>依照函数类型所示，a和b对应两个Int类型的参数，这个名称可以任意定义，a+b为返回值，随后return 了一个lambda的返回值，看起来是不是很强大,而且依照Kotlin的特性，当参数只有一个lambda参数的时候，括号可以省略，因此就变成了实例中的那样简洁的调用</p>
+<p>像Kotlin中的filter等操作符，都是这样定义实现的，感兴趣的可以研究下</p>
+<p>看到这里，可能有同学会问了，Kotlin不是号称与JAVA兼容吗，那再Java中如何调用呢，这就要从Kotlin函数的生成原理说起了，Kotlin的这些函数类型其实会被申明成普通的接口，一个函数类型的参数就会变成Function1的实现，N个函数类型的参数就是FunctionN，这个接口定义了一个invoke方法，调用该方法就会执行函数，So,我们可以这么写:</p>
+<p>Java8: 因为支持lambda，所以依旧可以这样写<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int value = getNumResult(a ,b - &gt;a + b);</span><br></pre></td></tr></table></figure></p>
+<p>Java8以下版本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int value = getNumResult(</span><br><span class="line">    new Function2&lt;Integer, Integer, Integer&gt;() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public Integer invoke(Integer a, Integer b) &#123;</span><br><span class="line">                return a + b;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure></p>
+<p>注意，如果定义的返回值是Unit,例如forEach高阶函数，在Java中就必须显示返回一个Unit对象,因为Unit是一个单例对象，因此可以这样定义返回<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return Unit.INSTANCE；</span><br></pre></td></tr></table></figure></p>
+<h4 id="4-使用高阶函数-将函数类型作为返回值"><a href="#4-使用高阶函数-将函数类型作为返回值" class="headerlink" title="4.使用高阶函数(将函数类型作为返回值)"></a>4.使用高阶函数(将函数类型作为返回值)</h4><p>顾名思义，相信同学们把作为参数的高阶函数理解透了这个很好理解，示例如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">//定义一个类用于装载参数</span><br><span class="line">class Num(var num: Int)</span><br><span class="line"></span><br><span class="line">//此方法的作用是如果type等于1，那么就从Num类中取出num进行乘法操作，如果不等于一，就进行相加操作</span><br><span class="line">    fun getNum(type: Int): (Num) -&gt; Int &#123;</span><br><span class="line">        if (type == 1) &#123;</span><br><span class="line">          //这是一种写法</span><br><span class="line">            return &#123; entity -&gt;</span><br><span class="line">                entity.num * entity.num</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">         //这是另一种简写，可以用it代替entity参数</span><br><span class="line">            return &#123;</span><br><span class="line">                it.num + it.num</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">使用:</span><br><span class="line">var ride = getNum(1) //传递一个1进去代表使用乘法</span><br><span class="line">var result = ride(Num(3)) //得到一个以Num作为参数的高阶函数</span><br><span class="line">==&gt; result = 9</span><br><span class="line"></span><br><span class="line">var sum = getNum(2)</span><br><span class="line">var result = sum(Num(3))</span><br><span class="line">==&gt; result = 6</span><br></pre></td></tr></table></figure>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>如果该文章帮助到了您,不如请我喝杯咖啡~</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/image/wechat.png" alt="黄杰 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/image/aipay.jpg" alt="黄杰 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/gitlabab-jitpack私有依赖库搭建.html" rel="next" title="gitlab加jitpack搭建免费私有依赖库">
+                <i class="fa fa-chevron-left"></i> gitlab加jitpack搭建免费私有依赖库
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+        <!--MOB SHARE BEGIN-->
+<div class="-mob-share-ui-button -mob-share-open">分享</div>
+<div class="-mob-share-ui" style="display: none">
+    <ul class="-mob-share-list">
+        <li class="-mob-share-weibo"><p>新浪微博</p></li>
+        <li class="-mob-share-weixin"><p>微信</p></li>
+        <li class="-mob-share-qzone"><p>QQ空间</p></li>
+        <li class="-mob-share-qq"><p>QQ好友</p></li>
+        <li class="-mob-share-tencentweibo"><p>腾讯微博</p></li>
+        <li class="-mob-share-youdao"><p>有道云笔记</p></li>
+        <li class="-mob-share-mingdao"><p>明道</p></li>
+        <li class="-mob-share-facebook"><p>Facebook</p></li>
+        <li class="-mob-share-twitter"><p>Twitter</p></li>
+        <li class="-mob-share-pocket"><p>Pocket</p></li>
+        <li class="-mob-share-google"><p>Google+</p></li>
+        <li class="-mob-share-tumblr"><p>Tumblr</p></li>
+        <li class="-mob-share-instapaper"><p>Instapaper</p></li>
+        <li class="-mob-share-linkedin"><p>Linkedin</p></li>
+    </ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<div class="-mob-share-ui-bg"></div>
+<script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=22c54eccf6196"></script>
+<!--MOB SHARE END-->
+      
+    </div>
+  </div>
 
 
           </div>
@@ -459,6 +569,8 @@
 
 
           
+  
+
 
         </div>
         
@@ -479,8 +591,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -547,6 +668,22 @@
 　 <!--<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="//music.163.com/outchain/player?type=0&id=1996249397&auto=0&height=430"></iframe>-->
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-定义-什么是高阶函数"><span class="nav-number">1.</span> <span class="nav-text">1.定义:什么是高阶函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-函数类型"><span class="nav-number">2.</span> <span class="nav-text">2.函数类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-使用高阶函数-将函数类型作为参数"><span class="nav-number">3.</span> <span class="nav-text">3.使用高阶函数(将函数类型作为参数)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-使用高阶函数-将函数类型作为返回值"><span class="nav-number">4.</span> <span class="nav-text">4.使用高阶函数(将函数类型作为返回值)</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -657,6 +794,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 

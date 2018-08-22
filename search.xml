@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Kotlin高阶函数使用(一)]]></title>
+    <url>%2FKotlin-Higher-order-function1.html</url>
+    <content type="text"><![CDATA[版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起. 用过Kotlin的同学都知道，那些扩展方法用起来简直不要太爽，那么这些扩展方法是怎么定义实现的呢，本文介绍了Kotlin高阶函数的使用,带你实现自己的超溜扩展方法，并且能让你能看懂扩展方法源码，阅读本文需要有一定的Kotlin基础，请谨慎阅读. 1.定义:什么是高阶函数高阶函数就是以另一个函数作为参数或返回值的函数，Kotlin可以以lambda或参数引用作为参数或返回值，所以，任何以lambda或函数引用作为参数或返回值的都是高阶函数 2.函数类型要使用Kotlin的高阶函数就必须遵循它的函数类型先来看一个简单的例子，这是一个简单的函数类型申明1val sum = &#123; x: Int, y: Int -&gt; x + y &#125; 之所以能这么写得益于Kotlin的类型推导，它的显示写法是这样的：1var sum:(Int,Int)-&gt; Int = &#123;x , y-&gt; x + y&#125; (Int,Int)是参数类型，-&gt;后面的值Int是返回类型,组合在一起就构成了一个函数类型,以上属于有参有返回值类型，下面列举其他几种类型 12var action:() -&gt;Unit = &#123;&#125; //无参无返回值var a = &#123;&#125; //类型推导后的简化写法 1var action:(Int) -&gt;Unit = &#123;&#125; //有参无返回值 1var action:() -&gt; Int = &#123;&#125; //无参有返回值 3.使用高阶函数(将函数类型作为参数)直接看代码12345678910 fun getNumResult(result: (Int, Int) -&gt; Int): Int &#123; return result(1,2) &#125;//调用var value = getNumResult&#123; a, b -&gt; a + b &#125;==&gt; value = 3var value = getNumResult&#123; a, b -&gt; a * b &#125;==&gt; value = 2 依照函数类型所示，a和b对应两个Int类型的参数，这个名称可以任意定义，a+b为返回值，随后return 了一个lambda的返回值，看起来是不是很强大,而且依照Kotlin的特性，当参数只有一个lambda参数的时候，括号可以省略，因此就变成了实例中的那样简洁的调用 像Kotlin中的filter等操作符，都是这样定义实现的，感兴趣的可以研究下 看到这里，可能有同学会问了，Kotlin不是号称与JAVA兼容吗，那再Java中如何调用呢，这就要从Kotlin函数的生成原理说起了，Kotlin的这些函数类型其实会被申明成普通的接口，一个函数类型的参数就会变成Function1的实现，N个函数类型的参数就是FunctionN，这个接口定义了一个invoke方法，调用该方法就会执行函数，So,我们可以这么写: Java8: 因为支持lambda，所以依旧可以这样写1int value = getNumResult(a ,b - &gt;a + b); Java8以下版本1234567int value = getNumResult( new Function2&lt;Integer, Integer, Integer&gt;() &#123; @Override public Integer invoke(Integer a, Integer b) &#123; return a + b; &#125; &#125;); 注意，如果定义的返回值是Unit,例如forEach高阶函数，在Java中就必须显示返回一个Unit对象,因为Unit是一个单例对象，因此可以这样定义返回1return Unit.INSTANCE； 4.使用高阶函数(将函数类型作为返回值)顾名思义，相信同学们把作为参数的高阶函数理解透了这个很好理解，示例如下: 1234567891011121314151617181920212223242526//定义一个类用于装载参数class Num(var num: Int)//此方法的作用是如果type等于1，那么就从Num类中取出num进行乘法操作，如果不等于一，就进行相加操作 fun getNum(type: Int): (Num) -&gt; Int &#123; if (type == 1) &#123; //这是一种写法 return &#123; entity -&gt; entity.num * entity.num &#125; &#125; else &#123; //这是另一种简写，可以用it代替entity参数 return &#123; it.num + it.num &#125; &#125; &#125;使用:var ride = getNum(1) //传递一个1进去代表使用乘法var result = ride(Num(3)) //得到一个以Num作为参数的高阶函数==&gt; result = 9var sum = getNum(2)var result = sum(Num(3))==&gt; result = 6]]></content>
+      <categories>
+        <category>Kotlin</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[gitlab加jitpack搭建免费私有依赖库]]></title>
     <url>%2Fgitlabab-jitpack%E7%A7%81%E6%9C%89%E4%BE%9D%E8%B5%96%E5%BA%93%E6%90%AD%E5%BB%BA.html</url>
     <content type="text"><![CDATA[版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起. 一直想为公司项目搭建一个依赖库，可以直接像引入第三方开源项目一样去引用它，方便集成到其他的项目中去，趁着这个周末将几大依赖库平台都研究了一番，顺便做一个总结 选择托管平台 搭建公司依赖库的前提是项目非公开，必须能托管私有项目，同时需要免费，对比现在比较火的只有两个： gitlab GitLab 是一个用于仓库管理系统的开源项目，使用Git作为代码管理工具，并在此基础上搭建起来的web服务。安装方法是参考GitLab在GitHub上的Wiki页面。 Coding 有人说Coding就是中国的github,但从最近的产品演变方向看，coding更想做的是团队代码云端服务，通过它可以云端一键部署代码 两者相比较，虽然Coding是国内产品，上手程度上具有一定的优势，但是产品并没有gitlab发展的成熟，故笔者选择了gitlab来托管私有项目 选择构建工具目前已知有以下平台供选择： Bintray优点：响应快，结构清晰，当部署出错能迅速打印log，分析错误原因缺点: 需要翻墙，配置稍显复杂 配置可参考:发布 Android Library 到 JCenter 从入门到放弃 jitpack优点: 配置简单,支持度广泛缺点: 管理平台较简单 使用Nexus Repository Manager OSS 3.x来搭建私有maven服务优点:较为开放，完全本地服务器运行缺点：需要对gradle进行复杂的配置,需要本地服务器 综合考虑，决定用jitpack来搭建 准备工作 注册一个gitlab账号 注册一个jitpack账号 在gitlab中创建一个私有项目,并生成一个Access Tokens(Setting-&gt;Access Tokens),如果是管理者把权限全部勾上，Expires at不需要填，点击生成记下密钥(我比较懒就不放示例图了) 进入jitpack的设置界面（点击用户名可进入）,看到GitLab一栏，将此令牌输入 回到jitpack首页左边Repositories里应该就可以看到我们先前创建的私有项目了 上传library包 创建一个项目，添加一个library包 在此library的gradle里加入 12apply plugin: 'com.github.dcendents.android-maven'group='com.gitlab.UserName' 其中UserName是你的用户名 3 在根目录的gradle中加入123dependencies&#123; classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'&#125; 注意看你的gradle版本，如果是4.1+就使用2.0，如果是4.4+就使用2.1配置完毕，使用git提交到gitlab,怎么提交不需要我说了吧，就是平常提交代码到github上一样 4 版本控制 提交成功后可以在gitlab中生成一个tag，tag的名称就是你在项目中引用的名称 5 刷新jitpack, 项目结构如图: 点击Get it即可获取你的配置地址了，复制它 项目中使用直接在项目的build.gradle中贴上这个地址，build………… 咦，怎么失败了，别急，这是因为权限问题造成的。由于我们在gitlab上创建的是私有项目，所以我们需要在项目中配置一下令牌:打开项目的gradle.properties,加上authToken=你的令牌地址,随后在项目根目录加上12345678allprojects &#123; repositories &#123; ........ maven &#123; url 'https://jitpack.io' credentials &#123; username authToken &#125; &#125; &#125;&#125; 重新rebuild一下，编译成功，试试在项目中使用library中的代码，大功告成，怎么样，配置是不是超级简单]]></content>
@@ -271,13 +282,13 @@
     <content type="text"><![CDATA[About Me Android 小生一枚，轻微强迫症患者，非处女座，忠实谷粉兼果粉，喜欢看书听歌旅游，最近的目标是去西藏，有组团的欢迎私我 Email(QQ): jay@huangjie.name Github : Jay-huangjie Weixin: h289223562 QQ: 289223562 CSDN: _杰哥]]></content>
   </entry>
   <entry>
-    <title><![CDATA[分类]]></title>
-    <url>%2Fcategories%2Findex.html</url>
+    <title><![CDATA[tags]]></title>
+    <url>%2Ftags%2Findex.html</url>
     <content type="text"></content>
   </entry>
   <entry>
-    <title><![CDATA[tags]]></title>
-    <url>%2Ftags%2Findex.html</url>
+    <title><![CDATA[分类]]></title>
+    <url>%2Fcategories%2Findex.html</url>
     <content type="text"></content>
   </entry>
 </search>
