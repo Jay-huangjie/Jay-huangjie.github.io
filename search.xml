@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[安卓小白之ndk入门篇]]></title>
+    <url>%2Fandroidndkstudyfirst.html</url>
+    <content type="text"><![CDATA[版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起. 本文是本人总结ndk的一个入门篇，接下来打算再总结两篇，一篇调用，一篇编译，希望对学习ndk的同学有所帮助哦 1.环境搭建开发工具：AndroidStudio打开AndroidStudio，进入settings,找到Android SDK目录，点击SDK tools，分别找到如图三个配置，勾上，下载。分别介绍一下： cmake类似于Android studio中的gradle,是对ndk的一个配置管理 LLDBc/c++的一个调试工具，安装后可以对c/c++代码进行debug NDKndk的开发工具包 安装完成后，新建一个工程，注意勾选下方的include c++ support,一路next，直到项目构建完成，这样，我们的整体的ndk项目开发环境就配置好了。 2.配置文件介绍项目构建完毕后，我们会发现多了配置和文件，如图： 先介绍一下这几个参数的作用：点开CMakeLists.txt，如下所示：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758# For more information about using CMake with Android Studio, read the# documentation: https://d.android.com/studio/projects/add-native-code.html# Sets the minimum version of CMake required to build the native library.cmake_minimum_required(VERSION 3.4.1)# Creates and names a library, sets it as either STATIC# or SHARED, and provides the relative paths to its source code.# You can define multiple libraries, and CMake builds them for you.# Gradle automatically packages shared libraries with your APK.# 配置so库信息add_library( # Sets the name of the library. # 生成的so库名称，此处生成的so文件名称是libnative-lib.so native-lib # Sets the library as a shared library. # STATIC：静态库，是目标文件的归档文件，在链接其它目标的时候使用 # SHARED：动态库，会被动态链接，在运行时被加载 # MODULE：模块库，是不会被链接到其它目标中的插件，但是可能会在运行时使用dlopen-系列的函数动态链接 SHARED # Provides a relative path to your source file(s). # 资源文件，可以多个， # 资源路径是相对路径，相对于本CMakeLists.txt所在目录 src/main/cpp/native-lib.cpp )# Searches for a specified prebuilt library and stores the path as a# variable. Because CMake includes system libraries in the search path by# default, you only need to specify the name of the public NDK library# you want to add. CMake verifies that the library exists before# completing its build.# 从系统查找依赖库find_library( # Sets the name of the path variable. # android系统每个类型的库会存放一个特定的位置，而log库存放在log-lib中 log-lib # Specifies the name of the NDK library that # you want CMake to locate. # android系统在c环境下打log到logcat的库 log )# Specifies libraries CMake should link to your target library. You# can link multiple libraries, such as libraries you define in this# build script, prebuilt third-party libraries, or system libraries.# 配置库的链接（依赖关系）target_link_libraries( # Specifies the target library. # 目标库 native-lib # Links the target library to the log library # included in the NDK. # 依赖于 $&#123;log-lib&#125; ) 看注释就能明白每个方法参数代表什么意思了，如果你觉得里面注释太多，看起来不是很顺眼，可以下载CMake simple highligher插件来提高代码亮度关于cmake的配置还有许多，这里只是先简单介绍一个。我们再来看一下build.gradle中的配置方法的作用,在defultConfig中有个这个参数，123456externalNativeBuild &#123; cmake &#123; cppFlags &quot;&quot; abiFilters &apos;armeabi&apos;,&apos;arm64-v8a&apos;, &apos;armeabi-v7a&apos;, &apos;x86&apos;, &apos;x86_64&apos; &#125; &#125; 我们主要关注 abiFilters，它是用来设置编译生成什么类型的so的，我们的cup架构主要有以下几种: armeabi armeabi-v7a arm64-v8a x86 x86_64 mips mips_64其中，armeabi-v7a是目前大部分手机的主流架构，它是基于armeabi的一种升级架构，因此，它们是互相兼容的，但目前各手机厂商的旗舰级，都已经开始采用arm64-v8a的cpu,不过不要慌，它也是兼容armeabi的，所以，如果我们只需要开发普通应用的话，我们只需要关注armeabi和armeabi-v7a就可以了，而像x86等这种类型的架构多用于平板等设备，因此我们只需要了解即可。与此相同的还有一个配置：123ndk&#123; abiFilters &quot;armeabi&quot;,&quot;armeabi-v7a&quot; &#125; 它也是用来配置需要什么类型的so的，但它是负责打包到apk里有什么类型的so,而不是编译出什么so,两者还是有区别的。例如我在cmake里设置一个 “armeabi”,”armeabi-v7a”，在ndk里设置一个armeabi，我make project一下，它会生成两个cpu类型的so,但是我运行打包apk，在apk的lib目录里就只有一个armeabi的so了，所以：当我们不需要编译so库时，例如引用的第三方库，可以使用ndk来过滤，完全不需要cmake接下来说一下android下的方法：12345externalNativeBuild &#123; cmake &#123; path &quot;CMakeLists.txt&quot; &#125; &#125; 其实很显然，它就是指定我们的CMakeLists文件路径的，当然我们的这个路径是可以更改的。这里教大家一个小技巧，在cmd中执行：adb shell cat /proc/cpuinfo可以查看当前手机的cpu架构哦，效果图如下：CPU architecture: 8说明我的手机是arm64-v8a架构 接下来我们来看cpp文件，这个文件是干嘛的呢，它是c里.h文件的实现的源文件，你可以把它看作是与java交互的桥梁，里面包含了java层需要调用到的函数方法，点开可以看到以下函数：12345678910#include &lt;jni.h&gt;#include &lt;string&gt;extern &quot;C&quot; JNIEXPORT jstring JNICALLJava_com_jie_ndkdemo_MainActivity_stringFromJNI( JNIEnv *env, jobject /* this */) &#123; std::string hello = &quot;Hello from C++&quot;; return env-&gt;NewStringUTF(hello.c_str());&#125; 主要是看这个函数：Java_com_jie_ndkdemo_MainActivity_stringFromJNI,它是有格式要求的，由Java包名类名_函数名组成，定义的时候一定要按照这个格式来，其中，MainActivity是我声明native方法的类的类名。 相信看过这篇文章的同学对ndk已经有了一个初步的了解，本人打算接下来再总结两篇文章，一篇讲解ndk的调用，一篇讲解ndk的编译，相信看完这三部曲，对于ndk将会有一个全面的了解。]]></content>
+      <categories>
+        <category>ndk</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Kotlin高阶函数使用(二)]]></title>
     <url>%2Fkotlin-%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8.html</url>
     <content type="text"><![CDATA[版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起. 上一篇文章带大家认识到了什么是高阶函数，那这一章就带大家看看高阶函数的实际使用场景吧 提问我们想一想，高阶函数带给我们的是什么，我们为什么要使用它呢？因为他可以让我们的方法更简单高效，能去掉冗余的样板代码，让我们关注的逻辑更清晰的展现在我们的面前，所以高阶函数一定是用在我们的方法实现上，而官方api其实已经将我们常用的快捷操作用高阶函数给封装好了，比如with,apply等操作符，所以剩下的就是接口调用了。 不知道大家用Kotlin实现过OnClickListener接口没有，有3种写法： 青铜版:12345view.setOnClickListener(object :View.OnClickListener&#123; override fun onClick(v: View?) &#123; //啊！我被点击了 &#125; &#125;) 黄金版12345view.setOnClickListener &#123; v -&gt; &#123; //啊！我被点击了 &#125; &#125; 钻石版123view.setOnClickListener &#123; //啊！我被点击了 &#125; 我们一对比发现，代码是一步一步被省略的，首先是省略了接口声明(转化为了lambda)，其次是省略了lambda的花括号(Kotlin的特性，当参数只有一个lambda参数的时候，括号可以省略),所以我们要实现的是如何将接口声明转化为lambda,哈哈，这不正是我们高阶函数所擅长的吗 实现虽然我们不能直接看到kotlin内部的高阶函数的实现方式，但是我们按住ctrl键将鼠标移到方法上是可以看到高阶函数的声明方式的，如你所见是这样的：1public final fun setOnClickListener( l: ((v: View!) → Unit)! ): Unit 看过我上篇文章的一眼就能看明白，这是声明了一个以view为参数的无返回值的高阶函数，但他是如何实现的呢，请看以下代码：12345678public final fun setOnClickListener( l: ((v: View!) → Unit)! ): Unit&#123; //将接口实现并赋值给全局变量接口方便接口方法调用 mOnClickListener = object :View.OnClickListener&#123; override fun onClick(v: View?) &#123; l.invoke(v) //关键是这句 &#125; &#125;&#125; 原理就是内部将接口给实例化，然后将逻辑通过invoke方法代理出去，这样我们点击事件内部就会走invoke方法啦。而invoke实际是一个接口(翻译成java代码你就明白啦),所以我们在方法外面实现的其实是invoke的接口实现逻辑，注意，这种接口的实现方式只能在接口只有一个方法的时候哦，因为invoke只有一个，哈哈，怎么样，setOnClickListener的处理逻辑小伙伴们明白了吗，举一反三的事情就交给各位勤奋的小伙伴了.]]></content>
@@ -293,13 +304,13 @@
     <content type="text"><![CDATA[About Me Android 小生一枚，轻微强迫症患者，非处女座，忠实谷粉兼果粉，喜欢看书听歌旅游，最近的目标是去西藏，有组团的欢迎私我 Email(QQ): jay@huangjie.name Github : Jay-huangjie Weixin: h289223562 QQ: 289223562 CSDN: _杰哥]]></content>
   </entry>
   <entry>
-    <title><![CDATA[tags]]></title>
-    <url>%2Ftags%2Findex.html</url>
+    <title><![CDATA[分类]]></title>
+    <url>%2Fcategories%2Findex.html</url>
     <content type="text"></content>
   </entry>
   <entry>
-    <title><![CDATA[分类]]></title>
-    <url>%2Fcategories%2Findex.html</url>
+    <title><![CDATA[tags]]></title>
+    <url>%2Ftags%2Findex.html</url>
     <content type="text"></content>
   </entry>
 </search>
