@@ -79,23 +79,23 @@
 
 
 
-<meta name="description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   本文是本人总结ndk的一个入门篇，接下来打算再总结两篇，一篇调用，一篇编译，希望对学习ndk的同学有所帮助哦">
+<meta name="description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   本文是本人总结ndk的一个入门篇，希望对学习ndk的同学有所帮助哦">
 <meta name="keywords" content="Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="安卓小白之ndk入门篇">
 <meta property="og:url" content="http://www.huangjie.name/androidndkstudyfirst.html">
 <meta property="og:site_name" content="Jay的记事本">
-<meta property="og:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   本文是本人总结ndk的一个入门篇，接下来打算再总结两篇，一篇调用，一篇编译，希望对学习ndk的同学有所帮助哦">
+<meta property="og:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   本文是本人总结ndk的一个入门篇，希望对学习ndk的同学有所帮助哦">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3468978-d330db63b148bb2c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3468978-b0d32f23e2b25a5d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3468978-3a20de031b648789.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3468978-b01cf2af3cc17232.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3468978-13a9d77a060d8557.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-12-09T09:13:29.054Z">
+<meta property="og:updated_time" content="2018-12-11T12:03:28.185Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安卓小白之ndk入门篇">
-<meta name="twitter:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   本文是本人总结ndk的一个入门篇，接下来打算再总结两篇，一篇调用，一篇编译，希望对学习ndk的同学有所帮助哦">
+<meta name="twitter:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   本文是本人总结ndk的一个入门篇，希望对学习ndk的同学有所帮助哦">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/3468978-d330db63b148bb2c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -396,7 +396,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,573 字
+                  1,480 字
                 </span>
               
 
@@ -412,7 +412,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  7 分钟
+                  6 分钟
                 </span>
               
             </div>
@@ -436,7 +436,7 @@
         <p><strong>版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.</strong></p>
 <hr>
 <blockquote>
-<p>本文是本人总结ndk的一个入门篇，接下来打算再总结两篇，一篇调用，一篇编译，希望对学习ndk的同学有所帮助哦<br><a id="more"></a></p>
+<p>本文是本人总结ndk的一个入门篇，希望对学习ndk的同学有所帮助哦<br><a id="more"></a></p>
 </blockquote>
 <h4 id="1-环境搭建"><a href="#1-环境搭建" class="headerlink" title="1.环境搭建"></a>1.环境搭建</h4><p>开发工具：AndroidStudio<br>打开AndroidStudio，进入<code>settings</code>,找到<code>Android SDK</code>目录，点击<code>SDK tools</code>，分别找到如图三个配置，勾上，下载。<br><img src="https://upload-images.jianshu.io/upload_images/3468978-d330db63b148bb2c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="环境搭建"><br>分别介绍一下：</p>
 <ul>
@@ -463,7 +463,6 @@
 <p>其实很显然，它就是指定我们的<code>CMakeLists</code>文件路径的，当然我们的这个路径是可以更改的。<br>这里教大家一个小技巧，在cmd中执行：<code>adb shell</code> <code>cat  /proc/cpuinfo</code>可以查看当前手机的cpu架构哦，效果图如下：<br><img src="https://upload-images.jianshu.io/upload_images/3468978-13a9d77a060d8557.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="adb"><br><code>CPU architecture: 8</code>说明我的手机是<code>arm64-v8a</code>架构</p>
 <p>接下来我们来看cpp文件，这个文件是干嘛的呢，它是c里.h文件的实现的源文件，你可以把它看作是与java交互的桥梁，里面包含了java层需要调用到的函数方法，点开可以看到以下函数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;jni.h&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line"></span><br><span class="line">extern &quot;C&quot; JNIEXPORT jstring JNICALL</span><br><span class="line">Java_com_jie_ndkdemo_MainActivity_stringFromJNI(</span><br><span class="line">        JNIEnv *env,</span><br><span class="line">        jobject /* this */) &#123;</span><br><span class="line">    std::string hello = &quot;Hello from C++&quot;;</span><br><span class="line">    return env-&gt;NewStringUTF(hello.c_str());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>主要是看这个函数：<br><code>Java_com_jie_ndkdemo_MainActivity_stringFromJNI</code>,它是有格式要求的，由Java<em>包名</em>类名_函数名组成，定义的时候一定要按照这个格式来，其中，<code>MainActivity</code>是我声明native方法的类的类名。</p>
-<p>相信看过这篇文章的同学对ndk已经有了一个初步的了解，本人打算接下来再总结两篇文章，一篇讲解ndk的调用，一篇讲解ndk的编译，相信看完这三部曲，对于ndk将会有一个全面的了解。</p>
 
       
     </div>
