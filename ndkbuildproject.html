@@ -79,17 +79,19 @@
 
 
 
-<meta name="description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   此为开发中遇到的一些常见问题的整理，方便下次遇到问题能快速找到解决方案，此外还收集了一些常见的开发技巧，持续更新中~~  1 编译出现：1All com.android.support libraries mu">
+<meta name="description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   本文接着上篇文章内容来,主要讲述如何生成so库以及将类编译成jar包供第三方调用安卓小白之ndk入门篇">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android开发常见问题与技巧汇总">
-<meta property="og:url" content="http://www.huangjie.name/Android开发常见问题汇总.html">
+<meta property="og:title" content="安卓小白之ndk编译打包成so供第三方调用">
+<meta property="og:url" content="http://www.huangjie.name/ndkbuildproject.html">
 <meta property="og:site_name" content="Jay的记事本">
-<meta property="og:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   此为开发中遇到的一些常见问题的整理，方便下次遇到问题能快速找到解决方案，此外还收集了一些常见的开发技巧，持续更新中~~  1 编译出现：1All com.android.support libraries must use the exact same version specificat">
+<meta property="og:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   本文接着上篇文章内容来,主要讲述如何生成so库以及将类编译成jar包供第三方调用安卓小白之ndk入门篇">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-19T15:03:34.709Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3468978-e6d758fb1916b250.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-12-11T13:29:36.237Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android开发常见问题与技巧汇总">
-<meta name="twitter:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   此为开发中遇到的一些常见问题的整理，方便下次遇到问题能快速找到解决方案，此外还收集了一些常见的开发技巧，持续更新中~~  1 编译出现：1All com.android.support libraries must use the exact same version specificat">
+<meta name="twitter:title" content="安卓小白之ndk编译打包成so供第三方调用">
+<meta name="twitter:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   本文接着上篇文章内容来,主要讲述如何生成so库以及将类编译成jar包供第三方调用安卓小白之ndk入门篇">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/3468978-e6d758fb1916b250.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -119,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://www.huangjie.name/Android开发常见问题汇总.html"/>
+  <link rel="canonical" href="http://www.huangjie.name/ndkbuildproject.html"/>
 
 
 
 
 
-  <title>Android开发常见问题与技巧汇总 | Jay的记事本</title>
+  <title>安卓小白之ndk编译打包成so供第三方调用 | Jay的记事本</title>
   
 
 
@@ -306,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.huangjie.name/Android开发常见问题汇总.html">
+    <link itemprop="mainEntityOfPage" href="http://www.huangjie.name/ndkbuildproject.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄杰">
@@ -323,7 +325,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Android开发常见问题与技巧汇总</h1>
+          <h1 class="post-title" itemprop="name headline">安卓小白之ndk编译打包成so供第三方调用</h1>
         
 
         <div class="post-meta">
@@ -335,8 +337,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-14T13:03:08+08:00">
-                2018-01-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-11T21:27:06+08:00">
+                2018-12-11
               </time>
             
 
@@ -345,28 +347,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android基础进阶/" itemprop="url" rel="index">
-                    <span itemprop="name">Android基础进阶</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -389,7 +369,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,148 字
+                  1,023 字
                 </span>
               
 
@@ -405,7 +385,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5 分钟
+                  4 分钟
                 </span>
               
             </div>
@@ -429,32 +409,20 @@
         <p><strong>版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.</strong></p>
 <hr>
 <blockquote>
-<p>此为开发中遇到的一些常见问题的整理，方便下次遇到问题能快速找到解决方案，此外还收集了一些常见的开发技巧，持续更新中~~</p>
+<p>本文接着上篇文章内容来,主要讲述如何生成so库以及将类编译成jar包供第三方调用<br><a href="http://www.huangjie.name/androidndkstudyfirst.html">安卓小白之ndk入门篇</a><br><a id="more"></a></p>
 </blockquote>
-<h4 id="1-编译出现："><a href="#1-编译出现：" class="headerlink" title="1 编译出现："></a>1 编译出现：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">All com.android.<span class="function">support libraries must use the exact same version <span class="title">specification</span> <span class="params">(mixing versions can lead to runtime crashes)</span>......</span></span><br></pre></td></tr></table></figure>
-<p>如果引用的第三方库的支持库版本低于（或者不一致）app build.gradle中的支持库版本，就会出现这种问题,修改第三方的依赖的话工作量太大,因此考虑所有模块强制使用相同的版本号的支持库，代码如下：</p>
-<p>在app build.gradle中添加：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">configurations.all &#123;</span><br><span class="line">    resolutionStrategy.eachDependency &#123; DependencyResolveDetails details -&gt;</span><br><span class="line">        def requested = details.requested</span><br><span class="line">        <span class="keyword">if</span> (requested.group == <span class="string">'com.android.support'</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!requested.name.startsWith(<span class="string">"multidex"</span>)) &#123;</span><br><span class="line">                details.useVersion <span class="string">'26.1.0'</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>此代码声明了除multdex外全部使用26.1.0的版本库</p>
-<h4 id="2-SVG图片兼容问题-主要针对5-0以下机型"><a href="#2-SVG图片兼容问题-主要针对5-0以下机型" class="headerlink" title="2 SVG图片兼容问题(主要针对5.0以下机型)"></a>2 SVG图片兼容问题(主要针对5.0以下机型)</h4><p>参考博客：<a href="https://www.jianshu.com/p/e3614e7abc03" target="_blank" rel="noopener">Android Vector曲折的兼容之路</a></p>
-<p>基本适配方法：<br>在app build.gradle 的<code>defaultConfig</code>中添加<code>defaultvectorDrawables.useSupportLibrary = true</code></p>
-<p>xml中使用：<br>ImageView原本是使用<code>src</code>加载,改为<code>app:srcCompat</code>.</p>
-<p>java中使用：<br><code>ImageView iv = (ImageView) findViewById(R.id.iv);
-iv.setImageResource(R.drawable.vector_image);</code></p>
-<h4 id="3-自定义View中在4-X版本上通过getContext-方法强转成Activity失效"><a href="#3-自定义View中在4-X版本上通过getContext-方法强转成Activity失效" class="headerlink" title="3.自定义View中在4.X版本上通过getContext()方法强转成Activity失效"></a>3.自定义View中在4.X版本上通过getContext()方法强转成Activity失效</h4><p>参考博客： <a href="http://blog.csdn.net/wingichoy/article/details/72868959" target="_blank" rel="noopener">记一次View.getContext()遇到的大坑</a></p>
-<p>原因：兼容v7包将<code>Context</code>包裹成了<code>TintContextWrapper</code>,所以强转成<code>Activity</code>会出错</p>
-<p>解决方法：使用构造方法中的Context来强转。</p>
-<h4 id="4-引入的第三方库与自己的support包冲突"><a href="#4-引入的第三方库与自己的support包冲突" class="headerlink" title="4.引入的第三方库与自己的support包冲突"></a>4.引入的第三方库与自己的support包冲突</h4><p>解决方法：<br>将冲突的库改成以下写法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">implementation (<span class="string">'此处是你引入的库'</span>)&#123;</span><br><span class="line">        exclude group: <span class="string">'com.android.support'</span> <span class="comment">//什么包冲突了这里就声明什么,注意名称要写对写全</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>另外，在这里普及一下<code>implementation</code>的概念,现在升级了AS后引入三方库有多种方式，如<code>implementation</code>,<code>compile</code>,<code>api</code> ..其中，<br><code>implementation</code>主要是引用本模块的库，其他模块是调用不到该模块引用的库的,类似java中的private属性,而<code>compile</code>类似java中的public属性,只要模块之间相互依赖,引用的库都能相互调用,而<code>api</code>的作用与<code>compile</code>一样,使用这些不同的调用方式是为了加快编译速度，如果你的库不需要在其他模块之中使用,请使用<code>implementation</code>方式，这样当外部调用改变不会编译整个model而只会编译改变的那个model.</p>
-<h4 id="5-在java代码中获取xml中设置的behavior"><a href="#5-在java代码中获取xml中设置的behavior" class="headerlink" title="5.在java代码中获取xml中设置的behavior"></a>5.在java代码中获取xml中设置的behavior</h4><p>在开发项目的时候需要获取behavior的实例做一些事情，发现<code>CoordinatorLayout</code>没有提供获取<code>behavior</code>的方法，后来查看源码发现是使用<code>CoordinatorLayout.LayoutParams</code>来设置<code>behavior</code>的，所以<code>behavior</code>自然是从这里来获取,示例代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//子类获取上级的CoordinatorLayout.LayoutParams</span></span><br><span class="line">CoordinatorLayout.LayoutParams cl = (CoordinatorLayout.LayoutParams) mRecyclerView.getLayoutParams();</span><br><span class="line"> MyBehavior behavior = (MyBehavior) cl.getBehavior(); <span class="comment">//调用getBehavior方法</span></span><br></pre></td></tr></table></figure>
-<h4 id="6-设置状态栏透明并使父布局移动到状态栏上去-适用于5-0以上"><a href="#6-设置状态栏透明并使父布局移动到状态栏上去-适用于5-0以上" class="headerlink" title="6.设置状态栏透明并使父布局移动到状态栏上去(适用于5.0以上)"></a>6.设置状态栏透明并使父布局移动到状态栏上去(适用于5.0以上)</h4><p>项目中需要用到状态栏颜色随着标题栏颜色改变,甚至还有渐变效果,如果单纯设置状态栏颜色非常不方便，并且实现颜色渐变也不简单，所有将采用将父布局上移的方法,这样状态栏的颜色就是标题栏的颜色啦,实现方法如下：</p>
-<p>step1:定义主题文件<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;style name=<span class="string">"TransTheme"</span> parent=<span class="string">"Theme.AppCompat.Light.NoActionBar"</span>&gt;</span><br><span class="line">        &lt;item name="android:windowTranslucentStatus"&gt;true&lt;/item&gt;</span><br><span class="line">        &lt;item name="android:statusBarColor"&gt;@android:color/transparent&lt;/item&gt; //设置状态栏透明</span><br><span class="line">    &lt;/style&gt;</span><br></pre></td></tr></table></figure></p>
-<p>step2:在清单文件的Activity中使用它<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;activity</span><br><span class="line">     android:name=<span class="string">".module.ScheduleActivity"</span></span><br><span class="line">     android:theme=<span class="string">"@style/TransTheme"</span> /&gt;</span><br></pre></td></tr></table></figure></p>
-<p>step3:让你的父布局的控件向下偏移一个状态栏的高度:<br>获取状态栏的高度:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 获取状态栏高度</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> context context</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span> 状态栏高度</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getStatusBarHeight</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">       <span class="comment">// 获得状态栏高度</span></span><br><span class="line">       <span class="keyword">int</span> resourceId = context.getResources().getIdentifier(<span class="string">"status_bar_height"</span>, <span class="string">"dimen"</span>, <span class="string">"android"</span>);</span><br><span class="line">       <span class="keyword">return</span> context.getResources().getDimensionPixelSize(resourceId);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
-<p>然后需要偏移的控件就需要根据项目实际情况了，一般是自定义一个标题布局,然后在所有的Activity中使用这个标题布局,我的标题布局的父布局是一个FragmeLayout，因此做如下设置：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (Build.VERSION.SDK_INT&gt;Build.VERSION_CODES.KITKAT)&#123;</span><br><span class="line">            FrameLayout.LayoutParams fl = (LayoutParams) mFrameLayout.getLayoutParams();</span><br><span class="line">            fl.topMargin = getStatusBarHeight(getContext());</span><br><span class="line">            mFrameLayout.setLayoutParams(fl);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>然后给<code>mFrameLayout</code>设置背景色,这样状态栏就和标题栏一个颜色啦。</p>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>在build.gradle中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">externalNativeBuild &#123;</span><br><span class="line">    cmake &#123;</span><br><span class="line">        cppFlags &quot;&quot;</span><br><span class="line">         //在这里指定需要生成什么类型的so</span><br><span class="line">        abiFilters &quot;armeabi&quot;,&quot;armeabi-v7a&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在CMakeList文件中可以指定生成的so库的名称<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">add_library( # Sets the name of the library.</span><br><span class="line">        native-lib  #修改此处</span><br><span class="line"></span><br><span class="line">        # Sets the library as a shared library.</span><br><span class="line">        SHARED</span><br><span class="line"></span><br><span class="line">        # Provides a relative path to your source file(s).</span><br><span class="line">        src/main/cpp/native-lib.cpp)</span><br><span class="line"></span><br><span class="line">.....</span><br><span class="line">target_link_libraries( # Specifies the target library.</span><br><span class="line">        native-lib #修改此处</span><br><span class="line"></span><br><span class="line">        # Links the target library to the log library</span><br><span class="line">        # included in the NDK.</span><br><span class="line">        $&#123;log-lib&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>注意<code>add_library</code>的名称和<code>target_link_libraries</code>的名称必须相同<br>还有另外一种配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">defaultConfig&#123;</span><br><span class="line">   ndk&#123;</span><br><span class="line">       //指定生成的so库名称</span><br><span class="line">       moduleName &quot;native&quot;</span><br><span class="line">      //在这里指定需要生成什么类型的so</span><br><span class="line">       abiFilters &quot;armeabi&quot;,&quot;armeabi-v7a&quot;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以直接在gradle中都配置好，不需要更改CMakeList</p>
+<p>配置好后，点击<code>Build</code>-&gt;<code>Make Project</code>等待编译完成,如果你是通过第一种方法配置的，那么生成的so库位于<code>app</code>-&gt;<code>build</code>-&gt;<code>intermediates</code>-&gt;<code>cmake</code>-&gt;<code>debug</code>-&gt;<code>obj</code>目录下，如果是第二种方法，那么so库位于<code>app</code>-&gt;<code>build</code>-&gt;<code>intermediates</code>-&gt;<code>ndk</code>-&gt;<code>debug</code>-&gt;<code>obj</code>目录下。</p>
+<h4 id="生成jar包"><a href="#生成jar包" class="headerlink" title="生成jar包"></a>生成jar包</h4><p>看cpp文件里的方法就知道，方法声明都是与包名绑定的，那我要是给第三方app调用呢，总不能让它们用我们的包名吧，所以，我们就需要将我们的类都打成jar包供第三方间接调用，让第三方调用我们的类，我们的类来调用c代码，这样问题就解决啦。</p>
+<p>1.要编译jar包，前提条件是你的这个项目必须是一个类库，也就是library,在app gradle<br>的最上面查看是否为<code>apply plugin: &#39;com.android.library&#39;</code></p>
+<p>2.在build defaultConfig目录里加入以下代码:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">task makeJar(type: Copy) &#123;</span><br><span class="line">        //删除存在的</span><br><span class="line">        delete &apos;build/libs/jar.jar&apos;</span><br><span class="line">        //设置拷贝的文件</span><br><span class="line">        from(&apos;build/intermediates/bundles/debug/&apos;)</span><br><span class="line">        //打进jar包后的文件目录</span><br><span class="line">        into(&apos;build/libs/&apos;)</span><br><span class="line">        //将classes.jar放入build/libs/目录下</span><br><span class="line">        //include ,exclude参数来设置过滤</span><br><span class="line">        //（我们只关心classes.jar这个文件）</span><br><span class="line">        include(&apos;classes.jar&apos;)</span><br><span class="line">        //重命名</span><br><span class="line">        rename (&apos;classes.jar&apos;, &apos;jar.jar&apos;)</span><br><span class="line">    &#125;</span><br><span class="line">    makeJar.dependsOn(build)</span><br></pre></td></tr></table></figure></p>
+<p>看注释，名字任意取，然后再Terminal中执行命令<code>gradlew makeJar</code>, Terminal在AndroidStudio的左下角。<br>执行完，提示BUILD SUCCESSFUL后，在以下路径可以找到生成的jar包：<br><code>app/build/intermediates/bundles/debug/</code></p>
+<h4 id="调用"><a href="#调用" class="headerlink" title="调用"></a>调用</h4><p>jar包和so库都生成好后，就可以使用了，将jar包放入app-&gt;libs目录，将so库放入app-&gt;src-&gt;main-&gt;jinLibs<br><img src="https://upload-images.jianshu.io/upload_images/3468978-e6d758fb1916b250.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="s"><br>根据你的需要在jinLibs中建立不同的cpu架构目录，一般创建一个armeabi和armeabi-v7a就可以了，注意不要写错，同时注意在gradle中申明你需要的架构类型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ndk&#123;</span><br><span class="line">      //在这里指定需要生成什么类型的so</span><br><span class="line">       abiFilters &quot;armeabi&quot;,&quot;armeabi-v7a&quot;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>都配置好后，重新Sync Project下项目，就能愉快的使用了。</p>
+<p>在使用中，有同学经常会遇到so库文件找不到的问题，这时你就需要检查你的架构目录下的so的数量是不是相同的，千万不要出现单个目录没有的情况。这是因为so库都是向下兼容，假如一台v7架构的手机，你把两个需要使用的so库都放到armeabi目录中，没问题，因为系统在v7中找不到会去armeabi目录找。但是如果你将一个so放到armeabi和armeabi-v7a，另一个只放了到了armeabi，当一个v7架构的手机使用的时候，如果发现armeabi-v7中没有是不会去armeabi中找的，因为另一个so也放到了armeabi-v7目录下，代表你兼容了armeabi-v7的情况，此时是不会向下兼容的。所以，解决方案就是要么删除v7里的so,要么把缺少的so补齐。</p>
 
       
     </div>
@@ -508,8 +476,8 @@ iv.setImageResource(R.drawable.vector_image);</code></p>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017年终总结.html" rel="next" title="2017年终总结">
-                <i class="fa fa-chevron-left"></i> 2017年终总结
+              <a href="/androidndkstudyfirst.html" rel="next" title="安卓小白之ndk入门篇">
+                <i class="fa fa-chevron-left"></i> 安卓小白之ndk入门篇
               </a>
             
           </div>
@@ -517,10 +485,6 @@ iv.setImageResource(R.drawable.vector_image);</code></p>
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/objectBox数据库使用教程-objectbox-java.html" rel="prev" title="objectBox数据库使用教程">
-                objectBox数据库使用教程 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -682,7 +646,7 @@ iv.setImageResource(R.drawable.vector_image);</code></p>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-编译出现："><span class="nav-number">1.</span> <span class="nav-text">1 编译出现：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-SVG图片兼容问题-主要针对5-0以下机型"><span class="nav-number">2.</span> <span class="nav-text">2 SVG图片兼容问题(主要针对5.0以下机型)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-自定义View中在4-X版本上通过getContext-方法强转成Activity失效"><span class="nav-number">3.</span> <span class="nav-text">3.自定义View中在4.X版本上通过getContext()方法强转成Activity失效</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-引入的第三方库与自己的support包冲突"><span class="nav-number">4.</span> <span class="nav-text">4.引入的第三方库与自己的support包冲突</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-在java代码中获取xml中设置的behavior"><span class="nav-number">5.</span> <span class="nav-text">5.在java代码中获取xml中设置的behavior</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-设置状态栏透明并使父布局移动到状态栏上去-适用于5-0以上"><span class="nav-number">6.</span> <span class="nav-text">6.设置状态栏透明并使父布局移动到状态栏上去(适用于5.0以上)</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置"><span class="nav-number">1.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#生成jar包"><span class="nav-number">2.</span> <span class="nav-text">生成jar包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调用"><span class="nav-number">3.</span> <span class="nav-text">调用</span></a></li></ol></div>
             
 
           </div>
