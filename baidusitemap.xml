@@ -4,6 +4,46 @@
 
     
   <url>
+    <loc>http://www.huangjie.name/multithreading2.html</loc>
+    <lastmod>2018-12-20T14:58:05.608Z</lastmod>
+    <data>
+        <display>
+        <title>Android/java 多线程(二)-Thread的好兄弟Handler</title>
+        <pubTime>2018-12-20T14:55:13.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="多线程编程" url="http://www.huangjie.name/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.huangjie.name/Threadsourse.html</loc>
+    <lastmod>2018-12-20T14:54:20.297Z</lastmod>
+    <data>
+        <display>
+        <title>Android/java 多线程(一)-Thread的使用以及源码分析</title>
+        <pubTime>2018-12-20T14:48:00.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="多线程编程" url="http://www.huangjie.name/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.huangjie.name/ndkbuildproject.html</loc>
     <lastmod>2018-12-11T13:29:36.237Z</lastmod>
     <data>

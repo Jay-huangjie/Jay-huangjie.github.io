@@ -1,3 +1,5 @@
+http://www.huangjie.name/multithreading2.html
+http://www.huangjie.name/Threadsourse.html
 http://www.huangjie.name/ndkbuildproject.html
 http://www.huangjie.name/androidndkstudyfirst.html
 http://www.huangjie.name/kotlin-高阶函数的使用.html
