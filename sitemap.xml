@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.huangjie.name/about/index.html</loc>
+    
+    <lastmod>2018-12-28T12:44:27.364Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.huangjie.name/Threadsource5.html</loc>
     
     <lastmod>2018-12-28T12:30:46.749Z</lastmod>
@@ -229,13 +236,6 @@
     <loc>http://www.huangjie.name/hello-world.html</loc>
     
     <lastmod>2017-12-15T15:59:25.900Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.huangjie.name/about/index.html</loc>
-    
-    <lastmod>2017-12-09T08:03:26.671Z</lastmod>
     
   </url>
   
