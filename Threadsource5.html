@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   上一篇文章带大家认识到了什么是高阶函数，那这一章就带大家看看高阶函数的实际使用场景吧">
+<meta name="description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.  多线程系列历史文章:Android/java 多线程(一)-Thread的使用以及源码分析Android/java 多线程(二)-Thread的好兄弟HandlerAndroid/java 多线程(三)-Hand">
 <meta name="keywords" content="Android">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Kotlin高阶函数使用(二)">
-<meta property="og:url" content="http://www.huangjie.name/kotlin-高阶函数的使用.html">
+<meta property="og:title" content="Android&#x2F;java 多线程(五)-ThreadPoolExecutor线程池的使用">
+<meta property="og:url" content="http://www.huangjie.name/Threadsource5.html">
 <meta property="og:site_name" content="Jay的记事本">
-<meta property="og:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   上一篇文章带大家认识到了什么是高阶函数，那这一章就带大家看看高阶函数的实际使用场景吧">
+<meta property="og:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.  多线程系列历史文章:Android/java 多线程(一)-Thread的使用以及源码分析Android/java 多线程(二)-Thread的好兄弟HandlerAndroid/java 多线程(三)-HandlerThread的使用场景及源码解析Android/java多线程(四)-In">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-31T14:28:17.413Z">
+<meta property="og:updated_time" content="2018-12-28T12:30:46.749Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kotlin高阶函数使用(二)">
-<meta name="twitter:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   上一篇文章带大家认识到了什么是高阶函数，那这一章就带大家看看高阶函数的实际使用场景吧">
+<meta name="twitter:title" content="Android&#x2F;java 多线程(五)-ThreadPoolExecutor线程池的使用">
+<meta name="twitter:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.  多线程系列历史文章:Android/java 多线程(一)-Thread的使用以及源码分析Android/java 多线程(二)-Thread的好兄弟HandlerAndroid/java 多线程(三)-HandlerThread的使用场景及源码解析Android/java多线程(四)-In">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://www.huangjie.name/kotlin-高阶函数的使用.html"/>
+  <link rel="canonical" href="http://www.huangjie.name/Threadsource5.html"/>
 
 
 
 
 
-  <title>Kotlin高阶函数使用(二) | Jay的记事本</title>
+  <title>Android/java 多线程(五)-ThreadPoolExecutor线程池的使用 | Jay的记事本</title>
   
 
 
@@ -307,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.huangjie.name/kotlin-高阶函数的使用.html">
+    <link itemprop="mainEntityOfPage" href="http://www.huangjie.name/Threadsource5.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄杰">
@@ -324,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Kotlin高阶函数使用(二)</h1>
+          <h1 class="post-title" itemprop="name headline">Android/java 多线程(五)-ThreadPoolExecutor线程池的使用</h1>
         
 
         <div class="post-meta">
@@ -336,8 +336,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-31T22:26:50+08:00">
-                2018-10-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-28T20:24:56+08:00">
+                2018-12-28
               </time>
             
 
@@ -359,8 +359,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Kotlin/" itemprop="url" rel="index">
-                    <span itemprop="name">Kotlin</span>
+                  <a href="/categories/多线程编程/" itemprop="url" rel="index">
+                    <span itemprop="name">多线程编程</span>
                   </a>
                 </span>
 
@@ -390,7 +390,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  733 字
+                  1,902 字
                 </span>
               
 
@@ -406,7 +406,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  7 分钟
                 </span>
               
             </div>
@@ -429,19 +429,82 @@
       
         <p><strong>版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.</strong></p>
 <hr>
+<p>多线程系列历史文章:<br><a href="http://www.huangjie.name/Threadsourse.html">Android/java 多线程(一)-Thread的使用以及源码分析</a><br><a href="http://www.huangjie.name/multithreading2.html">Android/java 多线程(二)-Thread的好兄弟Handler</a><br><a href="http://www.huangjie.name/Threadsourse3.html">Android/java 多线程(三)-HandlerThread的使用场景及源码解析</a><br><a href="http://www.huangjie.name/Threadsourse4.html">Android/java多线程(四)-IntentService</a><br><a id="more"></a></p>
 <blockquote>
-<p>上一篇文章带大家认识到了什么是高阶函数，那这一章就带大家看看高阶函数的实际使用场景吧</p>
+<p>前面几篇文章主要都是介绍的单个线程的运用以及原理，这篇文章开始讲解多个线程的运用</p>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>线程池是一个能对多个线程进行统一管理的一套机制，它具有诸多的优点：</p>
+<ul>
+<li>能对线程进行复用，当有空闲的线程，线程池会复用这些线程而不会去重新创建，节省了资源</li>
+<li>能灵活创建各种线程使用场景，内部封装了常用线程池创建逻辑，并支持自定义线程池逻辑创建</li>
+<li>能准确的对每一个线程进行管理，并能读取每个线程的一写基础信息，方便进行一些逻辑处理</li>
+</ul>
 </blockquote>
-<a id="more"></a>
-<h4 id="提问"><a href="#提问" class="headerlink" title="提问"></a>提问</h4><p>我们想一想，高阶函数带给我们的是什么，我们为什么要使用它呢？因为他可以让我们的方法更简单高效，能去掉冗余的样板代码，让我们关注的逻辑更清晰的展现在我们的面前，所以高阶函数一定是用在我们的方法实现上，而官方api其实已经将我们常用的快捷操作用高阶函数给封装好了，比如<code>with</code>,<code>apply</code>等操作符，所以剩下的就是接口调用了。</p>
-<p>不知道大家用Kotlin实现过OnClickListener接口没有，有3种写法：</p>
-<p>青铜版:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">view.setOnClickListener(object :View.OnClickListener&#123;</span><br><span class="line">           override fun onClick(v: View?) &#123;</span><br><span class="line">                 //啊！我被点击了</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;)</span><br></pre></td></tr></table></figure></p>
-<p>黄金版<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">view.setOnClickListener &#123; v -&gt;</span><br><span class="line">            &#123;</span><br><span class="line">                //啊！我被点击了  </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
-<p>钻石版<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">view.setOnClickListener &#123;</span><br><span class="line">               //啊！我被点击了  </span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure></p>
-<p>我们一对比发现，代码是一步一步被省略的，首先是省略了接口声明(转化为了lambda)，其次是省略了lambda的花括号(Kotlin的特性，当参数只有一个lambda参数的时候，括号可以省略),所以我们要实现的是如何将接口声明转化为lambda,哈哈，这不正是我们高阶函数所擅长的吗</p>
-<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><p>虽然我们不能直接看到kotlin内部的高阶函数的实现方式，但是我们按住<code>ctrl</code>键将鼠标移到方法上是可以看到高阶函数的声明方式的，如你所见是这样的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public final fun setOnClickListener( l: ((v: View!) → Unit)! ): Unit</span><br></pre></td></tr></table></figure></p>
-<p>看过我上篇文章的一眼就能看明白，这是声明了一个以view为参数的无返回值的高阶函数，但他是如何实现的呢，请看以下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public final fun setOnClickListener( l: ((v: View!) → Unit)! ): Unit&#123;</span><br><span class="line">    //将接口实现并赋值给全局变量接口方便接口方法调用</span><br><span class="line">    mOnClickListener = object :View.OnClickListener&#123;</span><br><span class="line">                  override fun onClick(v: View?) &#123;</span><br><span class="line">                           l.invoke(v) //关键是这句</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>原理就是内部将接口给实例化，然后将逻辑通过invoke方法代理出去，这样我们点击事件内部就会走invoke方法啦。而invoke实际是一个接口(翻译成java代码你就明白啦),所以我们在方法外面实现的其实是invoke的接口实现逻辑，注意，这种接口的实现方式只能在接口只有一个方法的时候哦，因为invoke只有一个，哈哈，怎么样，setOnClickListener的处理逻辑小伙伴们明白了吗，举一反三的事情就交给各位勤奋的小伙伴了.</p>
+<p>缺点：<br>线程中的数据传递没有Handler机制方便</p>
+<p>使用场景：<br>具有诸多耗时任务的情况，当系统为每一个任务创建一个线程，会占用系统的大量资源，容易引起界面的卡顿，线程池的复用机制就很好的解决了这个问题</p>
+<h3 id="常用的线程池的使用"><a href="#常用的线程池的使用" class="headerlink" title="常用的线程池的使用"></a>常用的线程池的使用</h3><h5 id="自定义线程池"><a href="#自定义线程池" class="headerlink" title="自定义线程池"></a>自定义线程池</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public ThreadPoolExecutor(int corePoolSize,</span><br><span class="line">                          int maximumPoolSize,</span><br><span class="line">                          long keepAliveTime,</span><br><span class="line">                          TimeUnit unit,</span><br><span class="line">                          BlockingQueue&lt;Runnable&gt; workQueue,</span><br><span class="line">                          ThreadFactory threadFactory,</span><br><span class="line">                          RejectedExecutionHandler handler) &#123;</span><br><span class="line">    if (corePoolSize &lt; 0 ||</span><br><span class="line">        maximumPoolSize &lt;= 0 ||</span><br><span class="line">        maximumPoolSize &lt; corePoolSize ||</span><br><span class="line">        keepAliveTime &lt; 0)</span><br><span class="line">        throw new IllegalArgumentException();</span><br><span class="line">    if (workQueue == null || threadFactory == null || handler == null)</span><br><span class="line">        throw new NullPointerException();</span><br><span class="line">    this.corePoolSize = corePoolSize;</span><br><span class="line">    this.maximumPoolSize = maximumPoolSize;</span><br><span class="line">    this.workQueue = workQueue;</span><br><span class="line">    this.keepAliveTime = unit.toNanos(keepAliveTime);</span><br><span class="line">    this.threadFactory = threadFactory;</span><br><span class="line">    this.handler = handler;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>传入不同的参数，实现的效果也不同,下面说一下每个参数的作用:</p>
+<ul>
+<li>corePoolSize 核心线程数,，即使空闲时仍保留在池中的线程数,除非设置了<code>allowCoreThreadTimeOut</code></li>
+<li>maximumPoolSize 线程池中允许的最大线程数</li>
+<li>keepAliveTime 顾名思义，线程终止前的存活时间，即当线程数大于核心线程数(corePoolSize )时,多余的空闲线程在终止之前等待新任务的最大时间</li>
+<li>TimeUnit  <code>keepAliveTime</code>的单位</li>
+<li>workQueue 在执行任务之前用于保存任务的队列。 该队列将仅保存execute方法提交的Runnable任务。</li>
+<li>ThreadFactory  执行程序创建新线程时使用的工厂</li>
+<li>RejectedExecutionHandler  执行被阻止时使用的处理程序</li>
+</ul>
+<p>这里说一下各个参数的配置套路,当使用<code>execute(Runnable)</code>方法添加一个任务到队列中，如果<code>corePoolSize</code>比<code>maximumPoolSize</code>小，队列满了后就会去创建新的线程,当<code>corePoolSize</code>与<code>maximumPoolSize</code>相等时，就会创建一个固定大小的核心线程池。如果将<code>maximumPoolSize</code>设置为无限大(例如nteger.MAX_VALUE)，则是创建一个能容纳任意数量任务的线程池。<br><code>ThreadFactory</code>的作用是用来创建新的线程的，它是一个接口,实现它即可创建一个新的线程：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public interface ThreadFactory &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Constructs a new &#123;@code Thread&#125;.  Implementations may also initialize</span><br><span class="line">     * priority, name, daemon status, &#123;@code ThreadGroup&#125;, etc.</span><br><span class="line">     *</span><br><span class="line">     * @param r a runnable to be executed by new thread instance</span><br><span class="line">     * @return constructed thread, or &#123;@code null&#125; if the request to</span><br><span class="line">     *         create a thread is rejected</span><br><span class="line">     */</span><br><span class="line">    Thread newThread(Runnable r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>通过它，你可以指定线程的名称，优先级，守护进程等，如果不设置，则会默认使用<code>Executors.defaultThreadFactory()</code>，它会创建一个与所有线程与所有相同的<code>ThreadGroup</code>并且具有相同的优先级和非守护进程状态<code>NORM_PRIORITY</code>。<br><code>workQueue</code>是一个排队策略,一般有三种:</p>
+<ul>
+<li>直接切换：对应<code>SynchronousQueue</code>实现类，将任务直接交给线程处理，不需要另外的控制，通常需要配置一个无限制的<code>maximumPoolSizes</code>，以避免拒绝掉新提交的任务</li>
+<li>无界队列:对应<code>LinkedBlockingDeque</code>实现类，它没有预定的容量，当有新的任务，会在队列中等待，直到加入到corePoolSize的线程中，如果corePoolSize线程一直很忙，也不会去创建新的线程，此时，最大值最小值对它没有任何的影响，每个任务与其他的任务都是独立的，不会互相影响</li>
+<li>有边界的队列：例如<code>ArrayBlockingQueue</code>实现类,它有助于在使用有限的maxPoolSize时防止资源的耗尽，但它更难调整与控制。</li>
+</ul>
+<p>一般情况下我们都可以通过java提供的工厂模式来构造我们的线程池策略，主要提供了以下几种方式:</p>
+<h5 id="newFixedThreadPool"><a href="#newFixedThreadPool" class="headerlink" title="newFixedThreadPool"></a>newFixedThreadPool</h5><p>特点:</p>
+<ul>
+<li>线程重用，如果没有重用的线程，将会创建一个新的线程添加到池中</li>
+<li>适合执行短期异步任务程序，默认为60秒的线程等待时间，超过就会终止与移除</li>
+<li>闲置的线程不会消耗资源</li>
+</ul>
+<p>源码配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public static ExecutorService newCachedThreadPool() &#123;</span><br><span class="line">    return new ThreadPoolExecutor(0, Integer.MAX_VALUE,</span><br><span class="line">                                  60L, TimeUnit.SECONDS,</span><br><span class="line">                                  new SynchronousQueue&lt;Runnable&gt;());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用场景:<br>它创建了一个无限扩大的线程池，但没有核心线程池，因此资源占用少，适合处理一些短期的异步任务</p>
+<h5 id="newFixedThreadPool-1"><a href="#newFixedThreadPool-1" class="headerlink" title="newFixedThreadPool"></a>newFixedThreadPool</h5><p>特点:</p>
+<ul>
+<li>创建一个固定数量的线程池，不能随时的新建线程，如果队列已满，提交了新任务，必须等待一个可用的线程</li>
+<li>线程会一直存在，直到调用shutdown方法</li>
+</ul>
+<p>源码配置:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public static ExecutorService newFixedThreadPool(int nThreads) &#123;</span><br><span class="line">    return new ThreadPoolExecutor(nThreads, nThreads,</span><br><span class="line">                                  0L, TimeUnit.MILLISECONDS,</span><br><span class="line">                                  new LinkedBlockingQueue&lt;Runnable&gt;());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用场景:<br>它创建了一个核心线程数与最大线程数相同的线程池，适用于已知任务数量，对线程数量进行限制的场景</p>
+<h5 id="newWorkStealingPool"><a href="#newWorkStealingPool" class="headerlink" title="newWorkStealingPool"></a>newWorkStealingPool</h5><p>特点:</p>
+<ul>
+<li>创建使用所有给定并行级别的线程池，并且可以使用多个队列来减少占用<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static ExecutorService newWorkStealingPool() &#123;</span><br><span class="line">    return new ForkJoinPool</span><br><span class="line">        (Runtime.getRuntime().availableProcessors(),</span><br><span class="line">         ForkJoinPool.defaultForkJoinWorkerThreadFactory,</span><br><span class="line">         null, true);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>使用场景:<br>它能创建一个拥有多个任务队列的线程池，可以减少链接数。并且它是默认创建当前可用cpu数量的线程来并行执行，因此适用于非常耗时的操作，并且可以并行执行</p>
+<h5 id="newSingleThreadExecutor"><a href="#newSingleThreadExecutor" class="headerlink" title="newSingleThreadExecutor"></a>newSingleThreadExecutor</h5><p>特点：</p>
+<ul>
+<li>有且只有一个任务处于活动状态</li>
+<li>先提交的先执行，有任务顺序</li>
+<li>当任务出现异常，会另创建一个新的线程替换<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static ExecutorService newSingleThreadExecutor() &#123;</span><br><span class="line">    return new FinalizableDelegatedExecutorService</span><br><span class="line">        (new ThreadPoolExecutor(1, 1,</span><br><span class="line">                                0L, TimeUnit.MILLISECONDS,</span><br><span class="line">                                new LinkedBlockingQueue&lt;Runnable&gt;()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>使用场景:<br>它是一个单例线程，并且有执行顺序，所以适用于有执行顺序的任务，并且有且只有一个任务是执行中的</p>
+<h5 id="ScheduledThreadPoolExecutor"><a href="#ScheduledThreadPoolExecutor" class="headerlink" title="ScheduledThreadPoolExecutor"></a>ScheduledThreadPoolExecutor</h5><p>特点：</p>
+<ul>
+<li>能设置延迟时间，能定期执行</li>
+<li>空闲的线程会保留</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public ScheduledThreadPoolExecutor(int corePoolSize) &#123;</span><br><span class="line">    super(corePoolSize, Integer.MAX_VALUE,</span><br><span class="line">          DEFAULT_KEEPALIVE_MILLIS, MILLISECONDS,</span><br><span class="line">          new DelayedWorkQueue());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用场景：<br>它具有定时特性，因此可以用来执行周期行的任务</p>
+<p>五大线程池介绍完毕，此外还有其他的常用方法:</p>
+<ul>
+<li><code>execute(Runnable command)</code> 提交任务，在将来的某个时间点执行任务</li>
+<li><code>afterExecute(Runnale r,Throwable t)</code> 在指定的Runnale执行后调用此方法</li>
+<li><code>beforeExecute(Thread t,Runnable r)</code>在给定的线程中执行给定的Runnable之前调用方法</li>
+<li><code>funalize</code> 当执行器不再被引用并且没有线程时，调用<code>shundown</code></li>
+<li>shundown 启动有序关闭，先前提交的任务会执行，执行完毕后关闭</li>
+<li><code>shundownNow</code> 主动停止执行中的任务，并返回正在执行等待的任务列表</li>
+</ul>
 
       
     </div>
@@ -501,8 +564,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Kotlin-Higher-order-function1.html" rel="next" title="Kotlin高阶函数使用(一)">
-                <i class="fa fa-chevron-left"></i> Kotlin高阶函数使用(一)
+              <a href="/Threadsource4.html" rel="next" title="Android/java多线程(四)-IntentService">
+                <i class="fa fa-chevron-left"></i> Android/java多线程(四)-IntentService
               </a>
             
           </div>
@@ -510,10 +573,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/androidndkstudyfirst.html" rel="prev" title="安卓小白之ndk入门篇">
-                安卓小白之ndk入门篇 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -675,7 +734,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#提问"><span class="nav-number">1.</span> <span class="nav-text">提问</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用的线程池的使用"><span class="nav-number">2.</span> <span class="nav-text">常用的线程池的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#自定义线程池"><span class="nav-number">2.0.1.</span> <span class="nav-text">自定义线程池</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#newFixedThreadPool"><span class="nav-number">2.0.2.</span> <span class="nav-text">newFixedThreadPool</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#newFixedThreadPool-1"><span class="nav-number">2.0.3.</span> <span class="nav-text">newFixedThreadPool</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#newWorkStealingPool"><span class="nav-number">2.0.4.</span> <span class="nav-text">newWorkStealingPool</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#newSingleThreadExecutor"><span class="nav-number">2.0.5.</span> <span class="nav-text">newSingleThreadExecutor</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ScheduledThreadPoolExecutor"><span class="nav-number">2.0.6.</span> <span class="nav-text">ScheduledThreadPoolExecutor</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

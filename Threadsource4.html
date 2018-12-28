@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   上一篇文章带大家认识到了什么是高阶函数，那这一章就带大家看看高阶函数的实际使用场景吧">
+<meta name="description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.  往期文章:Android/java 多线程(一)-Thread的使用以及源码分析Android/java 多线程(二)-Thread的好兄弟HandlerAndroid/java 多线程(三)-HandlerTh">
 <meta name="keywords" content="Android">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Kotlin高阶函数使用(二)">
-<meta property="og:url" content="http://www.huangjie.name/kotlin-高阶函数的使用.html">
+<meta property="og:title" content="Android&#x2F;java多线程(四)-IntentService">
+<meta property="og:url" content="http://www.huangjie.name/Threadsource4.html">
 <meta property="og:site_name" content="Jay的记事本">
-<meta property="og:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   上一篇文章带大家认识到了什么是高阶函数，那这一章就带大家看看高阶函数的实际使用场景吧">
+<meta property="og:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.  往期文章:Android/java 多线程(一)-Thread的使用以及源码分析Android/java 多线程(二)-Thread的好兄弟HandlerAndroid/java 多线程(三)-HandlerThread的使用场景及源码解析">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-31T14:28:17.413Z">
+<meta property="og:updated_time" content="2018-12-28T12:28:39.843Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kotlin高阶函数使用(二)">
-<meta name="twitter:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   上一篇文章带大家认识到了什么是高阶函数，那这一章就带大家看看高阶函数的实际使用场景吧">
+<meta name="twitter:title" content="Android&#x2F;java多线程(四)-IntentService">
+<meta name="twitter:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.  往期文章:Android/java 多线程(一)-Thread的使用以及源码分析Android/java 多线程(二)-Thread的好兄弟HandlerAndroid/java 多线程(三)-HandlerThread的使用场景及源码解析">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://www.huangjie.name/kotlin-高阶函数的使用.html"/>
+  <link rel="canonical" href="http://www.huangjie.name/Threadsource4.html"/>
 
 
 
 
 
-  <title>Kotlin高阶函数使用(二) | Jay的记事本</title>
+  <title>Android/java多线程(四)-IntentService | Jay的记事本</title>
   
 
 
@@ -307,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.huangjie.name/kotlin-高阶函数的使用.html">
+    <link itemprop="mainEntityOfPage" href="http://www.huangjie.name/Threadsource4.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄杰">
@@ -324,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Kotlin高阶函数使用(二)</h1>
+          <h1 class="post-title" itemprop="name headline">Android/java多线程(四)-IntentService</h1>
         
 
         <div class="post-meta">
@@ -336,8 +336,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-31T22:26:50+08:00">
-                2018-10-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-28T20:24:44+08:00">
+                2018-12-28
               </time>
             
 
@@ -359,8 +359,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Kotlin/" itemprop="url" rel="index">
-                    <span itemprop="name">Kotlin</span>
+                  <a href="/categories/多线程编程/" itemprop="url" rel="index">
+                    <span itemprop="name">多线程编程</span>
                   </a>
                 </span>
 
@@ -390,7 +390,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  733 字
+                  1,580 字
                 </span>
               
 
@@ -406,7 +406,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  8 分钟
                 </span>
               
             </div>
@@ -429,19 +429,19 @@
       
         <p><strong>版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.</strong></p>
 <hr>
-<blockquote>
-<p>上一篇文章带大家认识到了什么是高阶函数，那这一章就带大家看看高阶函数的实际使用场景吧</p>
-</blockquote>
-<a id="more"></a>
-<h4 id="提问"><a href="#提问" class="headerlink" title="提问"></a>提问</h4><p>我们想一想，高阶函数带给我们的是什么，我们为什么要使用它呢？因为他可以让我们的方法更简单高效，能去掉冗余的样板代码，让我们关注的逻辑更清晰的展现在我们的面前，所以高阶函数一定是用在我们的方法实现上，而官方api其实已经将我们常用的快捷操作用高阶函数给封装好了，比如<code>with</code>,<code>apply</code>等操作符，所以剩下的就是接口调用了。</p>
-<p>不知道大家用Kotlin实现过OnClickListener接口没有，有3种写法：</p>
-<p>青铜版:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">view.setOnClickListener(object :View.OnClickListener&#123;</span><br><span class="line">           override fun onClick(v: View?) &#123;</span><br><span class="line">                 //啊！我被点击了</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;)</span><br></pre></td></tr></table></figure></p>
-<p>黄金版<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">view.setOnClickListener &#123; v -&gt;</span><br><span class="line">            &#123;</span><br><span class="line">                //啊！我被点击了  </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
-<p>钻石版<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">view.setOnClickListener &#123;</span><br><span class="line">               //啊！我被点击了  </span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure></p>
-<p>我们一对比发现，代码是一步一步被省略的，首先是省略了接口声明(转化为了lambda)，其次是省略了lambda的花括号(Kotlin的特性，当参数只有一个lambda参数的时候，括号可以省略),所以我们要实现的是如何将接口声明转化为lambda,哈哈，这不正是我们高阶函数所擅长的吗</p>
-<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><p>虽然我们不能直接看到kotlin内部的高阶函数的实现方式，但是我们按住<code>ctrl</code>键将鼠标移到方法上是可以看到高阶函数的声明方式的，如你所见是这样的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public final fun setOnClickListener( l: ((v: View!) → Unit)! ): Unit</span><br></pre></td></tr></table></figure></p>
-<p>看过我上篇文章的一眼就能看明白，这是声明了一个以view为参数的无返回值的高阶函数，但他是如何实现的呢，请看以下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public final fun setOnClickListener( l: ((v: View!) → Unit)! ): Unit&#123;</span><br><span class="line">    //将接口实现并赋值给全局变量接口方便接口方法调用</span><br><span class="line">    mOnClickListener = object :View.OnClickListener&#123;</span><br><span class="line">                  override fun onClick(v: View?) &#123;</span><br><span class="line">                           l.invoke(v) //关键是这句</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>原理就是内部将接口给实例化，然后将逻辑通过invoke方法代理出去，这样我们点击事件内部就会走invoke方法啦。而invoke实际是一个接口(翻译成java代码你就明白啦),所以我们在方法外面实现的其实是invoke的接口实现逻辑，注意，这种接口的实现方式只能在接口只有一个方法的时候哦，因为invoke只有一个，哈哈，怎么样，setOnClickListener的处理逻辑小伙伴们明白了吗，举一反三的事情就交给各位勤奋的小伙伴了.</p>
+<p>往期文章:<br><a href="http://www.huangjie.name/Threadsourse.html">Android/java 多线程(一)-Thread的使用以及源码分析</a><br><a href="http://www.huangjie.name/multithreading2.html">Android/java 多线程(二)-Thread的好兄弟Handler</a><br><a href="http://www.huangjie.name/Threadsourse3.html">Android/java 多线程(三)-HandlerThread的使用场景及源码解析</a><br><a id="more"></a></p>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>一个方便的能在子线程中运行的服务，一个IntentService对应一个线程，由于是四大组件，优先级比线程高，不易被系统回收，处理完任务还能主动回收，因此用来处理后台下载任务极为适合</p>
+<h3 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h3><p>先继承此类，重写必要的方法，我们的逻辑处理是在<code>onHandleIntent()</code>方法中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by hj on 2018/12/21.</span><br><span class="line"> * 说明：</span><br><span class="line"> */</span><br><span class="line">public class MyIntentService extends IntentService &#123;</span><br><span class="line"></span><br><span class="line">    public MyIntentService() &#123;</span><br><span class="line">        super(&quot;MyIntentService&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onHandleIntent(@Nullable Intent intent) &#123;</span><br><span class="line">        //核心方法，处理异步逻辑</span><br><span class="line">        Log.i(&quot;HJ&quot;,&quot;onHandleIntent&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int onStartCommand(@Nullable Intent intent, int flags, int startId) &#123;</span><br><span class="line">        Log.i(&quot;HJ&quot;,&quot;onStartCommand&quot;);</span><br><span class="line">        return super.onStartCommand(intent, flags, startId);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onCreate() &#123;</span><br><span class="line">        Log.i(&quot;HJ&quot;, &quot;onCreate&quot;);</span><br><span class="line">        super.onCreate();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onDestroy() &#123;</span><br><span class="line">        Log.i(&quot;HJ&quot;,&quot;onDestroy&quot;);</span><br><span class="line">        super.onDestroy();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在清单文件中注册:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;service android:name=&quot;.MyIntentService&quot;&gt;</span><br><span class="line">    &lt;intent-filter&gt;</span><br><span class="line">        &lt;action android:name=&quot;com.jay.thread&quot;/&gt;</span><br><span class="line">    &lt;/intent-filter&gt;</span><br><span class="line">&lt;/service&gt;</span><br></pre></td></tr></table></figure></p>
+<p>在Activity中运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = new Intent(&quot;com.jay.thread&quot;);</span><br><span class="line">intent.setPackage(getPackageName());</span><br><span class="line">startService(intent);</span><br></pre></td></tr></table></figure></p>
+<p>打印的结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2018-12-21 15:03:14.848 4241-4241/com.zj.example.customview.funnel I/HJ: onCreate</span><br><span class="line">2018-12-21 15:03:14.850 4241-4241/com.zj.example.customview.funnel I/HJ: onStartCommand</span><br><span class="line">2018-12-21 15:03:14.850 4241-4258/com.zj.example.customview.funnel I/HJ: onHandleIntent</span><br><span class="line">2018-12-21 15:03:16.225 4241-4241/com.zj.example.customview.funnel I/HJ: onDestroy</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，它的生命周期是<code>onCreate()</code>-&gt;<code>onStartCommand()</code>-&gt;<code>onHandleIntent()</code>-&gt;<code>onDestroy()</code>,而且当它把<code>onHandleIntent()</code>方法里的逻辑处理完毕后会自动调用<code>onDestroy</code>来结束，所以我们不需要主动来关闭它。</p>
+<p>而且说到隐式启动Service，这里要叨逼两句，如果我把上面的<code>intent.setPackage(getPackageName())</code>去掉那么在5.0以上机型会遇到这种异常：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Caused by: java.lang.IllegalArgumentException: Service Intent must be explicit: Intent &#123; act=com.jay.thread &#125;</span><br><span class="line">       at android.app.ContextImpl.validateServiceIntent(ContextImpl.java:1448)</span><br><span class="line">       at android.app.ContextImpl.startServiceCommon(ContextImpl.java:1489)</span><br><span class="line">       at android.app.ContextImpl.startService(ContextImpl.java:1461)</span><br><span class="line">       at android.content.ContextWrapper.startService(ContextWrapper.java:644)</span><br><span class="line">       at com.zj.example.customview.funnel.MainActivity.onCreate(MainActivity.java:34)</span><br><span class="line">       at android.app.Activity.performCreate(Activity.java:6975)</span><br><span class="line">       at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1213)</span><br><span class="line">       at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2770)</span><br><span class="line">       at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:2892) </span><br><span class="line">       at android.app.ActivityThread.-wrap11(Unknown Source:0) </span><br><span class="line">       at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1593) </span><br><span class="line">       at android.os.Handler.dispatchMessage(Handler.java:105) </span><br><span class="line">       at android.os.Looper.loop(Looper.java:164) </span><br><span class="line">       at android.app.ActivityThread.main(ActivityThread.java:6541) </span><br><span class="line">       at java.lang.reflect.Method.invoke(Native Method) </span><br><span class="line">       at com.android.internal.os.Zygote$MethodAndArgsCaller.run(Zygote.java:240) </span><br><span class="line">       at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:767)</span><br></pre></td></tr></table></figure></p>
+<p>原因是在5.0源码中谷歌做了限制，如果component和package都为空，那么就会抛出这个异常，详见源码(源码位置：sdk/sources/android21/android/app/ContextImpl.java）:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private void validateServiceIntent(Intent service) &#123;</span><br><span class="line">       if (service.getComponent() == null &amp;&amp; service.getPackage() == null) &#123;</span><br><span class="line">           if (getApplicationInfo().targetSdkVersion &gt;= Build.VERSION_CODES.LOLLIPOP) &#123;</span><br><span class="line">               IllegalArgumentException ex = new IllegalArgumentException(</span><br><span class="line">                       &quot;Service Intent must be explicit: &quot; + service);</span><br><span class="line">               throw ex;</span><br><span class="line">           &#125; else &#123;</span><br><span class="line">               Log.w(TAG, &quot;Implicit intents with startService are not safe: &quot; + service</span><br><span class="line">                       + &quot; &quot; + Debug.getCallers(2, 3));</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>So,我们只要保证其中一个不为空就可以啦.</p>
+<h3 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h3><p>源码还是比较简单，可以先从<code>onCreate()</code>方法看起，具体逻辑见注释：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line">public abstract class IntentService extends Service &#123;</span><br><span class="line">    private volatile Looper mServiceLooper; //HandlerThread中的Looper</span><br><span class="line">    private volatile ServiceHandler mServiceHandler; //逻辑处理Handler</span><br><span class="line">    private String mName; //线程名称</span><br><span class="line">    private boolean mRedelivery; //是否保证intent在服务被杀死后能被接收到</span><br><span class="line"></span><br><span class="line">    //子线程Handler的逻辑处理类</span><br><span class="line">    private final class ServiceHandler extends Handler &#123;</span><br><span class="line">        public ServiceHandler(Looper looper) &#123;</span><br><span class="line">            super(looper);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void handleMessage(Message msg) &#123;</span><br><span class="line">            onHandleIntent((Intent)msg.obj); //onHandleIntent方法回调</span><br><span class="line">            stopSelf(msg.arg1); //自动回收</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public IntentService(String name) &#123;</span><br><span class="line">        super();</span><br><span class="line">        mName = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line">   /**</span><br><span class="line">   *此方法的作用：如果为true,则将Service StartResult状态置为START_REDELIVER_INTENT,这样当onHandleIntent方法还未回调的时候服务被回收，重启的时候onHandleIntent方法会被回调,发送上一次回收前的intent,如果有多个intent,将会发送最后一个意图</span><br><span class="line">   *</span><br><span class="line">   **/</span><br><span class="line">    public void setIntentRedelivery(boolean enabled) &#123;</span><br><span class="line">        mRedelivery = enabled;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onCreate()&#123;</span><br><span class="line">        super.onCreate();</span><br><span class="line">        //创建HandlerThread 并将线程命名为IntentService+自定义名称的形式</span><br><span class="line">        HandlerThread thread = new HandlerThread(&quot;IntentService[&quot; + mName + &quot;]&quot;);</span><br><span class="line">        thread.start();</span><br><span class="line"></span><br><span class="line">        mServiceLooper = thread.getLooper();</span><br><span class="line">        mServiceHandler = new ServiceHandler(mServiceLooper); //将HandlerThread里初始化的looper设置给子线程Handler</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onStart(@Nullable Intent intent, int startId) &#123;</span><br><span class="line">        Message msg = mServiceHandler.obtainMessage();</span><br><span class="line">        msg.arg1 = startId;</span><br><span class="line">        msg.obj = intent;  //我们在onHandleIntent方法里接收的intent是在这里赋值的</span><br><span class="line">        mServiceHandler.sendMessage(msg);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * You should not override this method for your IntentService. Instead,</span><br><span class="line">     * override &#123;@link #onHandleIntent&#125;, which the system calls when the IntentService</span><br><span class="line">     * receives a start request.</span><br><span class="line">     * @see android.app.Service#onStartCommand</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public int onStartCommand(@Nullable Intent intent, int flags, int startId) &#123;</span><br><span class="line">        onStart(intent, startId);</span><br><span class="line">        //StartResult状态设置是在这里</span><br><span class="line">        return mRedelivery ? START_REDELIVER_INTENT : START_NOT_STICKY;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onDestroy() &#123;</span><br><span class="line">        mServiceLooper.quit();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //这里将返回值置为了null，所以不建议使用bindService的形式来启动它，如果需要，建议直接使用Service</span><br><span class="line">    @Override</span><br><span class="line">    @Nullable</span><br><span class="line">    public IBinder onBind(Intent intent) &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * This method is invoked on the worker thread with a request to process.</span><br><span class="line">     * Only one Intent is processed at a time, but the processing happens on a</span><br><span class="line">     * worker thread that runs independently from other application logic.</span><br><span class="line">     * So, if this code takes a long time, it will hold up other requests to</span><br><span class="line">     * the same IntentService, but it will not hold up anything else.</span><br><span class="line">     * When all requests have been handled, the IntentService stops itself,</span><br><span class="line">     * so you should not call &#123;@link #stopSelf&#125;.</span><br><span class="line">     *</span><br><span class="line">     * @param intent The value passed to &#123;@link</span><br><span class="line">     *               android.content.Context#startService(Intent)&#125;.</span><br><span class="line">     *               This may be null if the service is being restarted after</span><br><span class="line">     *               its process has gone away; see</span><br><span class="line">     *               &#123;@link android.app.Service#onStartCommand&#125;</span><br><span class="line">     *               for details.</span><br><span class="line">     */</span><br><span class="line">    @WorkerThread</span><br><span class="line">    protected abstract void onHandleIntent(@Nullable Intent intent);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们在源码中看到，内部实现其实还是<code>HandlerThread</code>+<code>Handler</code>的方式，<code>onCreate()</code>中做了一些初始化的操作，在<code>onStart</code>中将<code>intent</code>用obj的方式传递给了<code>ServiceHandler</code>,然后在<code>handleMessage</code>中拿到intent并调用了<code>onHandleIntent</code>回调出来，这样一个完整的线程有序循环就建立了，而且因为是四大组件，存活率有很大的提升，这是直接用线程实现所没有的优势</p>
+<p>看完了源码，有没有对HandlerThread+Handler的应用进一步加深呢？</p>
 
       
     </div>
@@ -501,8 +501,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Kotlin-Higher-order-function1.html" rel="next" title="Kotlin高阶函数使用(一)">
-                <i class="fa fa-chevron-left"></i> Kotlin高阶函数使用(一)
+              <a href="/Threadsource3.html" rel="next" title="Android/java多线程(三)-HandlerThread的使用场景及源码解析">
+                <i class="fa fa-chevron-left"></i> Android/java多线程(三)-HandlerThread的使用场景及源码解析
               </a>
             
           </div>
@@ -511,8 +511,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/androidndkstudyfirst.html" rel="prev" title="安卓小白之ndk入门篇">
-                安卓小白之ndk入门篇 <i class="fa fa-chevron-right"></i>
+              <a href="/Threadsource5.html" rel="prev" title="Android/java 多线程(五)-ThreadPoolExecutor线程池的使用">
+                Android/java 多线程(五)-ThreadPoolExecutor线程池的使用 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -675,7 +675,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#提问"><span class="nav-number">1.</span> <span class="nav-text">提问</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单使用"><span class="nav-number">2.</span> <span class="nav-text">简单使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源码解析"><span class="nav-number">3.</span> <span class="nav-text">源码解析</span></a></li></ol></div>
             
 
           </div>

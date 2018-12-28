@@ -4,6 +4,66 @@
 
     
   <url>
+    <loc>http://www.huangjie.name/Threadsource5.html</loc>
+    <lastmod>2018-12-28T12:30:46.749Z</lastmod>
+    <data>
+        <display>
+        <title>Android/java 多线程(五)-ThreadPoolExecutor线程池的使用</title>
+        <pubTime>2018-12-28T12:24:56.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="多线程编程" url="http://www.huangjie.name/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.huangjie.name/Threadsource4.html</loc>
+    <lastmod>2018-12-28T12:28:39.843Z</lastmod>
+    <data>
+        <display>
+        <title>Android/java多线程(四)-IntentService</title>
+        <pubTime>2018-12-28T12:24:44.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="多线程编程" url="http://www.huangjie.name/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.huangjie.name/Threadsource3.html</loc>
+    <lastmod>2018-12-28T12:26:37.371Z</lastmod>
+    <data>
+        <display>
+        <title>Android/java多线程(三)-HandlerThread的使用场景及源码解析</title>
+        <pubTime>2018-12-28T12:24:33.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="多线程编程" url="http://www.huangjie.name/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.huangjie.name/multithreading2.html</loc>
     <lastmod>2018-12-20T14:58:05.608Z</lastmod>
     <data>
