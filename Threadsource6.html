@@ -82,14 +82,14 @@
 <meta name="description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.  多线程系列历史文章:Android/java 多线程(一)-Thread的使用以及源码分析Android/java 多线程(二)-Thread的好兄弟HandlerAndroid/java 多线程(三)-Hand">
 <meta name="keywords" content="Android">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android&#x2F;java 多线程(五)-ThreadPoolExecutor线程池的使用">
-<meta property="og:url" content="http://www.huangjie.name/Threadsource5.html">
+<meta property="og:title" content="Android&#x2F;java 多线程(六)-AsyncTask使用详解及源码分析">
+<meta property="og:url" content="http://www.huangjie.name/Threadsource6.html">
 <meta property="og:site_name" content="Jay的记事本">
 <meta property="og:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.  多线程系列历史文章:Android/java 多线程(一)-Thread的使用以及源码分析Android/java 多线程(二)-Thread的好兄弟HandlerAndroid/java 多线程(三)-HandlerThread的使用场景及源码解析Android/java多线程(四)-In">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-28T12:30:46.749Z">
+<meta property="og:updated_time" content="2018-12-29T13:13:30.490Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android&#x2F;java 多线程(五)-ThreadPoolExecutor线程池的使用">
+<meta name="twitter:title" content="Android&#x2F;java 多线程(六)-AsyncTask使用详解及源码分析">
 <meta name="twitter:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.  多线程系列历史文章:Android/java 多线程(一)-Thread的使用以及源码分析Android/java 多线程(二)-Thread的好兄弟HandlerAndroid/java 多线程(三)-HandlerThread的使用场景及源码解析Android/java多线程(四)-In">
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://www.huangjie.name/Threadsource5.html"/>
+  <link rel="canonical" href="http://www.huangjie.name/Threadsource6.html"/>
 
 
 
 
 
-  <title>Android/java 多线程(五)-ThreadPoolExecutor线程池的使用 | Jay的记事本</title>
+  <title>Android/java 多线程(六)-AsyncTask使用详解及源码分析 | Jay的记事本</title>
   
 
 
@@ -307,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.huangjie.name/Threadsource5.html">
+    <link itemprop="mainEntityOfPage" href="http://www.huangjie.name/Threadsource6.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄杰">
@@ -324,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Android/java 多线程(五)-ThreadPoolExecutor线程池的使用</h1>
+          <h1 class="post-title" itemprop="name headline">Android/java 多线程(六)-AsyncTask使用详解及源码分析</h1>
         
 
         <div class="post-meta">
@@ -336,8 +336,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-28T20:24:56+08:00">
-                2018-12-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-29T21:10:01+08:00">
+                2018-12-29
               </time>
             
 
@@ -390,7 +390,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,902 字
+                  2,022 字
                 </span>
               
 
@@ -406,7 +406,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  7 分钟
+                  9 分钟
                 </span>
               
             </div>
@@ -429,82 +429,39 @@
       
         <p><strong>版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.</strong></p>
 <hr>
-<p>多线程系列历史文章:<br><a href="http://www.huangjie.name/Threadsourse.html">Android/java 多线程(一)-Thread的使用以及源码分析</a><br><a href="http://www.huangjie.name/multithreading2.html">Android/java 多线程(二)-Thread的好兄弟Handler</a><br><a href="http://www.huangjie.name/Threadsourse3.html">Android/java 多线程(三)-HandlerThread的使用场景及源码解析</a><br><a href="http://www.huangjie.name/Threadsourse4.html">Android/java多线程(四)-IntentService</a><br><a id="more"></a></p>
-<blockquote>
-<p>前面几篇文章主要都是介绍的单个线程的运用以及原理，这篇文章开始讲解多个线程的运用</p>
-<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>线程池是一个能对多个线程进行统一管理的一套机制，它具有诸多的优点：</p>
+<p>多线程系列历史文章:<br><a href="http://www.huangjie.name/Threadsourse.html">Android/java 多线程(一)-Thread的使用以及源码分析</a><br><a href="http://www.huangjie.name/multithreading2.html">Android/java 多线程(二)-Thread的好兄弟Handler</a><br><a href="http://www.huangjie.name/Threadsourse3.html">Android/java 多线程(三)-HandlerThread的使用场景及源码解析</a><br><a href="http://www.huangjie.name/Threadsourse4.html">Android/java多线程(四)-IntentService</a><br><a href="http://www.huangjie.name/Threadsource5.html">Android/java 多线程(五)-ThreadPoolExecutor线程池的使用</a></p>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>一个Android封装好的轻量级异步抽象类，使用的话需要继承并重写部分方法</p>
+<h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>方便的实现多线程，并能方便的实现主线程与工作线程的通信，并且逻辑都在一个类中，不同于Handler的实现机制在不同的回调中，内部采用线程池管理策略，方便管理</p>
+<h3 id="使用介绍"><a href="#使用介绍" class="headerlink" title="使用介绍"></a>使用介绍</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public abstract class AsyncTask&lt;Params, Progress, Result&gt; &#123;</span><br><span class="line">   ....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到有三个泛型参数，它们的作用分别是：</p>
 <ul>
-<li>能对线程进行复用，当有空闲的线程，线程池会复用这些线程而不会去重新创建，节省了资源</li>
-<li>能灵活创建各种线程使用场景，内部封装了常用线程池创建逻辑，并支持自定义线程池逻辑创建</li>
-<li>能准确的对每一个线程进行管理，并能读取每个线程的一写基础信息，方便进行一些逻辑处理</li>
+<li>Params 传递给异步任务的参数类型，对应execute()方法和doInBackground()中的参数类型</li>
+<li>Progress 进度跟新参数类型,对应onProgressUpdate()方法返回的参数类型</li>
+<li>Result 异步任务执行完毕的返回结果类型，对应doInBackground()方法的返回结果类型和onPostExecute()方法的参数类型</li>
 </ul>
-</blockquote>
-<p>缺点：<br>线程中的数据传递没有Handler机制方便</p>
-<p>使用场景：<br>具有诸多耗时任务的情况，当系统为每一个任务创建一个线程，会占用系统的大量资源，容易引起界面的卡顿，线程池的复用机制就很好的解决了这个问题</p>
-<h3 id="常用的线程池的使用"><a href="#常用的线程池的使用" class="headerlink" title="常用的线程池的使用"></a>常用的线程池的使用</h3><h5 id="自定义线程池"><a href="#自定义线程池" class="headerlink" title="自定义线程池"></a>自定义线程池</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public ThreadPoolExecutor(int corePoolSize,</span><br><span class="line">                          int maximumPoolSize,</span><br><span class="line">                          long keepAliveTime,</span><br><span class="line">                          TimeUnit unit,</span><br><span class="line">                          BlockingQueue&lt;Runnable&gt; workQueue,</span><br><span class="line">                          ThreadFactory threadFactory,</span><br><span class="line">                          RejectedExecutionHandler handler) &#123;</span><br><span class="line">    if (corePoolSize &lt; 0 ||</span><br><span class="line">        maximumPoolSize &lt;= 0 ||</span><br><span class="line">        maximumPoolSize &lt; corePoolSize ||</span><br><span class="line">        keepAliveTime &lt; 0)</span><br><span class="line">        throw new IllegalArgumentException();</span><br><span class="line">    if (workQueue == null || threadFactory == null || handler == null)</span><br><span class="line">        throw new NullPointerException();</span><br><span class="line">    this.corePoolSize = corePoolSize;</span><br><span class="line">    this.maximumPoolSize = maximumPoolSize;</span><br><span class="line">    this.workQueue = workQueue;</span><br><span class="line">    this.keepAliveTime = unit.toNanos(keepAliveTime);</span><br><span class="line">    this.threadFactory = threadFactory;</span><br><span class="line">    this.handler = handler;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>传入不同的参数，实现的效果也不同,下面说一下每个参数的作用:</p>
+<p>如果不需要使用到，则可以使用<code>Void</code>类代替</p>
+<p>简单示例：</p>
+<p>申明一个实现类TestAsyncTask，主要打印方法的执行顺序以及参数及运行的线程名称<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by hj on 2018/12/29.</span><br><span class="line"> * 说明：</span><br><span class="line"> */</span><br><span class="line">public class TestAsyncTask extends AsyncTask&lt;String,Integer,Integer&gt; &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onPostExecute(Integer integer) &#123;</span><br><span class="line">        super.onPostExecute(integer);</span><br><span class="line">        Log.i(&quot;HJ&quot;,&quot;onPostExecute方法接收的参数值:&quot;+integer+&quot;--&quot;+runThreadName());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onPreExecute() &#123;</span><br><span class="line">        super.onPreExecute();</span><br><span class="line">        Log.i(&quot;HJ&quot;,&quot;onPreExecute&quot;+&quot;--&quot;+runThreadName());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onProgressUpdate(Integer... values) &#123;</span><br><span class="line">        super.onProgressUpdate(values);</span><br><span class="line">        Log.i(&quot;HJ&quot;,&quot;onProgressUpdate:&quot;+ Arrays.toString(values)+&quot;--&quot;+runThreadName());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected Integer doInBackground(String... strings) &#123;</span><br><span class="line">        Log.i(&quot;HJ&quot;,&quot;doInBackground()&quot;+&quot;--&quot;+runThreadName());</span><br><span class="line">        publishProgress(50);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private String runThreadName()&#123;</span><br><span class="line">        return &quot;运行在:&quot;+Thread.currentThread().getName()+&quot;线程&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//必须是在主线程中</span><br><span class="line"> TestAsyncTask task = new TestAsyncTask();</span><br><span class="line">        task.execute();</span><br></pre></td></tr></table></figure></p>
+<p>打印结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">I/HJ: onPreExecute--运行在:main线程</span><br><span class="line">I/HJ: doInBackground()--运行在:AsyncTask #1线程</span><br><span class="line">I/HJ: onProgressUpdate:[50]--运行在:main线程</span><br><span class="line">I/HJ: onPostExecute方法接收的参数值:1--运行在:main线程</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，只有doInBackground()方法执行在异步线程中，其他的方法都是运行在主线程中，方法执行顺序为：<br>onPreExecute()—-&gt;doInBackground()—-&gt;调用publishProgress()方法—-&gt;onProgressUpdate()——&gt;onPostExecute()</p>
+<p>下面介绍一下方法的具体作用:</p>
 <ul>
-<li>corePoolSize 核心线程数,，即使空闲时仍保留在池中的线程数,除非设置了<code>allowCoreThreadTimeOut</code></li>
-<li>maximumPoolSize 线程池中允许的最大线程数</li>
-<li>keepAliveTime 顾名思义，线程终止前的存活时间，即当线程数大于核心线程数(corePoolSize )时,多余的空闲线程在终止之前等待新任务的最大时间</li>
-<li>TimeUnit  <code>keepAliveTime</code>的单位</li>
-<li>workQueue 在执行任务之前用于保存任务的队列。 该队列将仅保存execute方法提交的Runnable任务。</li>
-<li>ThreadFactory  执行程序创建新线程时使用的工厂</li>
-<li>RejectedExecutionHandler  执行被阻止时使用的处理程序</li>
+<li>onPreExecute  在进行异步任务处理前的一些数据准备工作</li>
+<li>doInBackground 处理异步任务逻辑，内部可以调用publishProgress更新进度</li>
+<li>onProgressUpdate 进度更新回调</li>
+<li>onPostExecute  异步处理完毕后的结果回调 ，处理ui逻辑</li>
 </ul>
-<p>这里说一下各个参数的配置套路,当使用<code>execute(Runnable)</code>方法添加一个任务到队列中，如果<code>corePoolSize</code>比<code>maximumPoolSize</code>小，队列满了后就会去创建新的线程,当<code>corePoolSize</code>与<code>maximumPoolSize</code>相等时，就会创建一个固定大小的核心线程池。如果将<code>maximumPoolSize</code>设置为无限大(例如nteger.MAX_VALUE)，则是创建一个能容纳任意数量任务的线程池。<br><code>ThreadFactory</code>的作用是用来创建新的线程的，它是一个接口,实现它即可创建一个新的线程：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public interface ThreadFactory &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Constructs a new &#123;@code Thread&#125;.  Implementations may also initialize</span><br><span class="line">     * priority, name, daemon status, &#123;@code ThreadGroup&#125;, etc.</span><br><span class="line">     *</span><br><span class="line">     * @param r a runnable to be executed by new thread instance</span><br><span class="line">     * @return constructed thread, or &#123;@code null&#125; if the request to</span><br><span class="line">     *         create a thread is rejected</span><br><span class="line">     */</span><br><span class="line">    Thread newThread(Runnable r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>通过它，你可以指定线程的名称，优先级，守护进程等，如果不设置，则会默认使用<code>Executors.defaultThreadFactory()</code>，它会创建一个与所有线程与所有相同的<code>ThreadGroup</code>并且具有相同的优先级和非守护进程状态<code>NORM_PRIORITY</code>。<br><code>workQueue</code>是一个排队策略,一般有三种:</p>
-<ul>
-<li>直接切换：对应<code>SynchronousQueue</code>实现类，将任务直接交给线程处理，不需要另外的控制，通常需要配置一个无限制的<code>maximumPoolSizes</code>，以避免拒绝掉新提交的任务</li>
-<li>无界队列:对应<code>LinkedBlockingDeque</code>实现类，它没有预定的容量，当有新的任务，会在队列中等待，直到加入到corePoolSize的线程中，如果corePoolSize线程一直很忙，也不会去创建新的线程，此时，最大值最小值对它没有任何的影响，每个任务与其他的任务都是独立的，不会互相影响</li>
-<li>有边界的队列：例如<code>ArrayBlockingQueue</code>实现类,它有助于在使用有限的maxPoolSize时防止资源的耗尽，但它更难调整与控制。</li>
-</ul>
-<p>一般情况下我们都可以通过java提供的工厂模式来构造我们的线程池策略，主要提供了以下几种方式:</p>
-<h5 id="newFixedThreadPool"><a href="#newFixedThreadPool" class="headerlink" title="newFixedThreadPool"></a>newFixedThreadPool</h5><p>特点:</p>
-<ul>
-<li>线程重用，如果没有重用的线程，将会创建一个新的线程添加到池中</li>
-<li>适合执行短期异步任务程序，默认为60秒的线程等待时间，超过就会终止与移除</li>
-<li>闲置的线程不会消耗资源</li>
-</ul>
-<p>源码配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public static ExecutorService newCachedThreadPool() &#123;</span><br><span class="line">    return new ThreadPoolExecutor(0, Integer.MAX_VALUE,</span><br><span class="line">                                  60L, TimeUnit.SECONDS,</span><br><span class="line">                                  new SynchronousQueue&lt;Runnable&gt;());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>使用场景:<br>它创建了一个无限扩大的线程池，但没有核心线程池，因此资源占用少，适合处理一些短期的异步任务</p>
-<h5 id="newFixedThreadPool-1"><a href="#newFixedThreadPool-1" class="headerlink" title="newFixedThreadPool"></a>newFixedThreadPool</h5><p>特点:</p>
-<ul>
-<li>创建一个固定数量的线程池，不能随时的新建线程，如果队列已满，提交了新任务，必须等待一个可用的线程</li>
-<li>线程会一直存在，直到调用shutdown方法</li>
-</ul>
-<p>源码配置:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public static ExecutorService newFixedThreadPool(int nThreads) &#123;</span><br><span class="line">    return new ThreadPoolExecutor(nThreads, nThreads,</span><br><span class="line">                                  0L, TimeUnit.MILLISECONDS,</span><br><span class="line">                                  new LinkedBlockingQueue&lt;Runnable&gt;());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>使用场景:<br>它创建了一个核心线程数与最大线程数相同的线程池，适用于已知任务数量，对线程数量进行限制的场景</p>
-<h5 id="newWorkStealingPool"><a href="#newWorkStealingPool" class="headerlink" title="newWorkStealingPool"></a>newWorkStealingPool</h5><p>特点:</p>
-<ul>
-<li>创建使用所有给定并行级别的线程池，并且可以使用多个队列来减少占用<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static ExecutorService newWorkStealingPool() &#123;</span><br><span class="line">    return new ForkJoinPool</span><br><span class="line">        (Runtime.getRuntime().availableProcessors(),</span><br><span class="line">         ForkJoinPool.defaultForkJoinWorkerThreadFactory,</span><br><span class="line">         null, true);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>使用场景:<br>它能创建一个拥有多个任务队列的线程池，可以减少链接数。并且它是默认创建当前可用cpu数量的线程来并行执行，因此适用于非常耗时的操作，并且可以并行执行</p>
-<h5 id="newSingleThreadExecutor"><a href="#newSingleThreadExecutor" class="headerlink" title="newSingleThreadExecutor"></a>newSingleThreadExecutor</h5><p>特点：</p>
-<ul>
-<li>有且只有一个任务处于活动状态</li>
-<li>先提交的先执行，有任务顺序</li>
-<li>当任务出现异常，会另创建一个新的线程替换<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static ExecutorService newSingleThreadExecutor() &#123;</span><br><span class="line">    return new FinalizableDelegatedExecutorService</span><br><span class="line">        (new ThreadPoolExecutor(1, 1,</span><br><span class="line">                                0L, TimeUnit.MILLISECONDS,</span><br><span class="line">                                new LinkedBlockingQueue&lt;Runnable&gt;()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>使用场景:<br>它是一个单例线程，并且有执行顺序，所以适用于有执行顺序的任务，并且有且只有一个任务是执行中的</p>
-<h5 id="ScheduledThreadPoolExecutor"><a href="#ScheduledThreadPoolExecutor" class="headerlink" title="ScheduledThreadPoolExecutor"></a>ScheduledThreadPoolExecutor</h5><p>特点：</p>
-<ul>
-<li>能设置延迟时间，能定期执行</li>
-<li>空闲的线程会保留</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public ScheduledThreadPoolExecutor(int corePoolSize) &#123;</span><br><span class="line">    super(corePoolSize, Integer.MAX_VALUE,</span><br><span class="line">          DEFAULT_KEEPALIVE_MILLIS, MILLISECONDS,</span><br><span class="line">          new DelayedWorkQueue());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>使用场景：<br>它具有定时特性，因此可以用来执行周期行的任务</p>
-<p>五大线程池介绍完毕，此外还有其他的常用方法:</p>
-<ul>
-<li><code>execute(Runnable command)</code> 提交任务，在将来的某个时间点执行任务</li>
-<li><code>afterExecute(Runnale r,Throwable t)</code> 在指定的Runnale执行后调用此方法</li>
-<li><code>beforeExecute(Thread t,Runnable r)</code>在给定的线程中执行给定的Runnable之前调用方法</li>
-<li><code>funalize</code> 当执行器不再被引用并且没有线程时，调用<code>shundown</code></li>
-<li>shundown 启动有序关闭，先前提交的任务会执行，执行完毕后关闭</li>
-<li><code>shundownNow</code> 主动停止执行中的任务，并返回正在执行等待的任务列表</li>
-</ul>
+<h3 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h3><p><code>AsyncTask</code>内部的实现原理为：线程池+Handler</p>
+<p>其内部有两个线程池：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public static final Executor SERIAL_EXECUTOR = new SerialExecutor();</span><br><span class="line">private static volatile Executor sDefaultExecutor = SERIAL_EXECUTOR;</span><br><span class="line">public static final Executor THREAD_POOL_EXECUTOR;</span><br></pre></td></tr></table></figure></p>
+<p><code>SERIAL_EXECUTOR</code>对应内部的<code>SerialExecutor</code>内部实现类，主要实现了异步任务的顺序分发:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">private static class SerialExecutor implements Executor &#123;</span><br><span class="line">        final ArrayDeque&lt;Runnable&gt; mTasks = new ArrayDeque&lt;Runnable&gt;();</span><br><span class="line">        Runnable mActive;  //当前要处理的异步任务</span><br><span class="line"></span><br><span class="line">        //给execute方法加锁保证了顺序执行</span><br><span class="line">        public synchronized void execute(final Runnable r) &#123;</span><br><span class="line">           //将一个runnable添加进双端队列中</span><br><span class="line">            mTasks.offer(new Runnable() &#123;</span><br><span class="line">                public void run() &#123;</span><br><span class="line">                    try &#123;</span><br><span class="line">                        r.run();  //执行</span><br><span class="line">                    &#125; finally &#123;</span><br><span class="line">                        scheduleNext();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">            if (mActive == null) &#123;</span><br><span class="line">                scheduleNext();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        //此方法的作用是将SerialExecutor 池中的任务的第一个任务赋值给mActive ，并压入到</span><br><span class="line">       //THREAD_POOL_EXECUTOR线程池中</span><br><span class="line">        protected synchronized void scheduleNext() &#123;</span><br><span class="line">            //poll()方法的作用是删除队列中的第一个并返回结果,如果为null则返回null</span><br><span class="line">            if ((mActive = mTasks.poll()) != null) &#123;</span><br><span class="line">                //将第一个任务添加到THREAD_POOL_EXECUTOR线程池中</span><br><span class="line">                THREAD_POOL_EXECUTOR.execute(mActive);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>而THREAD_POOL_EXECUTOR的实现是在这里：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">static &#123;</span><br><span class="line">    ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(</span><br><span class="line">            CORE_POOL_SIZE, MAXIMUM_POOL_SIZE, KEEP_ALIVE_SECONDS, TimeUnit.SECONDS,</span><br><span class="line">            sPoolWorkQueue, sThreadFactory);</span><br><span class="line">    threadPoolExecutor.allowCoreThreadTimeOut(true);</span><br><span class="line">    THREAD_POOL_EXECUTOR = threadPoolExecutor;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以看出它是一个常见的工作线程池，所以，这两个线程池，一个负责消息的任务调度，保证按照顺序执行，另外一个则是真正的异步任务处理池</p>
+<p>接下来看一下它的构造方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">public AsyncTask(@Nullable Looper callbackLooper) &#123;</span><br><span class="line">        //初始化一个Handler处理主线程的通信</span><br><span class="line">        mHandler = callbackLooper == null || callbackLooper == Looper.getMainLooper()</span><br><span class="line">            ? getMainHandler()</span><br><span class="line">            : new Handler(callbackLooper);</span><br><span class="line">        //初始化一个可以存储Params参数的callable实现，其实也是 </span><br><span class="line">       //THREAD_POOL_EXECUTOR.execute()的执行回调</span><br><span class="line">        mWorker = new WorkerRunnable&lt;Params, Result&gt;() &#123;</span><br><span class="line">            public Result call() throws Exception &#123;</span><br><span class="line">               //里面的回调是不是很熟悉，和HandlerThread类似</span><br><span class="line">                mTaskInvoked.set(true); //添加线程标识,用于postResultIfNotInvoked方法的检查</span><br><span class="line">                Result result = null;  //这就是onPostExecute()方法的result</span><br><span class="line">                try &#123;</span><br><span class="line">                    Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);</span><br><span class="line">                    //noinspection unchecked</span><br><span class="line">                    result = doInBackground(mParams); //doInBackground方法在这里执行了</span><br><span class="line">                    Binder.flushPendingCommands();</span><br><span class="line">                &#125; catch (Throwable tr) &#123;</span><br><span class="line">                    mCancelled.set(true); //抛异常了取消任务</span><br><span class="line">                    throw tr;</span><br><span class="line">                &#125; finally &#123;</span><br><span class="line">                    postResult(result); //此方法的作用是将结果发送到主线程</span><br><span class="line">                &#125;</span><br><span class="line">                return result;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">         //初始化一个Future回调，主要用于检查处理结果是否发送</span><br><span class="line">        mFuture = new FutureTask&lt;Result&gt;(mWorker) &#123;</span><br><span class="line">            //done()方法是在callable()方法之后的回调</span><br><span class="line">            @Override</span><br><span class="line">            protected void done() &#123;</span><br><span class="line">                try &#123;</span><br><span class="line">                    //执行检查</span><br><span class="line">                    postResultIfNotInvoked(get());</span><br><span class="line">                &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                    android.util.Log.w(LOG_TAG, e);</span><br><span class="line">                &#125; catch (ExecutionException e) &#123;</span><br><span class="line">                    throw new RuntimeException(&quot;An error occurred while executing doInBackground()&quot;,</span><br><span class="line">                            e.getCause());</span><br><span class="line">                &#125; catch (CancellationException e) &#123;</span><br><span class="line">                    postResultIfNotInvoked(null);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">//mWorker 的实现</span><br><span class="line">    private static abstract class WorkerRunnable&lt;Params, Result&gt; implements Callable&lt;Result&gt; &#123;</span><br><span class="line">        Params[] mParams;  //保存传入的参数</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>接下来看看以上检查的方法的实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">private void postResultIfNotInvoked(Result result) &#123;</span><br><span class="line">        //执行了mWorker 里的call()回调的都会变为true,如果为false,说明任务没有被执行</span><br><span class="line">        final boolean wasTaskInvoked = mTaskInvoked.get();</span><br><span class="line">        if (!wasTaskInvoked) &#123;</span><br><span class="line">            postResult(result);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //将此AsyncTask对象作为message参数发送,接收到之后就会调用finish()方法结束</span><br><span class="line">    private Result postResult(Result result) &#123;</span><br><span class="line">        @SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">        Message message = getHandler().obtainMessage(MESSAGE_POST_RESULT,</span><br><span class="line">                new AsyncTaskResult&lt;Result&gt;(this, result));</span><br><span class="line">        message.sendToTarget();</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中的getHandler()中的Handler的实现类是<code>InternalHandler</code>，来看看它的实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">  private static class InternalHandler extends Handler &#123;</span><br><span class="line">      public InternalHandler(Looper looper) &#123;</span><br><span class="line">          super(looper);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      @SuppressWarnings(&#123;&quot;unchecked&quot;, &quot;RawUseOfParameterizedType&quot;&#125;)</span><br><span class="line">      @Override</span><br><span class="line">      public void handleMessage(Message msg) &#123;</span><br><span class="line">          </span><br><span class="line">          AsyncTaskResult&lt;?&gt; result = (AsyncTaskResult&lt;?&gt;) msg.obj;</span><br><span class="line">          switch (msg.what) &#123;</span><br><span class="line">              case MESSAGE_POST_RESULT:</span><br><span class="line">                  //result.mData[0]就是从postResult发送过来的AsyncTask对象</span><br><span class="line">                  result.mTask.finish(result.mData[0]);  //处理结果分发，回调对应的方法</span><br><span class="line">                  break;</span><br><span class="line">              case MESSAGE_POST_PROGRESS:</span><br><span class="line">                  result.mTask.onProgressUpdate(result.mData);  //这里处理进度更新</span><br><span class="line">                  break;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">private void finish(Result result) &#123;</span><br><span class="line">      // 先判断是否调用了Cancelled()</span><br><span class="line">          // 1. 若调用了则执行我们复写的onCancelled（）</span><br><span class="line">          // 即 取消任务时的操作</span><br><span class="line">          if (isCancelled()) &#123;</span><br><span class="line">              onCancelled(result);</span><br><span class="line">          &#125; else &#123;</span><br><span class="line"></span><br><span class="line">          // 2. 若无调用Cancelled()，则执行我们复写的onPostExecute(result)</span><br><span class="line">          // 即更新UI操作</span><br><span class="line">              onPostExecute(result);</span><br><span class="line">          &#125;</span><br><span class="line">          // 注：不管AsyncTask是否被取消，都会将AsyncTask的状态变更为：FINISHED</span><br><span class="line">          mStatus = Status.FINISHED;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后来看一下执行方法<code>execute()</code>:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"> @MainThread</span><br><span class="line"> public final AsyncTask&lt;Params, Progress, Result&gt; execute(Params... params) &#123;</span><br><span class="line">     return executeOnExecutor(sDefaultExecutor, params);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">@MainThread</span><br><span class="line"> public final AsyncTask&lt;Params, Progress, Result&gt; executeOnExecutor(Executor exec,</span><br><span class="line">         Params... params) &#123;</span><br><span class="line">     if (mStatus != Status.PENDING) &#123;</span><br><span class="line">         switch (mStatus) &#123;</span><br><span class="line">             case RUNNING:</span><br><span class="line">                 throw new IllegalStateException(&quot;Cannot execute task:&quot;</span><br><span class="line">                         + &quot; the task is already running.&quot;);</span><br><span class="line">             case FINISHED:</span><br><span class="line">                 throw new IllegalStateException(&quot;Cannot execute task:&quot;</span><br><span class="line">                         + &quot; the task has already been executed &quot;</span><br><span class="line">                         + &quot;(a task can be executed only once)&quot;);</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     mStatus = Status.RUNNING;</span><br><span class="line"></span><br><span class="line">     onPreExecute();</span><br><span class="line"></span><br><span class="line">     mWorker.mParams = params; //mWorker中的参数是在这里保存的</span><br><span class="line">     exec.execute(mFuture);  //将mFuture对象添加到THREAD_POOL_EXECUTOR 线程池中，mFuture在构造方法中做了初始化。</span><br><span class="line"></span><br><span class="line">     return this;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>总结：<br>1.初始化两个线程池，一个负责任务调度<code>(SerialExecutor)</code>,一个负责任务处理<code>THREAD_POOL_EXECUTOR</code><br>2.构造方法中实例化了子线程中的callable接口方法，从<code>WorkerRunnable</code>中取出<code>Params</code>对象并赋值给<code>dodoInBackground(mParams)</code>方法执行耗时任务。<br>3.执行<code>execute()</code>方法将任务提交到THREAD_POOL_EXECUTOR线程池中，并将Params参数赋值到了<code>WorkerRunnable</code>中。<br>4.调用了<code>postResult(result)</code>,通过InternalHandler 将消息回调到了主线程（执行了finish()方法，里面有onPostExecute方法),实现了UI的更新</p>
 
       
     </div>
@@ -564,8 +521,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Threadsource4.html" rel="next" title="Android/java多线程(四)-IntentService">
-                <i class="fa fa-chevron-left"></i> Android/java多线程(四)-IntentService
+              <a href="/Threadsource5.html" rel="next" title="Android/java 多线程(五)-ThreadPoolExecutor线程池的使用">
+                <i class="fa fa-chevron-left"></i> Android/java 多线程(五)-ThreadPoolExecutor线程池的使用
               </a>
             
           </div>
@@ -573,10 +530,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/Threadsource6.html" rel="prev" title="Android/java 多线程(六)-AsyncTask使用详解及源码分析">
-                Android/java 多线程(六)-AsyncTask使用详解及源码分析 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -738,7 +691,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用的线程池的使用"><span class="nav-number">2.</span> <span class="nav-text">常用的线程池的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#自定义线程池"><span class="nav-number">2.0.1.</span> <span class="nav-text">自定义线程池</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#newFixedThreadPool"><span class="nav-number">2.0.2.</span> <span class="nav-text">newFixedThreadPool</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#newFixedThreadPool-1"><span class="nav-number">2.0.3.</span> <span class="nav-text">newFixedThreadPool</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#newWorkStealingPool"><span class="nav-number">2.0.4.</span> <span class="nav-text">newWorkStealingPool</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#newSingleThreadExecutor"><span class="nav-number">2.0.5.</span> <span class="nav-text">newSingleThreadExecutor</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ScheduledThreadPoolExecutor"><span class="nav-number">2.0.6.</span> <span class="nav-text">ScheduledThreadPoolExecutor</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用"><span class="nav-number">2.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用介绍"><span class="nav-number">3.</span> <span class="nav-text">使用介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源码解析"><span class="nav-number">4.</span> <span class="nav-text">源码解析</span></a></li></ol></div>
             
 
           </div>
