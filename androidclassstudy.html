@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Android," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   文章首发于我的简书,本处只做整理归档用">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="玩转Class之Class的各种骚操作(反射封装必看)">
+<meta property="og:url" content="http://www.huangjie.name/androidclassstudy.html">
+<meta property="og:site_name" content="黄杰的个人博客">
+<meta property="og:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   文章首发于我的简书,本处只做整理归档用">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3468978-115865cd6cbf0d07.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-01-19T12:15:05.882Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="玩转Class之Class的各种骚操作(反射封装必看)">
+<meta name="twitter:description" content="版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.   文章首发于我的简书,本处只做整理归档用">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/3468978-115865cd6cbf0d07.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.huangjie.name/androidclassstudy.html"/>
+
+
+
+
+
+  <title>玩转Class之Class的各种骚操作(反射封装必看) | 黄杰的个人博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?51e4822e4bc99e2b512924ae3703d251";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">黄杰的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Android进阶,Android技术学习，Android基础</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.huangjie.name/androidclassstudy.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄杰">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://upload.jianshu.io/users/upload_avatars/3468978/ead781c0-5128-4b28-8edf-3bdce9813948.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="黄杰的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">玩转Class之Class的各种骚操作(反射封装必看)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-19T20:12:40+08:00">
+                2019-01-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android基础进阶/" itemprop="url" rel="index">
+                    <span itemprop="name">Android基础进阶</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,809 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  16 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>版权声明：本文为博主原创文章，转载请注明出处(www.huangjie.name)，保护原创，从我做起.</strong></p>
+<hr>
+<blockquote>
+<p>文章首发于我的<a href="https://www.jianshu.com/u/2334b8b9f764" target="_blank" rel="noopener">简书</a>,本处只做整理归档用<br><a id="more"></a>    </p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Class类表示正在运行的Java应用程序中的类和接口，枚举和基本数据类型，我们可以从中获取到类的一切相关信息，包括字段，方法，名称，父类，接口等</p>
+<h2 id="常用方法介绍"><a href="#常用方法介绍" class="headerlink" title="常用方法介绍"></a>常用方法介绍</h2><h4 id="名称获取"><a href="#名称获取" class="headerlink" title="名称获取"></a>名称获取</h4><p>此类方法用于获取类的名称信息<br><strong>getName()方法</strong></p>
+<ul>
+<li>如果是一个实体类，则会返回完整包名路径名称,<br>例如位于<code>com.hj.testclass</code>包下的<code>student</code>类，则会返回<code>com.hj.testclass.student</code><ul>
+<li>如果是一个数组类型，则返回内部嵌套深度的一个或多个”[“字符，后面拼接上基本数据类型的二进制名称,二进制名称表如下：</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Element Type</th>
+<th>Encoding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>boolean</td>
+<td>Z</td>
+</tr>
+<tr>
+<td>byte</td>
+<td>B</td>
+</tr>
+<tr>
+<td>char</td>
+<td>C</td>
+</tr>
+<tr>
+<td>class or interface</td>
+<td>Lclassname</td>
+</tr>
+<tr>
+<td>double</td>
+<td>D</td>
+</tr>
+<tr>
+<td>float</td>
+<td>F</td>
+</tr>
+<tr>
+<td>int</td>
+<td>I</td>
+</tr>
+<tr>
+<td>long</td>
+<td>J</td>
+</tr>
+<tr>
+<td>short</td>
+<td>S</td>
+</tr>
+</tbody>
+</table>
+<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(new long[1][2][3]).getClass().getName()</span><br><span class="line">输出:</span><br><span class="line">[[[J</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>如果是基本数据类型，则会返回数据类型的关键字<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">byte.class.getName()</span><br><span class="line">输出：</span><br><span class="line">byte</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>getSimpleName()方法</strong><br>返回源代码中给出的基础类的简单名称。 如果基础类是匿名的，则返回一个空字符串。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Student student = new Student();</span><br><span class="line">Class mClass = student.getClass();</span><br><span class="line">log(&quot;getSimpleName:&quot;+mClass.getSimpleName());</span><br><span class="line">输出：</span><br><span class="line">Student</span><br></pre></td></tr></table></figure></p>
+<p><strong>getPackage()方法</strong><br>返回包名信息</p>
+<h4 id="注解相关"><a href="#注解相关" class="headerlink" title="注解相关"></a>注解相关</h4><p>可获取此类是否是注解，是否包含某注解并获取到其对象，获取全部注解<br>| 方法| 作用 |<br>|——-|——–|<br>|<strong>getAnnotation(Class<a> annotationClass)</a></strong>|获取传入的注解对象，如果不存在，则返回null|<br>|<strong>getAnnotations()</strong>|返回此类上的所有注解|<br>|<strong>getAnnotationsByType(Class<a> annotationClass)</a></strong>|返回传入的注解对象数组，与getAnnotation()的区别是检测传入的注解是否是重复元素|<br>|<strong>isAnnotation()</strong>|判断这个类是否是一个注解类|<br>|<strong>isAnnotationPresent(Class&lt;? extends Annotation&gt; annotationClass)</strong>|是否包含传入的注解类,效果与getAnnotation()!=null相同|<br>举个栗子：<br>新建一个注解对象：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by hj on 2019/1/10.</span><br><span class="line"> * 说明：</span><br><span class="line"> */</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">public @interface MyAnnotation &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>新建一个Student并加入<code>@MyAnnotation</code>注解：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by hj on 2019/1/10.</span><br><span class="line"> * 说明：</span><br><span class="line"> */</span><br><span class="line">@MyAnnotation</span><br><span class="line">public class Student&#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Student student = new Student();</span><br><span class="line">        Class studentClass = student.getClass();</span><br><span class="line">        boolean isAnnotation = studentClass.isAnnotation();</span><br><span class="line">        log(studentClass.getSimpleName()+&quot;是否是注解类:&quot;+isAnnotation);</span><br><span class="line">        boolean isContainAnnotation = studentClass.isAnnotationPresent(MyAnnotation.class);</span><br><span class="line">        log(studentClass.getSimpleName()+&quot;是否包含MyAnnotation注解类:&quot;+isContainAnnotation);</span><br><span class="line">        Annotation annotation = studentClass.getAnnotation(MyAnnotation.class);</span><br><span class="line">        Annotation[] annotations = studentClass.getAnnotations();</span><br><span class="line">        if (annotation != null) &#123;</span><br><span class="line">            log(&quot;获取指定的MyAnnotation类:&quot;+annotation.toString());</span><br><span class="line">        &#125;</span><br><span class="line">        if (annotations.length &gt; 0)&#123;</span><br><span class="line">            log(&quot;获取注解集合中的第一个元素:&quot;+annotations[0].toString());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static void log(String value) &#123;</span><br><span class="line">        System.out.print(value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>打印：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Student是否是注解类:false</span><br><span class="line">Student是否包含MyAnnotation注解类:true</span><br><span class="line">获取指定的MyAnnotation类:@jie.com.imageoptimize.mclass.MyAnnotation()</span><br><span class="line">获取注解集合中的第一个元素:@jie.com.imageoptimize.mclass.MyAnnotation()</span><br></pre></td></tr></table></figure></p>
+<h4 id="构造方法相关"><a href="#构造方法相关" class="headerlink" title="构造方法相关"></a>构造方法相关</h4><p>在介绍构造方法之前，先介绍一个类<code>Constructor</code>,它的作用是提供一个类的单个构造方法的信息访问，如果一个类有两个构造方法，那么这个类就会对应有两个<code>Constructor</code>类，它可以使用<code>newInstance</code>方法来进行类的构造方法实现并进行扩展，但如果发生缩小转换则会抛出<code>IllegalArgumentException</code>异常，比如这个类有两个构造参数却只传入一个，就会抛异常。<br>获取<code>Constructor</code>信息的方法有：<br>| 方法| 作用 |<br>|——-|——–|<br>|<strong>getConstructors()</strong>|返回这个类的公共构造函数的 Constructor对象的数组|<br>|<strong>getConstructor(Class&lt;?&gt;..parameterTypes)</strong>|传入一个指定的参数类型来获取特定的公共构造方法类|<br>|<strong>getDeclaredConstructors()</strong>|与getConstructors的区别是返回所有的构造方法数组，不限于public protected private|<br>|<strong>getDeclaredConstructor(Class&lt;?&gt;..parameterTypes)</strong>|与getConstructor的区别是会返回所有类型的构造方法|<br>接下来介绍一下<code>Constructor</code>类的<code>newInstance</code>方法，这个方法说白了就是执行构造函数的，你传入一个当前构造函数的类型的值进去，那么就会执行这个类的构造方法。<br>下面举一个反射调用构造方法的栗子：<br>新建一个Student类，分别添加两个私有构造方法，一个公有构造方法，并添加两个参数，在构造方法处执行打印逻辑，代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by hj on 2019/1/10.</span><br><span class="line"> * 说明：</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">public class Student &#123;</span><br><span class="line"></span><br><span class="line">    private String name;</span><br><span class="line">    private int age;</span><br><span class="line"></span><br><span class="line">    private Student() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Student(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">        log(&quot;公有构造方法执行了，打印传入的名称为:&quot;+name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private Student(int age)&#123;</span><br><span class="line">        this.age = age;</span><br><span class="line">        log(&quot;私有构造方法执行了，打印传入的年龄为:&quot;+age);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Student student = new Student();</span><br><span class="line">        Class mClass = student.getClass();</span><br><span class="line">        Constructor[] constructors = mClass.getConstructors();</span><br><span class="line">        log(&quot;获取&quot; + mClass.getSimpleName() + &quot;的公共构造方法数量为:&quot; + constructors.length);</span><br><span class="line">        try &#123;</span><br><span class="line">            Constructor constructor = mClass.getConstructor(String.class);</span><br><span class="line"></span><br><span class="line">            constructor.newInstance(&quot;张三&quot;);</span><br><span class="line"></span><br><span class="line">        &#125; catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        Constructor[] declaredConstructors = mClass.getDeclaredConstructors();</span><br><span class="line">        log(&quot;获取&quot; + mClass.getSimpleName() + &quot;的所有构造方法数量为:&quot; + declaredConstructors.length);</span><br><span class="line">        try &#123;</span><br><span class="line">            Constructor constructor = mClass.getDeclaredConstructor(int.class);</span><br><span class="line"></span><br><span class="line">            constructor.newInstance(18);</span><br><span class="line"></span><br><span class="line">        &#125; catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static void log(String value) &#123;</span><br><span class="line">        System.out.print(value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>打印结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">获取Student的公共构造方法数量为:1</span><br><span class="line">公有构造方法执行了，打印传入的名称为:张三</span><br><span class="line">获取Student的所有构造方法数量为:3</span><br><span class="line">私有构造方法执行了，打印传入的年龄为:18</span><br></pre></td></tr></table></figure></p>
+<p>怎么样，反射调用类的构造方法技能get到了吗</p>
+<h5 id="字段相关"><a href="#字段相关" class="headerlink" title="字段相关"></a>字段相关</h5><p>此类型方法是用的最多的一种，希望小伙伴们可以熟练掌握<br>在介绍字段方法之前，先介绍一个类<code>Field</code>,它用于保存，修改字段的信息，甚至可以修改字段的访问权限,常用的方法如下:<br>| 方法| 作用 |<br>|——-|——–|<br>|<strong>getName()</strong>|获取字段名称|<br>|<strong>get()</strong>|传入需要获取的值的类的对象，获取该字段的值,返回object类型，使用的时候需要做类型判断|<br>|<strong>getBoolean(),getInt()…</strong>|获取指定类型的字段值|<br>|<strong>set()，setBoolean()…</strong>| 将指定的类的指定值设置为新值|<br>|<strong>isAccessible()</strong>|判断此字段是否有访问权限|<br>|<strong>setAccessible()</strong>|设置字段的权限，为true代表可以访问|<br>接下来再来看看如何使用Class来获取字段信息:<br>| 方法| 作用 |<br>|——-|——–|<br>|<strong>getFields()</strong>|获取所有的公共字段|<br>|<strong>getField()</strong>|传入字段的名称，返回公共字段对象|<br>|<strong>getDeclaredFields()</strong>|获取所有字段，返回一个Field数组|<br>|<strong>getDeclaredField</strong>|传入字段的名称，返回字段对象,无访问限制|<br>下面举个获取字段名称和内容的例子，并分享一个常用的套路写法，一般的都可以按照这个套路来写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by hj on 2019/1/10.</span><br><span class="line"> * 说明：</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">public class Student &#123;</span><br><span class="line"></span><br><span class="line">    public String name;</span><br><span class="line">    private int age;</span><br><span class="line"></span><br><span class="line">    public Student(String name, int age) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">        this.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Student student = new Student(&quot;张三&quot;, 18);</span><br><span class="line">        setAllComponentsName(student);</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">    private static void setAllComponentsName(Object f) &#123;</span><br><span class="line">        Field[] fields = f.getClass().getDeclaredFields();</span><br><span class="line">        for (Field field : fields) &#123;</span><br><span class="line">            // 对于每个属性，获取属性名</span><br><span class="line">            String varName = field.getName();</span><br><span class="line">            try &#123;</span><br><span class="line">                // 获取原来的访问控制权限</span><br><span class="line">                boolean accessFlag = field.isAccessible();</span><br><span class="line">                // 修改访问控制权限</span><br><span class="line">                field.setAccessible(true);</span><br><span class="line">                // 获取在对象f中属性fields[i]对应的对象中的变量</span><br><span class="line">                Object o = field.get(f);</span><br><span class="line">                if (!&quot;&quot;.equals(varName)) &#123;</span><br><span class="line">                    //这里可以处理相关逻辑</span><br><span class="line">                    if (o != null) &#123;</span><br><span class="line">                        if (o instanceof String) &#123;</span><br><span class="line">                            String value = (String) o;</span><br><span class="line">                            log(&quot;String类型字段:&quot; + value);</span><br><span class="line">                        &#125; else if (o instanceof Integer) &#123;</span><br><span class="line">                            int value = (int) o;</span><br><span class="line">                            log(&quot;int类型字段:&quot; + value);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                // 恢复访问控制权限</span><br><span class="line">                field.setAccessible(accessFlag);</span><br><span class="line">            &#125; catch (IllegalArgumentException | IllegalAccessException ex) &#123;</span><br><span class="line">                ex.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static void log(String value) &#123;</span><br><span class="line">        System.out.print(value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>打印结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String类型字段:张三</span><br><span class="line">int类型字段:18</span><br></pre></td></tr></table></figure></p>
+<p>一般都是先将权限修改为true,再去读取字段内容，随后进行逻辑处理，最后记得将权限改回来.</p>
+<h5 id="方法相关"><a href="#方法相关" class="headerlink" title="方法相关"></a>方法相关</h5><p>此类型方法也是用的比较多的一种，是反射调用方法的关键<br>class中关于方法的封装都是给<code>Method</code>类来操作的，它可以获取，修改，执行类的方法，核心方法就是<code>invoke()</code>，作用是执行方法，第一个参数是需要执行的方法的类对象，随后是需要执行的方法参数值。<br>获取<code>Method</code>对象有四个方法:<br>| 方法| 作用 |<br>|——-|——–|<br>|<strong>getMethods()</strong>|获取类的所有公共方法|<br>|<strong>getMethod()</strong>|获取指定公共方法，传入一个方法的名称与参数的类型|<br>|<strong>getDeclaredMethods()</strong>|获取类的所有方法|<br>|<strong>getDeclaredMethod()</strong>|获取类的指定方法，传入参数同getMethod()|<br>举个例子，将本来为张三的名称修改为李四：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by hj on 2019/1/10.</span><br><span class="line"> * 说明：</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">public class Student &#123;</span><br><span class="line"></span><br><span class="line">    public String name;</span><br><span class="line">    private int age;</span><br><span class="line"></span><br><span class="line">    public Student(String name, int age) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">        this.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void setName(String name)&#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">        log(&quot;设置的名称为：&quot;+name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Student student = new Student(&quot;张三&quot;, 18);</span><br><span class="line">        Class mClass = student.getClass();</span><br><span class="line">        try &#123;</span><br><span class="line">            Method method = mClass.getDeclaredMethod(&quot;setName&quot;,String.class);</span><br><span class="line">            method.invoke(student,&quot;李四&quot;);</span><br><span class="line">        &#125; catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private static void log(String value) &#123;</span><br><span class="line">        System.out.print(value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>打印结果:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">设置的名称为：李四</span><br></pre></td></tr></table></figure></p>
+<p>在项目中使用，可以参考上面的<code>Field</code>类，其实都是差不多的，一通百通。</p>
+<h5 id="抽象-继承-接口-泛型相关"><a href="#抽象-继承-接口-泛型相关" class="headerlink" title="抽象,继承,接口,泛型相关"></a>抽象,继承,接口,泛型相关</h5><p>此类方法虽然不常用到，但在某些情况下能发挥意想不到的作用，在许多框架的源码中也能看见它们的身影，如<code>Gson</code>的<code>$Gson$Types</code>类,<code>Retrofit</code>的<code>Util</code>类等，来跟我学习一下把。</p>
+<p><strong>泛型</strong><br>首先说说获取类的泛型获取，先介绍一个接口<code>Type</code>,它是java中所有类型的通用接口，类型包括原始类型(class)，参数化类型(ParameterizedType)，数组类型(GenericArrayType)，类型变量(TypeVariable)和基本数据类型。内部实现了一个方法<code>getTypeName()</code>,用于返回类型参数信息，基于它向外扩展的接口有：</p>
+<ul>
+<li>ParameterizedType<br>表示一个参数化类型，说简单点就是带有参数类型的类型，如Collection ,如果带有了类型，如Collection<string>，那么就是说String将Collection参数化</string></li>
+<li>GenericArrayType<br>表示一个参数化类型或类型变量的数组类型，简单说就是泛型A<t>[]或泛型数组T[]</t></li>
+<li>TypeVariable<br>所有类型变量的父接口,也就是我们定义抽象类中的那种K,E等泛型变量，可以泛指任何类</li>
+<li>WildcardType<br>表示一个通配符表达，例如?,? extends Integer<br><code>Type</code>可以通过<code>class</code>的<code>getGenericInterfaces</code>或<code>getGenericSuperclass()</code>方法来获取<br>这么说或许还有点抽象，<code>ParameterizedType</code>与<code>TypeVariable</code>的概念或许还拎不太清。下面通过示例来加深理解<br>先来说说ParameterizedType<br>举个例子，先声明一个带泛型的超类<code>Person</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by hj on 2019/1/10.</span><br><span class="line"> * 说明：</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">public class Person&lt;T&gt; &#123;</span><br><span class="line"></span><br><span class="line">    public T feature;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>随后定义一个实体类<code>Feature</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by hj on 2019/1/10.</span><br><span class="line"> * 说明：</span><br><span class="line"> */</span><br><span class="line">public class Feature &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后申明一个<code>Student</code>并继承<code>Person</code>,将<code>Feature</code>作为<code>T</code>传入:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by hj on 2019/1/10.</span><br><span class="line"> * 说明：</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">public class Student extends Person&lt;Feature&gt; &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Student student = new Student();</span><br><span class="line">        Class mClass = student.getClass();</span><br><span class="line">        Type type = mClass.getGenericSuperclass();</span><br><span class="line">        //这里获取的type为Person&lt;Feature&gt;，所以属于ParameterizedType</span><br><span class="line">        if (type instanceof ParameterizedType) &#123;</span><br><span class="line">            //父类的泛型可能有多个，这里只写了一个，所以取第一个就行了，这里是取Person&lt;Feature&gt;中的Feature</span><br><span class="line">            Class tClass = (Class) ((ParameterizedType) type).getActualTypeArguments()[0];</span><br><span class="line">            log(tClass.getSimpleName());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private static void log(String value) &#123;</span><br><span class="line">        System.out.print(value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>因为<code>Class</code>类也实现了<code>Type</code>接口，所以是可以强制转化的<br>打印结果如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Feature</span><br></pre></td></tr></table></figure></p>
+<p>可以看到在此示例中，只要是<code>Person&lt;&gt;</code>中传入的参数是一个参数类型，不管是<code>实体类</code>，<code>String</code>都行，只要是参数而没有泛指意义，那么它就属于<code>ParameterizedType</code>类型<br>接下来将代码修改一下，将<code>Feature</code>改为<code>T</code>,修改获取逻辑：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by hj on 2019/1/10.</span><br><span class="line"> * 说明：</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">public class Student&lt;T&gt; extends Person&lt;T&gt; &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Student student = new Student();</span><br><span class="line">        Class mClass = student.getClass();</span><br><span class="line">        Type type = mClass.getGenericSuperclass();</span><br><span class="line">       //此时这里的type为Person&lt;T&gt;，而不是T，所以依旧属于ParameterizedType</span><br><span class="line">        if (type instanceof ParameterizedType) &#123;</span><br><span class="line">           //这里是从Person&lt;T&gt;中获取T</span><br><span class="line">            Type childType = ((ParameterizedType)type).getActualTypeArguments()[0];</span><br><span class="line">            if (childType instanceof TypeVariable)&#123;</span><br><span class="line">                log(((TypeVariable) childType).getName());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private static void log(String value) &#123;</span><br><span class="line">        System.out.print(value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>输出名称为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T</span><br></pre></td></tr></table></figure></p>
+<p>不知道小伙伴们有没有理解了，当获取的类型是泛指的，如T等，那么就是<code>TypeVariable</code>类型，当类型是参数类型的，例如由子类传入的，具体化的，那么就是<code>ParameterizedType</code>类型。<br>接下来的<code>GenericArrayType</code>和<code>WildcardType</code>就比较好理解了，将以上示例中的<code>Person&lt;T&gt;</code>改为<code>Person&lt;T[]&gt;</code>，将结果输出，代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by hj on 2019/1/10.</span><br><span class="line"> * 说明：</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">public class Student&lt;T&gt; extends Person&lt;T[]&gt; &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Student student = new Student();</span><br><span class="line">        Class mClass = student.getClass();</span><br><span class="line">        Type type = mClass.getGenericSuperclass();</span><br><span class="line">        if (type instanceof ParameterizedType) &#123;</span><br><span class="line">            //这里获取到的类型为：T[],是一个数组类型，所以是GenericArrayType</span><br><span class="line">            Type childType = ((ParameterizedType)type).getActualTypeArguments()[0];</span><br><span class="line">            if (childType instanceof GenericArrayType)&#123;</span><br><span class="line">                log(childType.toString());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private static void log(String value) &#123;</span><br><span class="line">        System.out.print(value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>输出名称为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T[]</span><br></pre></td></tr></table></figure></p>
+<p><code>WildcardType</code>就不演示了，将<code>T</code>改为带<code>？</code>的类型就可以了，如果封装类型实在太复杂，教大家一个技巧，打个断点，啥类型都帮你显示出来了。<br><img src="https://upload-images.jianshu.io/upload_images/3468978-115865cd6cbf0d07.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="断点识别参数类型.png"><br>一看就知道是ParameterizedType类型了，哈哈哈，溜不溜。</p>
+<p>这里给小伙伴一个作业：<br><code>List&lt;? extends T&gt;[]</code>中的<code>List&lt;? extends T&gt;</code>,<code>? extends T</code>，<code>T</code> ,<code>List&lt;? extends T&gt;[]</code>分别代表什么类型呢？</p>
+<p><strong>继承</strong><br>获取父级类使用<code>Class.getSuperclass()</code>方法即可获取父类的<code>class</code></p>
+<p><strong>接口</strong><br>获取接口也比较简单，一个接口实际上也是一个Class类，通过<code>getInterfaces()</code>获取到一个<code>Class</code>数组，而接口里声明的方法可以通过获取<code>Method</code>的方式来获取,<br>举个栗子，先创建一个<code>MyInterface</code>接口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by hj on 2019/1/11.</span><br><span class="line"> * 说明：</span><br><span class="line"> */</span><br><span class="line">public interface MyInterface &#123;</span><br><span class="line">    void getName();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在<code>Student</code>类里实现并获取：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by hj on 2019/1/10.</span><br><span class="line"> * 说明：</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">public class Student implements MyInterface&#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Student student = new Student();</span><br><span class="line">        Class mClass = student.getClass();</span><br><span class="line">        Class interfaces = mClass.getInterfaces()[0];</span><br><span class="line">        try &#123;</span><br><span class="line">            Method methods = interfaces.getMethod(&quot;getName&quot;,null);</span><br><span class="line">            log(methods.getName());</span><br><span class="line">        &#125; catch (NoSuchMethodException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static void log(String value) &#123;</span><br><span class="line">        System.out.print(value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void getName() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>打印出方法名为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getName</span><br></pre></td></tr></table></figure></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>只要拿到Class类，我们就可以获取到它的父类，接口，方法，字段，以及泛型，从而做一些解耦封装，提高类的解耦性。或者在不修改源码的情况下执行或修改源码中的方法，字段，从而达到理想中的效果。小伙伴们快去练习一下把。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>如果该文章帮助到了您,不如请我喝杯咖啡~</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/image/wechat.png" alt="黄杰 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/image/aipay.jpg" alt="黄杰 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Android性能优化-图片篇.html" rel="next" title="Android性能优化-图片篇">
+                <i class="fa fa-chevron-left"></i> Android性能优化-图片篇
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!--MOB SHARE BEGIN-->
+<div class="-mob-share-ui-button -mob-share-open">分享</div>
+<div class="-mob-share-ui" style="display: none">
+    <ul class="-mob-share-list">
+        <li class="-mob-share-weibo"><p>新浪微博</p></li>
+        <li class="-mob-share-weixin"><p>微信</p></li>
+        <li class="-mob-share-qzone"><p>QQ空间</p></li>
+        <li class="-mob-share-qq"><p>QQ好友</p></li>
+        <li class="-mob-share-tencentweibo"><p>腾讯微博</p></li>
+        <li class="-mob-share-youdao"><p>有道云笔记</p></li>
+        <li class="-mob-share-mingdao"><p>明道</p></li>
+        <li class="-mob-share-facebook"><p>Facebook</p></li>
+        <li class="-mob-share-twitter"><p>Twitter</p></li>
+        <li class="-mob-share-pocket"><p>Pocket</p></li>
+        <li class="-mob-share-google"><p>Google+</p></li>
+        <li class="-mob-share-tumblr"><p>Tumblr</p></li>
+        <li class="-mob-share-instapaper"><p>Instapaper</p></li>
+        <li class="-mob-share-linkedin"><p>Linkedin</p></li>
+    </ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<div class="-mob-share-ui-bg"></div>
+<script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=22c54eccf6196"></script>
+<!--MOB SHARE END-->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://upload.jianshu.io/users/upload_avatars/3468978/ead781c0-5128-4b28-8edf-3bdce9813948.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240"
+                alt="黄杰" />
+            
+              <p class="site-author-name" itemprop="name">黄杰</p>
+              <p class="site-description motion-element" itemprop="description">个人技术博客,安卓的完整知识树记录,属于Android进阶类博客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+　 <!--<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="//music.163.com/outchain/player?type=0&id=1996249397&auto=0&height=430"></iframe>-->
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用方法介绍"><span class="nav-number">2.</span> <span class="nav-text">常用方法介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#名称获取"><span class="nav-number">2.0.1.</span> <span class="nav-text">名称获取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注解相关"><span class="nav-number">2.0.2.</span> <span class="nav-text">注解相关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造方法相关"><span class="nav-number">2.0.3.</span> <span class="nav-text">构造方法相关</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#字段相关"><span class="nav-number">2.0.3.1.</span> <span class="nav-text">字段相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方法相关"><span class="nav-number">2.0.3.2.</span> <span class="nav-text">方法相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#抽象-继承-接口-泛型相关"><span class="nav-number">2.0.3.3.</span> <span class="nav-text">抽象,继承,接口,泛型相关</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">黄杰</span>
+
+  
+</div>
+
+
+  <span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
